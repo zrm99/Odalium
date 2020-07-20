@@ -1,0 +1,108 @@
+body {
+  background-color: #28f0da;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+a:hover {
+  color: red;
+}
+#grid {
+  display: grid;
+  grid-template-columns: repeat(50, 1fr);
+  grid-gap: 0px;
+}
+
+.button-styling {
+  background-color: white;
+  border-style: solid;
+  border-color: black;
+  margin: 3px;
+  margin-top: 0px;
+  font-size: 17px;
+  border-radius: 5px;
+  padding-right: 3px;
+}
+
+.button-styling:hover {
+  background-color: #e7e7e7;
+}
+
+.icon-size-spacing {
+  padding-right: 5px;
+  font-size: 15px;
+}
+
+#links-content {
+  display: inline;
+  grid-column: 1/52;
+  border-width: 2px;
+  border-radius: 8px;
+  border-color: black;
+  border-style: solid;
+  background-color: #cceeff;
+  margin-bottom: 55px;
+  border-top-width: 2px;
+}
+
+.float-right {
+  float: right;
+}
+
+
+#miniverse-list {
+  margin-right: 18px;
+  display: inline-block;
+  font-size: 20px;
+  width: 182px;
+  height: 46px;
+}
+
+#follower-count-box {
+  display: inline-block;
+  font-size: 20px;
+}
+
+#browser-content {
+  grid-row: 2/2;
+  grid-column: 19/50;
+}
+#miniverse-title {
+  margin-right: 135px;
+}
+.type-spacing {
+  margin-left: 50px;
+}
+.title-styling {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 630px) {
+  #browser-content {
+  grid-column: 14/50;
+  }
+}
+
+@media screen and (max-width: 447px) {
+  #browser-content {
+  grid-column: 2/50;
+  }
+}
+@media screen and (max-width: 353px) {
+  #miniverse-title {
+    margin-right: 135px;
+  }
+  #browser-content {
+  grid-column: 1/50;
+  }
+
+  .button-styling {
+    background-color: white;
+    border-style: solid;
+    border-color: black;
+    font-size: 15px;
+    border-radius: 5px;
+  }
+}

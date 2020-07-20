@@ -1,0 +1,103 @@
+body {
+  background-color: #28f0da;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+}
+
+
+
+.miniverse-form {
+  text-align: center;
+  background-color: #ccffff;
+  border-style: solid;
+  border-color: #595959;
+  border-radius: 20px;
+  border-width: 7px;
+  grid-column: 19/20;
+  grid-row: 1;
+}
+
+.title-text {
+  color: black;
+  font-size: 20px;
+  border-radius: 7px;
+  background-color: #1affc6;
+  font-family: "Arial";
+  width: 287px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 2px;
+  padding-top: 1px;
+}
+
+
+ ul {
+   font-size: 14px;
+   padding-left: 12px;
+ }
+
+.text-area-resize {
+     resize: none;
+}
+
+input[type="textarea"] {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #dfe1e5;
+  padding: 7px;
+  border-radius: 9px;
+  width: 283px;
+}
+
+textarea {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #dfe1e5;
+  border-radius: 9px;
+  padding: 7px;
+  width: 283px;
+}
+
+textarea:hover {
+  border-color: #595959;
+  background-color: #e7e7e7;
+}
+
+input[type="textarea"]:hover {
+  border-color: #595959;
+  background-color: #e7e7e7;
+}
+
+input[type="submit"] {
+  border-color: black;
+  padding: 3px;
+  margin-top: 7px;
+  border-radius: 20px;
+  border-style: outset;
+  cursor: pointer;
+  width: 300px;
+}
+
+input[type="submit"]:hover {
+border-color: #595959;
+background-color: #e7e7e7;
+color: red;
+}
+
+.miniverse-type-selection {
+  border-radius: 20px;
+  border-color:#dfe1e5;
+  width: 100px;
+  margin-top: 4px;
+}

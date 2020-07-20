@@ -1,0 +1,19 @@
+body {
+  background-color: #28f0da;
+}
+
+#navbar-grid-size {
+  grid-row: 1/1;
+  grid-column: 1/21;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+}
+
+#following-box {
+  font-size: 30px;
+  border-style: solid;
+  border-width: 2px;
+}

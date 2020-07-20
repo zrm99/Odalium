@@ -1,0 +1,42 @@
+.button-styling {
+  background-color: white;
+  border-style: solid;
+  border-color: black;
+  margin: 3px;
+  margin-top: 0px;
+  font-size: 17px;
+  border-radius: 5px;
+  padding-right: 3px;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+a:hover {
+  color: red;
+}
+
+.float-right {
+  float: right;
+}
+
+.button-styling:hover {
+  background-color: #e7e7e7;
+}
+
+.icon-size-spacing {
+  padding-right: 5px;
+  font-size: 15px;
+}
+
+.links-content {
+  display: inline;
+  border-width: 2px;
+  border-radius: 8px;
+  border-color: black;
+  border-style: solid;
+  background-color: #cceeff;
+  margin-bottom: 55px;
+  border-top-width: 2px;
+}

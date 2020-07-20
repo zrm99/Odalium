@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/profile.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <meta charset="utf-8">
+    <title>Profile</title>
+  </head>
+  <body>
+    <div id="grid-container">
+      <div id="username">
+        {{user}}
+      </div>
+        <div class="links-content" id="navbar-grid-size">
+          <a href="/search" class="hover-background button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+          <a href="/browser" class="hover-background button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+          <a href="/profile/following" class="hover-background button-styling"><i class="las la-users icon-size-spacing"></i>Following</a>
+          <a href="/profile/followers" class="hover-background button-styling"><i class="las la-users icon-size-spacing"></i>Followers</a>
+          <a href="/profile/customize" class="hover-background button-styling"><i class="las la-user-edit icon-size-spacing"></i>Customize</a>
+          <a href="/logout" class="float-right hover-background button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+        </div>
+      <div id="bio">
+        {{userBio}}
+      </div>
+  </div>
+  </body>
+</html>

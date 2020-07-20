@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Following</title>
+    <link rel="stylesheet" href="/user-following.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  </head>
+  <body>
+  <div id="grid">
+    <div class="links-content" id="navbar-grid-size">
+      <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+      <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+      <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+    </div>
+  <h5>Users following you</h5>
+  {{#each userFollowing}}
+  <div id="following-box">
+    <a href="/user/{{this.following_names}}">{{this.following_names}}</a>
+  {{/each}}
+</div>
+  </div>
+  </body>
+</html>

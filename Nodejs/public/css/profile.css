@@ -1,0 +1,166 @@
+body {
+  background-color: #28f0da;
+}
+
+a {
+  text-decoration: none;
+  background-color: white;
+  color: blue;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  margin-left: 8px;
+  margin-right: 4px;
+  padding-right: 3px;
+}
+a:hover {
+  color: red;
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+#username {
+  font-size: 25px;
+  grid-row: 2/2;
+  grid-column: 13/18;
+  text-align: center;
+}
+
+.hover-background:hover {
+  background-color: #e7e7e7;
+}
+#settings-position {
+  grid-row: 1/1;
+  grid-column: 30/30;
+  z-index: 2;
+}
+#settings-content {
+  display: flex;
+  font-size: 15px;
+  margin-top: 3px;
+}
+#searchbar {
+  grid-row: 1/1;
+  grid-column: 28/32;
+}
+
+
+
+#searchbar-text {
+grid-row: 1/1;
+grid-column: 30/32;
+}
+
+#submitbox {
+  width: 200px;
+  height: 25px;
+  border-style: solid;
+}
+
+#image-box {
+  display: flex;
+  justify-content: center;
+  grid-column: 15/16;
+  grid-row: 3/7;
+}
+
+#navbar-grid-size {
+  grid-row: 1/1;
+  grid-column: 1/32;
+}
+
+#links-content {
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  background-color: #cceeff;
+  font-size: 15px;
+  margin-bottom: 55px;
+  border-radius: 8px;
+  padding-bottom: 5px;
+
+}
+
+#bio {
+ grid-column: 10/21;
+ grid-row: 3/3;
+ background-color: white;
+ text-align: left;
+ padding-top: 5px;
+ padding-bottom: 5px;
+ padding-left: 25px;
+ padding-right: 25px;
+ font-size: 25px;
+ border-radius: 75px;
+ border-color: black;
+ border-style: solid;
+ word-wrap: anywhere;
+}
+
+#profile-post-container {
+grid-column: 12/19;
+grid-row: 4/4;
+color: blue;
+display: block;
+position: relative;
+text-align: center;
+border-radius: 20px;
+border-style: solid;
+background-color: #d9d9d9;
+cursor: pointer;
+height: 25px;
+top: 5px;
+}
+
+.text-spacing {
+  margin-top: 3px;
+}
+
+.posts {
+
+}
+
+.float-right {
+  float: right;
+}
+
+@media screen and (max-width: 391px) {
+#username {
+  grid-row: 2;
+  grid-column: 19;
+}
+#links-main {
+  grid-row: 1;
+  grid-column: 1/2;
+}
+#image-box {
+  grid-column: 19;
+  grid-row: 3/6;
+}
+}
+
+@media screen and (max-width: 430px) {
+  #links-content {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #username {
+     grid-column: 1/50;
+  }
+  #bio {
+    grid-column: 1/50;
+  }
+}
+
+@media screen and (max-width: 514px) {
+ a {
+   margin-left: 0px;
+   margin-right: 0px;
+ }
+}
