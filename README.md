@@ -1,5 +1,5 @@
 # Odalmedia
-Odalmedia is an open-source NodeJS based forum software using PostgreSQL programmed in mind to have little moderation. 
+Odalmedia is an open-source NodeJS based text only forum software using PostgreSQL, programmed in mind to have little moderation. 
 
 <h3>
 History/About:
