@@ -104,14 +104,14 @@ retrieveUserFollowers: async function retrieveUserFollowers(userName) {
   var query = `SELECT "follower_names" FROM t_users WHERE "username" = $1`;
   var queryValues = [userName];
   var results = await client.query(query, queryValues);
-  return results.rows;
+  return results.rows[0].follower_names;
 },
 
 retrieveUserFollowing: async function retrieveUserFollowing(userName) {
   var query = `SELECT "following_names" FROM t_users WHERE "username" = $1`;
   var queryValues = [userName];
   var results = await client.query(query, queryValues);
-  return results.rows;
+  return results.rows[0].following_names;
 },
 
 findMiniverseName: async function findMiniverseName(miniverseName) {
@@ -221,10 +221,6 @@ await client.query(query, queryValues);
 var query = `UPDATE t_miniverses SET follower_count = follower_count - 1 WHERE "name" = $1`;
 var queryValues = [miniverseName];
 await client.query(query, queryValues);
-},
-
-orderMiniversePostsByReplyCount: async function orderMiniversePostsByReplyCount(currentMiniverse) {
-
 },
 
 retrieveMiniverseSummaries: async function retrieveMiniverseSummaries(currentMiniverse) {
