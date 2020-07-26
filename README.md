@@ -29,6 +29,7 @@ Required tools:
 </h3>
 
 Pgadmin https://www.pgadmin.org/download/
+<br>
 NodeJS https://nodejs.org/en/
 
 <h3>
@@ -38,7 +39,7 @@ Installation Instructions:
 1) Have the required tools installed.
 2) Download the main Nodejs directory.  
 3) Run pgadmin and set up a user and password and create a database.
-4) Follow these instructions by importing the file titled "intial.sql": 
+4) Follow these instructions by importing the file titled "initial.sql": 
 https://www.postgresql-archive.org/pgAdmin-4-How-to-I-import-a-sql-file-td5999352.html
 5) Start up the Node.js command prompt and navigate to the inside of the /Nodejs/ directory.
 6) Run NPM install which will install the required dependencies for the program.
