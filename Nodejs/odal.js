@@ -53,7 +53,7 @@ app.set('view engine', 'handlebars');
 var pgSession = require('connect-pg-simple')(session);
 var expireDate = new Date(Date.now() + 60 * 60 * 1000);
 app.use(session({
-    store: new pgSession({conString: "postgres://" + db.dbUser + ":" + db.dbPass + "@localhost:5432/postgres"}),
+    store: new pgSession({conString: "postgres://" + db.dbUser + ":" + db.dbPass + "@localhost:5432/" + db.dbName}),
     secret: 'makethisasecurepass',
     resave: false,
     saveUninitialized: false,

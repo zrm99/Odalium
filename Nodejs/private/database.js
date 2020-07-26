@@ -15,6 +15,7 @@ client.query('SELECT $1::text as message', ['DATABASE CONNECTED'], (err, res) =>
 module.exports = {
   dbUser: databaseUser,
   dbPass: databasePass,
+  dbName: databaseName,
 
   deleteSessions: async function deleteSessions(session) {
     try {
