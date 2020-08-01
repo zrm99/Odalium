@@ -182,7 +182,6 @@ app.get('/user/:username', async function(req, res) {
 	} else {
 	var userExists = await db.checkExistingUser(req.params.username);
 	if (userExists.rowCount > 0) {
-	var image = await db.retrieveUserImage(req.params.username);
 	req.session.lastViewedUser= req.params.username;
 	app.use(express.static("public/css"));
 	var userFollowingExists = await db.checkUserFollowingExists(req.params.username, req.session.user);
@@ -190,14 +189,12 @@ app.get('/user/:username', async function(req, res) {
 		res.render('other-profiles-followed', {
 			layout: false,
 			name: req.params.username,
-			imageLink: image,
 			userBio: await db.retrieveUserBio(req.params.username),
 		});
 	} else {
 		res.render('other-profiles-unfollowed', {
 			layout: false,
 			name: req.params.username,
-			imageLink: image,
 			userBio: await db.retrieveUserBio(req.params.username),
 		});
 	}

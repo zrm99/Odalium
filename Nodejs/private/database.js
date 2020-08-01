@@ -4,7 +4,7 @@ var databaseName = prompt('Database name: ');
 var databaseUser = prompt('Database owner: ');
 var databasePass = prompt('Database password: ');
 
-const connection = "postgres://" + databaseUser + ":" + databasePass + "@localhost:5432/" + databaseName; // this postgres at the end might be the username
+const connection = "postgres://" + databaseUser + ":" + databasePass + "@localhost:5432/" + databaseName;
 const { Client } = require('pg');
 const client = new Client(connection);
 client.connect();
