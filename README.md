@@ -12,6 +12,8 @@ I have never attempted SQL programming before, and before switching to PostgreSQ
 I had created basic authentication with a register/login page with MongoDB and Mongoose.
 After contemplating for a while I decided to migrate databases and attempt PostgreSQL.
 
+I am still very new to github, so you may see some very strange mistakes from me
+early on. Please forgive me as I get accustomed to using git and github.
 
 The way the current website is structured is that once you register for a profile, you have access to a custom pseudo-anonymous profile
 that allows you to post in the public domain, located by pressing the "browser" button.
@@ -75,6 +77,7 @@ and the credentials or information entered is wrong.
 <h3>
 Images of current iteration of Odalmedia:
 </h3>
+
 ![Profile section](https://user-images.githubusercontent.com/36284384/89106357-0f3bd000-d3de-11ea-9338-ce1a74107ada.JPG)
 ![Searchbar section](https://user-images.githubusercontent.com/36284384/89106359-0fd46680-d3de-11ea-8e11-e2d3adfe75ba.JPG)
 ![Creating a miniverse](https://user-images.githubusercontent.com/36284384/89106353-0e0aa300-d3de-11ea-83e6-859879008186.JPG)
