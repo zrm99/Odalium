@@ -71,3 +71,16 @@ These prompts will be asked every time the server is restarted.
 If all is successful two messages should appear, the first displays "SERVING RUNNING AT: localhost:8080",
 and the next message says "DATABASE CONNECTED". If the messages mentioned do not show up, and you see a large list of errors, you weant wrong somewhere
 and the credentials or information entered is wrong.
+
+<h3>
+Images of current iteration of Odalmedia:
+</h3>
+![Profile section](https://user-images.githubusercontent.com/36284384/89106357-0f3bd000-d3de-11ea-9338-ce1a74107ada.JPG)
+![Searchbar section](https://user-images.githubusercontent.com/36284384/89106359-0fd46680-d3de-11ea-8e11-e2d3adfe75ba.JPG)
+![Creating a miniverse](https://user-images.githubusercontent.com/36284384/89106353-0e0aa300-d3de-11ea-83e6-859879008186.JPG)
+![Browser section](https://user-images.githubusercontent.com/36284384/89106352-0d720c80-d3de-11ea-920f-b972f8876dcb.JPG)
+![Empty miniverse](https://user-images.githubusercontent.com/36284384/89106354-0ea33980-d3de-11ea-97db-f79f004f94a2.JPG)
+![Creating a miniverse topic](https://user-images.githubusercontent.com/36284384/89106360-0fd46680-d3de-11ea-949b-8ac01348c8fb.JPG)
+![Miniverse topic](https://user-images.githubusercontent.com/36284384/89106355-0ea33980-d3de-11ea-9628-d0665b154533.JPG)
+![Miniverse topic clicked](https://user-images.githubusercontent.com/36284384/89106356-0f3bd000-d3de-11ea-8709-5a96f1af9628.JPG)
+![Reply under miniverse topic](https://user-images.githubusercontent.com/36284384/89106358-0f3bd000-d3de-11ea-8ad6-c3137f68a9eb.JPG)
