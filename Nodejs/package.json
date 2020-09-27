@@ -14,7 +14,7 @@
     "express-session": "^1.17.1",
     "fs": "0.0.1-security",
     "helmet": "^3.23.3",
-    "pg": "^7.18.2",
+    "pg": "^8.3.3",
     "prompt-sync": "^4.2.0",
     "utf-8-validate": "^5.0.2",
     "uuidv4": "^6.2.3"
