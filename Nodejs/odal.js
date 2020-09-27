@@ -93,7 +93,7 @@ app.post("/register", async (req, res) => {
 		res.status(500).send(str);
 		res.end();
 	} else if (typeof(error) == "string") {
-		res.status(500).send(error);
+		res.sendStatus(500);
 		res.end();
 	}
 }
@@ -117,7 +117,7 @@ app.post('/login', async function(req, res){
 			db.updateIpAddress(req);
 		}
 	} catch (error) {
-		res.send(error);
+		res.send("<h1>Something went wrong while logging you in. Please try again</h1>");
 	}
 });
 
@@ -276,7 +276,7 @@ app.post('/create/miniverse', async function(req, res) {
 	db.createMiniverse(req, encodedURI);
 	res.redirect('/browser');
 } catch (error) {
-	res.send(error);
+	res.sendStatus(404);
 }
 });
 
