@@ -13,9 +13,7 @@ const helmet = require('helmet');
 const crypto = require('crypto');
 const fs = require('fs');
 const https = require('https');
-
-// TO IMPORT INITIAL.SQL and TABLE.SQL
-// https://www.postgresql-archive.org/pgAdmin-4-How-to-I-import-a-sql-file-td5999352.html
+const rateLimit = require("express-rate-limit");
 
 // const httpsOptions = {
 // 	cert: fs.readFileSync('./security/www_example_com.crt'),
@@ -54,15 +52,23 @@ var pgSession = require('connect-pg-simple')(session);
 var expireDate = new Date(Date.now() + 60 * 60 * 1000);
 app.use(session({
     store: new pgSession({conString: "postgres://" + db.dbUser + ":" + db.dbPass + "@localhost:5432/" + db.dbName}),
-    secret: 'makethisasecurepass',
+    secret: 'CHANGE_SECRET_FOR_PRODUCTION',
     resave: false,
     saveUninitialized: false,
 		cookie: {maxAge: null, secure: false, httpOnly: false},
+    // In production change httpOnly to true and change 'secure' to true.
 		autoRemove: 'native',
 }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+
+app.use(limiter);
 
 app.get('/', async function(req, res) {
 	res.sendFile(path.join(__dirname  + '/public/html/index.html'));
@@ -90,7 +96,7 @@ app.post("/register", async (req, res) => {
 	} catch (error) {
 		if (typeof(error) == "object") {
 		var str = error.message.slice(29, error.length);
-		res.status(500).send(str);
+		res.sendStatus(500);
 		res.end();
 	} else if (typeof(error) == "string") {
 		res.sendStatus(500);
