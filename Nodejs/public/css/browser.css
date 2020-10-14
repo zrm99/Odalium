@@ -63,6 +63,7 @@ a:hover {
 #follower-count-box {
   display: inline-block;
   font-size: 20px;
+  margin-left: 3px;
 }
 
 #browser-content {
@@ -71,12 +72,14 @@ a:hover {
 }
 #miniverse-title {
   margin-right: 135px;
+  font-weight: bold;
 }
 .type-spacing {
   margin-left: 50px;
 }
 .title-styling {
   text-decoration: underline;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 630px) {

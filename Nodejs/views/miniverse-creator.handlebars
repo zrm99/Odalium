@@ -14,7 +14,9 @@
         <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
         <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
         <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+        <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
       </div>
+      <div class="miniverse-container">
       <div id="miniverse-name">
         {{miniverseName}}
       </div>
@@ -31,23 +33,27 @@
       </div>
     <div id="create-post-container">
       <i class="las la-comment-alt"></i>
-      CREATE TOPIC
+      Post
       <div id="create-post-form">
         <form action="/create/miniverse-post" method="post">
-          Topic Title
-          <input id="topic-box" type="text" name="topicTitle">
-          Topic Content
+          Title
+          <br>
+          <input id="topic-box" type="text" name="topicTitle" maxlength="500">
+          <br>
+          Description
+          <br>
           <textarea id="description-box" name="topicContent" rows="3" cols="20" maxlength="10000"></textarea>
+          <br>
           <input type="submit" name="" value="Submit">
         </form>
       </div>
     </div>
     <div id="topics-list">
-      <span id="topic-box-header">TOPICS</span>
+      <span id="topic-box-header">Topics</span>
       <div id="topic-sorting-box">
-        <span id="sort-by-top">TOP</span>
+        <span id="sort-by-top">Top</span>
         |
-        <span id="sort-by-recent">RECENT</span>
+        <span id="sort-by-recent">Recent</span>
       </div>
     <div id="topic-box-style">
     {{#each miniverseTopics}}
@@ -75,6 +81,8 @@
     {{/each}}
     </div>
   </div>
+</div>
+</div>
   </body>
   <footer>
     <script type="text/javascript" src="/miniverse.js"></script>

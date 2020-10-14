@@ -4,16 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
     <title>Create</title>
+    <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="/create-miniverse.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
   </head>
   <body>
     <div id="grid">
+      <div class="links-content" id="navbar-grid-size">
+        <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+        <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+        <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+      </div>
     <form class="miniverse-form" action="/create/miniverse" method="POST">
       <div id="miniverse-box">
-        <div class="title-text">Miniverse Name</div>
+        <div class="title-text rounded-top-element">Miniverse Name</div>
         <input type="textarea" name="miniverseName">
         <ul>
-        <li>Must have both a name and summary</li>
         <li>Must be 20 characters or less</li>
       </ul>
       </div>
@@ -26,6 +32,7 @@
       </div>
       <select class="miniverse-type-selection" name="miniverseType" required>
         <option value="free">Free</option>
+        <option value="controlled">Controlled</option>
       </select>
       <br>
       <input type="checkbox" name="agreementTerms" value="">Agree to creation

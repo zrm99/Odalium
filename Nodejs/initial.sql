@@ -41,6 +41,14 @@ CREATE TABLE "t_users" (
   "role" text
 );
 
+
+CREATE TABLE "t_profile_posts" (
+  "username" text,
+  "date_created" text,
+  "profile_post_content" text,
+  "post_id" bigint
+);
+
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
 	"sess" json NOT NULL,

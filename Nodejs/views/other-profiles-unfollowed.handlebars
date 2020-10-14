@@ -2,27 +2,25 @@
 <html lang="en" dir="ltr">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/other-profiles.css">
+    <link rel="stylesheet" href="/profile.css">
+    <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <meta charset="utf-8">
     <title>{{name}}'s Profile</title>
   </head>
   <body>
     <div id="grid-container">
+      <div class="flex" id="navbar-grid-size">
+      <div class="links-container">
+        <a href="/search" class="hover-background button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+        <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+        <a href="/browser" class="hover-background button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+        <a href="/logout" class="float-right hover-background button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+      </div>
+      <div class="profile-grid">
+      <div class="profile-table">
       <div id="username">
         {{name}}
-      </div>
-      <div id="settings-position">
-        <div id="settings-content">
-          <a href="/profile"><i class="las la-user icon-size-spacing"></i>Profile</a>
-          <a href="/logout"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
-        </div>
-      </div>
-      <div id="links-position">
-        <div id="links-content">
-          <a href="/search"><i class="las la-search icon-size-spacing"></i>Search</a>
-          <a href="/browser"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
-        </div>
       </div>
       <div id="bio">
         <div id="follow-button-box">
@@ -31,8 +29,22 @@
           </form>
         </div>
         {{userBio}}
-      <div>
-
+      </div>
+      <div class="user-posts-container">
+        {{#each userPosts}}
+        <div class="user-posts"> <!-- Make nonceID -->
+        {{this.profile_post_content}}
+        <div>
+          <div class="user-post-date">
+            {{this.date_created}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
   </div>
+    </div>
+  </div>
+  </div>
+</div>
   </body>
 </html>

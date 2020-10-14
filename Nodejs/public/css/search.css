@@ -24,16 +24,17 @@ body {
 display: block;
 grid-row: 2/2;
 grid-column: 12/21;
+margin-top: 25px;
 border-style: solid;
-border: 2px 2px 2px 2px;
-background-color: #cceeff;
+background-color: #00b7ffde;
 border-radius: 8px;
 padding: 3px;
 border-width: 7px;
 border-color: #595959;
+text-align: center;
 }
 
-#search-form-pos {
+#search-form-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -49,9 +50,8 @@ border-color: #595959;
 
 #txt-clr-bg {
   color: black;
-  background-color: #1affc6;
+  background-color: #cceeff;
   border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
   padding-left: 5px;
   padding-right: 5px;
@@ -65,8 +65,7 @@ border-color: #595959;
 
 
 input[type="submit"] {
-  grid-column: 2/8;
-  grid-row: 3;
+  grid-column: 4/6;
   border-color:  #999999;
   border-radius: 20px;
   margin-top: 7px;

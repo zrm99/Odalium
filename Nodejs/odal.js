@@ -56,7 +56,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 		cookie: {maxAge: null, secure: false, httpOnly: false},
-    // In production change httpOnly to true and change 'secure' to true.
+    // In production change 'secure' to true.
 		autoRemove: 'native',
 }));
 
@@ -65,7 +65,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100
+  max: 1000
 });
 
 app.use(limiter);
@@ -115,7 +115,7 @@ app.post('/login', async function(req, res){
 		var userExists = await db.checkExistingUser(req.body.Username);
 		if (req.body.Username == "" || req.body.Password == "") {
 			throw '<h1>Empty username or password</h1>';
-		} else if (userExists.rowCount == 0) {
+		} else if (userExists.rowCount == false) {
 			throw `${req.body.Username} not found, please register first`;
 		} else {
 			db.validateUser(req, res);
@@ -134,6 +134,7 @@ app.get('/profile', async function(req, res) {
 			 layout: false,
 			 user: req.session.user,
 			 userBio: await db.retrieveUserBio(req.session.user),
+       userPosts: await db.retrieveUserPosts(req.session.user),
 		 });
 	 } else {
 		res.status(403).send("<h1>Please register, login, or enable cookies to access this content.</h1>");
@@ -196,12 +197,14 @@ app.get('/user/:username', async function(req, res) {
 			layout: false,
 			name: req.params.username,
 			userBio: await db.retrieveUserBio(req.params.username),
+      userPosts: await db.retrieveUserPosts(req.params.username),
 		});
 	} else {
 		res.render('other-profiles-unfollowed', {
 			layout: false,
 			name: req.params.username,
 			userBio: await db.retrieveUserBio(req.params.username),
+      userPosts: await db.retrieveUserPosts(req.params.username),
 		});
 	}
 } else {
@@ -413,6 +416,25 @@ app.post('/create/miniverse-post', async function(req, res) {
 }
 });
 
+app.post('/create/profile-post', async function(req, res) {
+	if (vd.verifySession(req)) {
+		if (req.body.profilePostContent != '') {
+      var d = new Date();
+      var date = d.toString();
+			if (await db.checkProfilePostsExist() == false) {
+				db.insertProfilePost(req.session.user, date, req.body.profilePostContent, 1);
+			} else {
+				let postID = await db.lastPostID(req.session.user);
+				postID = parseInt(postID) + 1;
+				db.insertProfilePost(req.session.user, date, req.body.profilePostContent, postID);
+			}
+		}
+		res.redirect('back');
+	} else {
+		res.status(403).send("<h1>Please register, login, or enable cookies to access this content.</h1>");
+	}
+});
+
 app.get('/admin', async function(req, res) {
 	app.use(express.static('public/css'));
 	if (vd.verifySession(req)) {
@@ -432,7 +454,7 @@ app.get('/admin', async function(req, res) {
 
 app.get('/chat', function(req, res){
 	res.send("Feature is currently disabled.");
-})
+});
 
 app.get('/terms-and-conditions', function(req, res) {
 	app.use(express.static("public/css"));

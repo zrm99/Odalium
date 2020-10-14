@@ -2,18 +2,31 @@ body {
   background-color: #28f0da;
 }
 
-#navbar-grid-size {
-  grid-row: 1/1;
-  grid-column: 1/21;
-}
 
 #grid {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+#navbar-grid-size {
+  grid-row: 1;
+  grid-column: 1/21;
+}
+
+#following-box-header {
+  grid-row: 4;
+  grid-column: 6/16;
+  font-size: 20px;
+  font-family: "Arial";
 }
 
 #following-box {
+  grid-row: 5;
+  grid-column: 6/16;
   font-size: 30px;
   border-style: solid;
   border-width: 2px;
+  border-radius: 7px;
+  background-color: white;
 }

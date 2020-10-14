@@ -14,7 +14,9 @@
         <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
         <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
       </div>
-    <h4>Your followers</h4>
+    <div id="follower-box-header">
+        People following you
+    </div>
     {{#each userFollowers}}
     <div id="follower-box">
     <a href="/user/{{this}}">{{this}}</a>

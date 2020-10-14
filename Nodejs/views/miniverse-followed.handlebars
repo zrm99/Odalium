@@ -10,6 +10,13 @@
   </head>
   <body>
     <div id="grid-container">
+      <div class="links-content" id="navbar-grid-size">
+        <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+        <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+        <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+        <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+      </div>
+      <div class="miniverse-container">
       <div id="miniverse-name">
         {{miniverseName}}
       </div>
@@ -24,12 +31,12 @@
       </div>
     <div id="create-post-container">
       <i class="las la-comment-alt"></i>
-      CREATE TOPIC
+      Post
       <div id="create-post-form">
         <form action="/create/miniverse-post" method="post">
-          Topic Title
-          <input id="topic-box" type="text" name="topicTitle">
-          Topic Content
+          Title
+          <input id="topic-box" type="text" name="topicTitle" maxlength="500">
+          Description
           <textarea id="description-box" name="topicContent" rows="3" cols="20" maxlength="10000"></textarea>
           <input type="submit" name="" value="Submit">
         </form>
@@ -55,7 +62,7 @@
     }
     </style>
     <script nonce="{{../nonceID}}"}>
-    document.getElementById("button-{{this.topic_id}}").addEventListener("click", function Expand() {
+    document.getElementById("button-{{this.topic_id}}").addEventListener("click", function Cool() {
       if (document.getElementById("summary-{{this.topic_id}}").style.display === "block") {
         document.getElementById("summary-{{this.topic_id}}").style.display = "none";
       } else {
@@ -66,6 +73,7 @@
     {{/each}}
     </div>
   </div>
+</div>
   </body>
   <footer>
     <script type="text/javascript" src="/miniverse.js"></script>

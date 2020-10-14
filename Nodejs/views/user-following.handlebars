@@ -14,12 +14,14 @@
       <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
       <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
     </div>
-  <h5>Users following you</h5>
+  <div id="following-box-header">
+    People you follow
+  </div>
   {{#each userFollowing}}
   <div id="following-box">
     <a href="/user/{{this}}">{{this}}</a>
+  </div>
   {{/each}}
-</div>
   </div>
   </body>
 </html>

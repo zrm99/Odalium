@@ -15,7 +15,10 @@ a:hover {
   grid-template-columns: repeat(40, 1fr);
 }
 
-
+#navbar-grid-size {
+  grid-column: 1/41;
+  grid-row: 1;
+}
 
 .miniverse-form {
   text-align: center;
@@ -25,20 +28,25 @@ a:hover {
   border-radius: 20px;
   border-width: 7px;
   grid-column: 19/20;
-  grid-row: 1;
+  grid-row: 2;
+  margin-top: 25px;
 }
 
 .title-text {
   color: black;
   font-size: 20px;
-  border-radius: 7px;
-  background-color: #1affc6;
+  background-color: #00b7ffde;
   font-family: "Arial";
   width: 287px;
   padding-left: 7px;
   padding-right: 7px;
   padding-bottom: 2px;
   padding-top: 1px;
+}
+
+.rounded-top-element {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 
@@ -56,7 +64,6 @@ input[type="textarea"] {
   border-width: 2px;
   border-color: #dfe1e5;
   padding: 7px;
-  border-radius: 9px;
   width: 283px;
 }
 
@@ -64,7 +71,6 @@ textarea {
   border-style: solid;
   border-width: 2px;
   border-color: #dfe1e5;
-  border-radius: 9px;
   padding: 7px;
   width: 283px;
 }

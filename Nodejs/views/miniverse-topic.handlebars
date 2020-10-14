@@ -16,6 +16,7 @@
         <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
         <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
       </div>
+      <div id="inner-grid">
     <div id="topic-title">
       {{topicTitle}}
     </div>
@@ -25,10 +26,9 @@
     </div>
     <div id="reply-button-container">
       <i class="las la-reply"></i>
-      REPLY
+      Reply
       <div id="create-reply-form">
         <form action="/create/topic-reply" method="post">
-          Reply Content
           <textarea id="reply-area" name="replyContent" rows="5" cols="28" maxlength="10000"></textarea>
           <br>
           <input type="submit" name="Submit" value="Submit">
@@ -37,7 +37,7 @@
     </div>
     <div id="delete-reply-container">
       <i title="Delete reply"  class="lar la-trash-alt delete-reply-icon"></i>
-      DELETE
+      Delete
       <div id="delete-reply-form">
     <form action="/reply-delete" method="POST">
       Username
@@ -64,6 +64,7 @@
   </div>
 
   </div>
+</div>
   <footer>
     <script type="text/javascript" src="/miniverse-topic.js"></script>
   </footer>

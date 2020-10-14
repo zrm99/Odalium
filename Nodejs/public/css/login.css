@@ -54,16 +54,8 @@ input[type=submit] {
   color: black;
   font-size: 20px;
   border-radius: 7px;
-  background-color: #1affc6;
+  background-color: #00b7ffde;
   font-family: "Arial";
-}
-
-#username-box {
-  padding: 0px;
-}
-
-#password-box {
-  padding: 0px;
 }
 
 .hover-background:hover {

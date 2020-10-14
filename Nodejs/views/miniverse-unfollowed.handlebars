@@ -4,12 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/miniverse.css">
+    <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <title>{{miniverseName}}</title>
 
   </head>
   <body>
     <div id="grid-container">
+      <div class="links-content" id="navbar-grid-size">
+        <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+        <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+        <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+        <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+      </div>
+      <div class="miniverse-container">
     <div id="miniverse-name">{{miniverseName}}</div>
     <div id="miniverse-summary">
       <form action="/m/follow" method="POST" class="unfollow-button-position">
@@ -23,12 +31,12 @@
 
     <div id="create-post-container">
       <i class="las la-comment-alt"></i>
-      CREATE TOPIC
+      Post
       <div id="create-post-form">
         <form action="/create/miniverse-post" method="post">
-          Topic Title
-          <input id="topic-box" type="text" name="topicTitle">
-          Topic Content
+          Title
+          <input id="topic-box" type="text" name="topicTitle"  maxlength="500">
+          Description
           <textarea id="description-box" name="topicContent" rows="3" cols="20" maxlength="10000"></textarea>
           <input type="submit" name="" value="Submit">
         </form>
@@ -69,6 +77,7 @@
     </div>
   </div>
 
+</div>
 
   </div>
   <noscript>

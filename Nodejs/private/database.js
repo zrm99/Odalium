@@ -330,4 +330,31 @@ retrieveUsersData: async function retrieveUsersData() {
   var results = await client.query(query);
   return results.rows;
 },
+
+
+checkProfilePostsExist: async function checkProfilePostsExist() {
+    var query = `SELECT * FROM "t_profile_posts" WHERE "post_id" = 1`;
+    var result = await client.query(query);
+    return result.rowCount;
+},
+
+insertProfilePost: async function insertProfilePost(sessionUser, profilePostCreationDate, profilePostContent, postID) {
+  var query = `INSERT INTO "t_profile_posts" (username, date_created, profile_post_content, post_id) VALUES($1, $2, $3, $4)`;
+  var queryValues = [sessionUser, profilePostCreationDate, profilePostContent, postID];
+  await client.query(query, queryValues);
+},
+
+lastPostID: async function lastPostID() {
+    var query = `SELECT "post_id" FROM t_profile_posts ORDER BY "date_created" DESC LIMIT 1`;
+    var result = await client.query(query);
+    return result.rows[0].post_id;
+  },
+
+retrieveUserPosts: async function retrieveUserPosts(sessionUser) {
+  var query = `SELECT * FROM "t_profile_posts" WHERE "username" = $1 ORDER BY date_created DESC`;
+  var queryValues = [sessionUser];
+  var result = await client.query(query, queryValues);
+  return result.rows;
+},
+
 }

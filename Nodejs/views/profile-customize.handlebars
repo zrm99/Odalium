@@ -3,21 +3,30 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/profile-customize.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <meta charset="utf-8">
     <title>Customize profile</title>
   </head>
   <body>
-    <div id="update-bio">
-      <form action="customize">
-
-      </form>
-    </div>
+      <div id="grid-container">
+        <div class="flex" id="navbar-grid-size">
+        <div class="links-container">
+          <a href="/search" class="hover-background button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+          <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+          <a href="/browser" class="hover-background button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+          <a href="/logout" class="float-right hover-background button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+        </div>
+      </div>
+      <div id="bio-container">
       <div id="update-bio-form">
-        Update bio
+        Update status
       <form action="update-bio" method="POST">
-        <textarea id="" name="update_bio" rows="10" cols="50" maxlength="80"></textarea>
+        <textarea name="update_bio" rows="3" cols="50" maxlength="240"></textarea>
         <input type="submit" value="Submit">
       </form>
     </div>
+  </div>
+  </div>
   </body>
 </html>

@@ -1,5 +1,5 @@
 # Odalmedia
-Odalmedia is an open-source NodeJS based text only forum software using PostgreSQL, which is
+Odalmedia is an open-source ExpressJS based text only forum software using PostgreSQL, which is
 meant to be similar to, but different than Reddit was in its early days.
 This software is currently feature incomplete, riddled with bugs and it has some
 security vulnerabilities.
@@ -28,20 +28,57 @@ and then you should see a console prompt displaying "Database name:".
 8) Submit the database name and then answer the next prompts of "Database owner:" and "Database password:".
 These prompts will be asked every time the server is restarted.
 
-If all is successful two messages should appear, the first displays "SERVING RUNNING AT: localhost:8080",
-and the next message says "DATABASE CONNECTED". If the messages mentioned do not show up, and you see a large list of errors, you went wrong somewhere
-and the credentials or information entered is wrong.
+If all is successful two messages should appear, the first displays
+"SERVING RUNNING AT: localhost:8080", and the next message says
+"DATABASE CONNECTED". If the messages mentioned do not show up, and you see a
+large list of errors, you went wrong somewhere and the credentials or
+information entered is wrong, or an unknown bug may have been discovered.
 
 <h3>
 Images of the current iteration of Odalmedia:
 </h3>
 
-![Profile section](https://user-images.githubusercontent.com/36284384/89106357-0f3bd000-d3de-11ea-9338-ce1a74107ada.JPG)
-![Searchbar section](https://user-images.githubusercontent.com/36284384/89106359-0fd46680-d3de-11ea-8e11-e2d3adfe75ba.JPG)
-![Creating a miniverse](https://user-images.githubusercontent.com/36284384/89106353-0e0aa300-d3de-11ea-83e6-859879008186.JPG)
-![Browser section](https://user-images.githubusercontent.com/36284384/89106352-0d720c80-d3de-11ea-920f-b972f8876dcb.JPG)
-![Empty miniverse](https://user-images.githubusercontent.com/36284384/89106354-0ea33980-d3de-11ea-97db-f79f004f94a2.JPG)
-![Creating a miniverse topic](https://user-images.githubusercontent.com/36284384/89106360-0fd46680-d3de-11ea-949b-8ac01348c8fb.JPG)
-![Miniverse topic](https://user-images.githubusercontent.com/36284384/89106355-0ea33980-d3de-11ea-9628-d0665b154533.JPG)
-![Miniverse topic clicked](https://user-images.githubusercontent.com/36284384/89106356-0f3bd000-d3de-11ea-8709-5a96f1af9628.JPG)
-![Reply under miniverse topic](https://user-images.githubusercontent.com/36284384/89106358-0f3bd000-d3de-11ea-8ad6-c3137f68a9eb.JPG)
+<h4> /profile with no posts </h4>
+
+![User profile no posts](https://user-images.githubusercontent.com/36284384/96004694-8cc58880-0df0-11eb-8c3b-0df124c1df35.png)
+
+<h4> /profile with a post </h4>
+
+![User profile with post](https://user-images.githubusercontent.com/36284384/96004796-aa92ed80-0df0-11eb-833d-ff701fa8b57c.JPG)
+
+<h4> /profile/customize </h4>
+
+![Update status](https://user-images.githubusercontent.com/36284384/96005083-f6de2d80-0df0-11eb-92eb-7dce12851f93.png)
+
+<h4> /other-profiles-unfollowed </h4>
+
+![Other profile unfollowed](https://user-images.githubusercontent.com/36284384/96006602-82a48980-0df2-11eb-88b8-2402690e965f.JPG)
+
+<h4> /other-profiles-followed </h4>
+
+![Other profile followed](https://user-images.githubusercontent.com/36284384/96006741-a5cf3900-0df2-11eb-8b2b-5730404e8256.png)
+
+<h4> /browser (Miniverse location area) </h4>
+
+![Browser](https://user-images.githubusercontent.com/36284384/96005424-4886b800-0df1-11eb-842b-4cbf78349315.png)
+
+<h4> /m/:miniverseName  (miniverse creator view)</h4>
+
+![Empty miniverse](https://user-images.githubusercontent.com/36284384/96005559-681de080-0df1-11eb-9c21-8137a810b8bb.JPG)
+
+![Create topic button expanded](https://user-images.githubusercontent.com/36284384/96005720-956a8e80-0df1-11eb-940c-b564d9fbb7f3.JPG)
+
+![Topic posted](https://user-images.githubusercontent.com/36284384/96005774-a61b0480-0df1-11eb-8ce5-e95163774c28.JPG)
+
+![Topic expanded](https://user-images.githubusercontent.com/36284384/96005833-b3d08a00-0df1-11eb-86d6-3384f3b233d4.png)
+
+<h4> /m/:miniverseName/topic/:id  (topic creator view) </h4>
+
+![Miniverse topic creator](https://user-images.githubusercontent.com/36284384/96006202-16c22100-0df2-11eb-9663-c7c273390f54.png)
+
+![Miniverse topic with reply](https://user-images.githubusercontent.com/36284384/96006356-3fe2b180-0df2-11eb-9907-1f1daf68aea5.JPG)
+
+
+<h4> /miniverse-followed (miniverse where you are not the creator) </h4>
+
+![Followed miniverse](https://user-images.githubusercontent.com/36284384/96007370-46255d80-0df3-11eb-925b-fb75819965e9.JPG)
