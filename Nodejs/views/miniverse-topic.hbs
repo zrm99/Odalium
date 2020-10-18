@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{topicTitle}}</title>
+    <link rel="stylesheet" href="/miniverse-topic.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+  <body>
+    <div id="grid">
+      <div class="links-content" id="navbar-grid-size">
+        <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+        <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+        <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+        <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+      </div>
+      <div id="inner-grid">
+    <div id="topic-title">
+      {{topicTitle}}
+    </div>
+    <div id="topic-summary">
+      <pre>{{topicSummary}}</pre>
+      By: <a href="/user/{{topicCreator}}">{{topicCreator}}</a>
+    </div>
+    <div id="reply-button-container">
+      <i class="las la-reply"></i>
+      Reply
+      <div id="create-reply-form">
+        <form action="/create/topic-reply" method="post">
+          <textarea id="reply-area" name="replyContent" rows="5" cols="28" maxlength="10000"></textarea>
+          <br>
+          <input type="submit" name="Submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div id="delete-reply-container">
+      <i title="Delete reply"  class="lar la-trash-alt delete-reply-icon"></i>
+      Delete
+      <div id="delete-reply-form">
+    <form action="/reply-delete" method="POST">
+      Username
+      <input type="text" name="replyCreator" value="" class="form-submission">
+      <br>
+      Post #
+      <input type="text" name="replyID" value="" class="form-submission">
+      <br>
+      <input type="submit" name="Submit" value="Submit">
+    </div>
+    </form>
+  </div>
+    <div id="reply-list">
+    {{#each topicReplies}}
+    <div class="background-styling-1">
+   <span title="Post ID">#{{this.reply_id}}</span>
+      <a title="User" class="creator-name-spacing" href="/user/{{this.creator}}">{{this.creator}}:</a>
+      <div id="reply-container">
+      {{this.reply_content}}
+    </div>
+  </div>
+    <br>
+    {{/each}}
+  </div>
+
+  </div>
+</div>
+  <footer>
+    <script type="text/javascript" src="/miniverse-topic.js"></script>
+  </footer>
+  </body>
+</html>

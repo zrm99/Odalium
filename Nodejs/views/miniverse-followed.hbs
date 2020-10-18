@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/miniverse.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <title>{{miniverseName}}</title>
+  </head>
+  <body>
+    <div id="grid-container">
+      <div class="links-content" id="navbar-grid-size">
+        <a href="/search" class="button-styling"><i class="las la-search icon-size-spacing"></i>Search</a>
+        <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+        <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+        <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+      </div>
+      <div class="miniverse-container">
+      <div id="miniverse-name">
+        {{miniverseName}}
+      </div>
+      <div id="miniverse-summary">
+        <form action="/m/unfollow" method="POST" class="follow-button-position">
+          <input class="button-styling" type="submit" value="Unfollow {{miniverseName}}">
+        </form>
+        {{miniverseSummary}}
+        <div id="creator-name">
+          Owner: <a href="/user/{{miniverseCreatorName}}">{{miniverseCreatorName}}</a>
+        </div>
+      </div>
+    <div id="create-post-container">
+      <i class="las la-comment-alt"></i>
+      Post
+      <div id="create-post-form">
+        <form action="/create/miniverse-post" method="post">
+          Title
+          <input id="topic-box" type="text" name="topicTitle" maxlength="500">
+          Description
+          <textarea id="description-box" name="topicContent" rows="3" cols="20" maxlength="10000"></textarea>
+          <input type="submit" name="" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div id="topics-list">
+      <span id="topic-box-header">TOPICS</span>
+      <div id="topic-sorting-box">
+        <span id="sort-by-top">TOP</span>
+        |
+        <span id="sort-by-recent">RECENT</span>
+      </div>
+    <div id="topic-box-style">
+    {{#each miniverseTopics}}
+    <div class="topic-divider" id="button-{{this.topic_id}}">
+    <i title="Expand topic summary" class="las la-chevron-circle-down expand-summary"></i>
+    <a href="/m/{{../miniverseName}}/topic/{{this.topic_id}}">{{this.title}}</a>
+    <span id="summary-{{this.topic_id}}"><pre>{{this.descriptor}}</pre></span>
+    </div>
+    <style nonce="{{../nonceID}}">
+    #summary-{{this.topic_id}} {
+      display: none;
+    }
+    </style>
+    <script nonce="{{../nonceID}}"}>
+    document.getElementById("button-{{this.topic_id}}").addEventListener("click", function Cool() {
+      if (document.getElementById("summary-{{this.topic_id}}").style.display === "block") {
+        document.getElementById("summary-{{this.topic_id}}").style.display = "none";
+      } else {
+      document.getElementById("summary-{{this.topic_id}}").style.display = "block";
+      }
+    });
+    </script>
+    {{/each}}
+    </div>
+  </div>
+</div>
+  </body>
+  <footer>
+    <script type="text/javascript" src="/miniverse.js"></script>
+  </footer>
+</html>
