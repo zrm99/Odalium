@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const http = require('http');
-const exphbs  = require('express-handlebars');
 const db = require('./private/database.js');
 const vd = require('./private/validation.js');
 const ms = require('./private/misc.js');
@@ -46,8 +45,10 @@ app.use(helmet.contentSecurityPolicy({
 
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }))
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
+
+app.engine('hbs', require('exphbs'));
+app.set('view engine', 'hbs');
+
 var pgSession = require('connect-pg-simple')(session);
 var expireDate = new Date(Date.now() + 60 * 60 * 1000);
 app.use(session({
