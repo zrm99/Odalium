@@ -13,6 +13,7 @@ a {
   margin-right: 4px;
   padding-right: 3px;
 }
+
 a:hover {
   color: red;
 }
@@ -35,11 +36,11 @@ a:hover {
   z-index: 2;
   margin-top: 2px;
 }
+
 #settings-content {
   margin-top: 2px;
   font-size: 15px;
 }
-
 
 .icon-size-spacing {
   padding-right: 5px;
@@ -62,24 +63,12 @@ grid-column: 30/32;
   border-style: solid;
 }
 
-#image-box {
-  display: flex;
-  justify-content: center;
-  grid-column: 15/16;
-  grid-row: 2/7;
-}
-
-#user-image {
-  width: 100px;
-  height: 100px;
-}
-
 #links-position {
   grid-row: 1/1;
   grid-column: 1/32;
 }
 
-#links-content {
+#links-container {
   display: flex;
   border-width: 2px;
   border-color: black;
@@ -89,7 +78,6 @@ grid-column: 30/32;
   margin-bottom: 55px;
   border-radius: 8px;
   padding-bottom: 5px;
-
 }
 
 #bio {
@@ -117,10 +105,8 @@ grid-column: 30/32;
 .button-styling:hover {
   background-color:  #bfbfbf;
 }
-.posts {
 
-}
-
+/* Below 420 pixels, orientate the username or buttons in a different manner to prevent overlapping and buttons getting cut off*/
 @media screen and (max-width: 391px) {
 #username {
   grid-row: 2;
@@ -129,9 +115,5 @@ grid-column: 30/32;
 #links-main {
   grid-row: 1;
   grid-column: 1/2;
-}
-#image-box {
-  grid-column: 19;
-  grid-row: 3/6;
 }
 }

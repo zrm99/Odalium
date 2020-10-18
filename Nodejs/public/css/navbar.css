@@ -1,3 +1,17 @@
+.links-container {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #cceeff;
+    border-top-width: 2px;
+    border-radius: 8px;
+}
+
+.flex {
+  display: flex;
+  flex-flow: column;
+}
+
 .button-styling {
   background-color: white;
   border-style: solid;
@@ -31,15 +45,12 @@ a:hover {
   font-size: 15px;
 }
 
+@media screen and (max-width: 430px) {
+  .links-container {
+    display: inline-grid;
+  }
 
-.links-content {
-  display: inline-block;
-
-  border-width: 2px;
-  border-radius: 8px;
-  border-color: black;
-  border-style: solid;
-  background-color: #cceeff;
-  margin-bottom: 5px;
-  border-top-width: 2px;
+  .button-styling {
+    margin: 1px;
+  }
 }

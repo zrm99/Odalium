@@ -1,5 +1,3 @@
-
-
 body {
 background-color: #28f0da;
 }
@@ -61,7 +59,7 @@ pre {
 }
 
 #reply-button-container {
-  grid-column: 7/16;
+  grid-column: 6/16;
   color: blue;
   display: block;
   position: relative;
@@ -73,19 +71,8 @@ pre {
   cursor: pointer;
   z-index: 2;
 }
-#create-reply-form {
-  color: black;
-  background-color: #cceeff;
-  border-color: black;
-  border-style: solid;
-  border-radius: 5px;
-  border-width: 5px;
-  display: none;
-  position: absolute;
-  right: -50px;
-  cursor: context-menu;
-}
 
+#create-reply-form,
 #delete-reply-form {
   color: black;
   background-color: #cceeff;
@@ -95,7 +82,9 @@ pre {
   border-width: 5px;
   display: none;
   position: absolute;
-  right: -50px;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 8%);
   cursor: context-menu;
 }
 
@@ -103,7 +92,6 @@ pre {
   display: block;
   grid-column: 3/19;
   grid-row: 5;
-  /* margin-bottom: 75px; */
 }
 
 #reply-container {
@@ -120,6 +108,7 @@ pre {
 
 
 #delete-topic {
+  grid-row: 1;
   grid-column: 20;
   font-size: 30px;
 }
@@ -138,7 +127,7 @@ pre {
 }
 
 #delete-reply-container {
-  grid-column: 7/16;
+  grid-column: 6/16;
   grid-row: 4;
   color: blue;
   display: block;
@@ -179,12 +168,10 @@ pre {
     grid-column: 9/21;
     grid-row: 4;
   }
-
   #delete-reply-container {
     grid-column: 9/21;
     grid-row: 5;
   }
-
   #reply-list {
     grid-column: 9/18;
     grid-row: 6;
@@ -204,38 +191,23 @@ pre {
  }
 
  @media screen and (max-width: 450px){
+   #inner-grid,
+   #topic-summary {
+     grid-column: 1/31;
+   }
+
+   #topic-title {
+     grid-row: 1;
+     grid-column: 1/31;
+   }
+
+   #reply-button-container,
+   #delete-reply-container {
+     grid-column: 6/19;
+   }
 
    #reply-list {
-     grid-column: 5/18;
+     grid-column: 4/24;
      grid-row: 6;
    }
  }
-
-
- @media screen and (max-width: 360px) {
-   #topic-title {
-     grid-column: 1/31;
-     grid-row: 1;
-   }
-   #topic-summary {
-     grid-column: 1/31;
-     grid-row: 2;
-   }
-   #reply-button-container {
-     grid-column: 1/31;
-     grid-row: 3;
-   }
-
-   #delete-reply-container {
-     grid-column: 1/31;
-     grid-row: 4;
-   }
-
-   #reply-list {
-     grid-column: 4/28;
-     grid-row: 6;
-   }
-
-   #delete-topic {
-     grid-column: 30/31;
-   }

@@ -49,6 +49,8 @@ a:hover {
 
 
 
+
+
 #searchbar-text {
   grid-row: 1/1;
   grid-column: 30/32;
@@ -60,11 +62,18 @@ a:hover {
   border-style: solid;
 }
 
+/* https://stackoverflow.com/questions/45536537/centering-in-css-grid */
 #image-box {
   display: flex;
   justify-content: center;
   grid-column: 15/16;
   grid-row: 3/7;
+}
+
+#user-image {
+  width: 100px;
+  height: 100px;
+  /* If I choose to allow this, use a safe host like imgur */
 }
 
 #navbar-grid-size {
@@ -103,6 +112,8 @@ a:hover {
   margin-right: 125px;
 }
 
+
+
 #profile-post-form {
   display: none;
   color: black;
@@ -122,6 +133,9 @@ a:hover {
   margin-top: 25px;
   border-bottom-left-radius: 7px;
 	border-bottom-right-radius: 7px;
+  border-bottom-width: 1px;
+  border-left-style: none;
+  border-right-style: none;
 }
 
 .profile-table {
@@ -155,11 +169,13 @@ a:hover {
     border-top-width: 2px;
     border-radius: 8px;
 }
+
 .flex {
   display: flex;
   flex-flow: column;
 }
 
+/* Below 420 pixels, orientate the username or buttons in a different manner to prevent overlapping and buttons getting cut off*/
 @media screen and (max-width: 391px) {
   #username {
     grid-row: 2;
@@ -176,9 +192,23 @@ a:hover {
 }
 
 @media screen and (max-width: 430px) {
-  .links-content {
-    display: block;
-  }
+
+.profile-table {
+  grid-column: 1/31;
+}
+#profile-post-container {
+  margin-left: 85px;
+  margin-right: 85px;
+}
+#profile-post-form {
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, 1%);
+}
+#profile-post-content {
+  width: 97%;
+}
+
 }
 
 @media screen and (max-width: 900px) {

@@ -6,24 +6,20 @@ a {
   text-decoration: none;
   color: blue;
 }
+
 a:hover {
   color: red;
 }
+
 #grid {
   display: grid;
   grid-template-columns: repeat(50, 1fr);
   grid-gap: 0px;
 }
 
-.button-styling {
-  background-color: white;
-  border-style: solid;
-  border-color: black;
-  margin: 3px;
-  margin-top: 0px;
-  font-size: 17px;
-  border-radius: 5px;
-  padding-right: 3px;
+#navbar-grid-size {
+  grid-row: 1/1;
+  grid-column: 1/51;
 }
 
 .button-styling:hover {
@@ -35,22 +31,9 @@ a:hover {
   font-size: 15px;
 }
 
-#links-content {
-  display: inline;
-  grid-column: 1/52;
-  border-width: 2px;
-  border-radius: 8px;
-  border-color: black;
-  border-style: solid;
-  background-color: #cceeff;
-  margin-bottom: 55px;
-  border-top-width: 2px;
-}
-
 .float-right {
   float: right;
 }
-
 
 #miniverse-list {
   margin-right: 18px;
@@ -67,6 +50,7 @@ a:hover {
 }
 
 #browser-content {
+  margin-top: 25px;
   grid-row: 2/2;
   grid-column: 19/50;
 }

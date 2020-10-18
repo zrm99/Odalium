@@ -131,6 +131,7 @@ app.post('/login', async function(req, res){
 app.get('/profile', async function(req, res) {
 	 if (vd.verifySession(req)) {
 		 app.use(express.static("public/css"));
+     app.use(express.static("public/js"));
 		 res.render('profile', {
 			 layout: false,
 			 user: req.session.user,
@@ -268,8 +269,10 @@ app.get('/browser', async function(req, res){
 
 app.get('/create/miniverse', async function(req, res) {
 	if (vd.verifySession(req)) {
-	app.use('/create', express.static(__dirname + '/public/css'));
-	res.sendFile(path.join(__dirname + '/public/html/create-miniverse.html'));
+	app.use(express.static('public/css'));
+	res.render('create-miniverse', {
+    layout: false,
+  });
 } else {
 	res.status(403).send("Please register, login, or enable cookies to access this content.");
 }

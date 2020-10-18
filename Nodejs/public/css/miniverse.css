@@ -3,7 +3,7 @@ body {
 }
 
 .miniverse-container {
-  grid-column: 29/55;
+  grid-column: 27/55;
   grid-row: 2;
   background-color: #00b7ffde;
   border-style: solid;
@@ -17,6 +17,7 @@ body {
   grid-row: 2/2;
   grid-column: 1/11;
   font-size: 30px;
+  padding-top: 4.5px;
   padding-left: 15px;
   cursor: default;
 }
@@ -138,11 +139,13 @@ a {
    display: none;
    position: absolute;
    cursor: default;
-   right: -52px;
+   top: 0%;
+   left: 50%;
+   transform: translate(-50%, 8%);
  }
 
 #topic-box {
-  width: 298px;
+  width: 98%;
   border-style: solid;
   border-radius: 3px;
   border-color: #999999;
@@ -226,22 +229,25 @@ pre {
   #miniverse-name {
     grid-column: 20/58;
   }
+
   #delete-miniverse {
     grid-column: 40/52;
   }
+
   #miniverse-summary {
     grid-column: 22/57;
   }
+
   #create-post-container {
     grid-column: 25/54;
   }
+
   #topics-list {
     grid-column: 25/54;
   }
 }
 
 @media screen and (max-width: 850px) {
-
   #miniverse-name {
     grid-column: 24/54;
   }
@@ -257,7 +263,7 @@ pre {
   #create-post-container {
     grid-column: 25/54;
   }
-  
+
   #topics-list {
     grid-column: 25/54;
   }
@@ -304,21 +310,24 @@ pre {
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 430px) {
+  .miniverse-container {
+    grid-column: 1/84;
+  }
   #miniverse-name {
-    grid-column: 24/54;
+    grid-column: 1/54;
   }
   #delete-miniverse {
     grid-column: 50/52;
   }
   #miniverse-summary {
-    grid-column: 24/55;
+    grid-column: 1/55;
   }
   #create-post-container {
-    grid-column: 25/54;
+    grid-column: 1/54;
   }
   #topics-list {
-    grid-column: 25/54;
+    grid-column: 1/54;
   }
 }
 
