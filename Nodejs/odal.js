@@ -20,12 +20,12 @@ const rateLimit = require("express-rate-limit");
 // 	key: fs.readFileSync('./security/example.key'),
 // }
 
-// const httpsServer = https.createServer(httpsOptions, app).listen(port, hostname, () => {
-//   console.log('\nServer running at ' + 'https://' + hostname + ":" + port);
+// const httpsServer = https.createServer(httpsOptions, app).listen(process.env.PORT, process.env.HOST, () => {
+//   console.log('\nServer running at ' + 'https://' + process.env.HOST + ":" + process.env.PORT);
 // });
 
-http.createServer(app).listen(8080);
-console.log("SERVING RUNNING AT: localhost:8080");
+http.createServer(app).listen(process.env.PORT);
+console.log("SERVING RUNNING AT: localhost:" + process.env.PORT);
 
 app.use(helmet());
 app.use(function (req, res, next) {
@@ -49,11 +49,11 @@ app.use(helmet.referrerPolicy({ policy: 'same-origin' }))
 app.engine('hbs', require('exphbs'));
 app.set('view engine', 'hbs');
 
-var pgSession = require('connect-pg-simple')(session);
-var expireDate = new Date(Date.now() + 60 * 60 * 1000);
+let pgSession = require('connect-pg-simple')(session);
+let expireDate = new Date(Date.now() + 60 * 60 * 1000);
 app.use(session({
-    store: new pgSession({conString: "postgres://" + db.dbUser + ":" + db.dbPass + "@localhost:5432/" + db.dbName}),
-    secret: 'CHANGE_SECRET_FOR_PRODUCTION',
+    store: new pgSession({conString: "postgres://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@localhost:5432/" + process.env.DB_NAME}),
+    secret: process.env.DB_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
 		cookie: {maxAge: null, secure: false, httpOnly: false},
@@ -78,13 +78,20 @@ app.get('/', async function(req, res) {
 });
 
 app.get('/register', function(req, res) {
+  if (vd.verifySession(req)) {
+    res.redirect('/profile');
+  } else {
 	res.sendFile(path.join(__dirname + '/public/html/register.html'));
 	app.use(express.static("public/css"));
+  }
 });
 
 app.post("/register", async (req, res) => {
+  if (vd.verifySession(req)) {
+    res.redirect('/profile');
+  } else {
 	try {
-	var userExists = await db.checkExistingUser(req.body.Username);
+	let userExists = await db.checkExistingUser(req.body.Username);
   if (userExists.rowCount >= 1) {
     throw "<h1>Username already exists.</h1>";
   }
@@ -95,30 +102,32 @@ app.post("/register", async (req, res) => {
 	db.insertUser(req.body.Username, req.body.Password, new Date(), req.ip);
 	res.redirect('/login');
 	} catch (error) {
-		if (typeof(error) == "object") {
-		var str = error.message.slice(29, error.length);
-		res.sendStatus(500);
-		res.end();
-	} else if (typeof(error) == "string") {
-		res.sendStatus(500);
-		res.end();
-	}
+    res.sendStatus(500);
+}
 }
 });
 
 app.get('/login', function(req, res) {
+  if (vd.verifySession(req)) {
+    res.redirect('/profile');
+  } else {
 	res.sendFile(path.join(__dirname + '/public/html/login.html'));
 	app.use(express.static("public/css"));
+  }
 });
 
 app.post('/login', async function(req, res){
+  if (vd.verifySession(req)) {
+    res.redirect('/profile');
+  } else {
 	try {
-		var userExists = await db.checkExistingUser(req.body.Username);
+		let userExists = await db.checkExistingUser(req.body.Username);
 		if (req.body.Username == "" || req.body.Password == "") {
 			throw '<h1>Empty username or password</h1>';
 		} else if (userExists.rowCount == false) {
 			throw `${req.body.Username} not found, please register first`;
 		} else {
+      vd.userRequirements(req.body.Username, req.body.Password);
 			db.validateUser(req, res);
 			req.session.user = req.body.Username;
 			db.updateIpAddress(req);
@@ -126,6 +135,7 @@ app.post('/login', async function(req, res){
 	} catch (error) {
 		res.send("<h1>Something went wrong while logging you in. Please try again</h1>");
 	}
+  }
 });
 
 app.get('/profile', async function(req, res) {
@@ -189,11 +199,11 @@ app.get('/user/:username', async function(req, res) {
 	if (req.params.username == req.session.user) {
 		res.redirect('/profile');
 	} else {
-	var userExists = await db.checkExistingUser(req.params.username);
+	let userExists = await db.checkExistingUser(req.params.username);
 	if (userExists.rowCount > 0) {
 	req.session.lastViewedUser= req.params.username;
 	app.use(express.static("public/css"));
-	var userFollowingExists = await db.checkUserFollowingExists(req.params.username, req.session.user);
+	let userFollowingExists = await db.checkUserFollowingExists(req.params.username, req.session.user);
 	if (userFollowingExists == 1) {
 		res.render('other-profiles-followed', {
 			layout: false,
@@ -220,7 +230,7 @@ app.get('/user/:username', async function(req, res) {
 
 app.get('/profile/following', async function(req, res) {
   if (vd.verifySession(req)) {
-	var following = await db.retrieveUserFollowing(req.session.user)
+	let following = await db.retrieveUserFollowing(req.session.user)
 	res.render('user-following',  {
 		layout: false,
 		userFollowing: following,
@@ -232,7 +242,7 @@ app.get('/profile/following', async function(req, res) {
 
 app.get('/profile/followers', async function(req, res) {
   if (vd.verifySession(req)) {
-	var followers = await db.retrieveUserFollowers(req.session.user);
+	let followers = await db.retrieveUserFollowers(req.session.user);
 	res.render('user-followers', {
 		layout: false,
 		userFollowers: followers,
@@ -254,8 +264,8 @@ app.post('/user/unfollow', async function(req, res) {
 
 app.get('/browser', async function(req, res){
 	if (vd.verifySession(req)) {
-	var miniverseColumn = await db.listMiniverses();
-	var miniverseFollowerCount = await db.listMiniverseFollowerCount();
+	let miniverseColumn = await db.listMiniverses();
+	let miniverseFollowerCount = await db.listMiniverseFollowerCount();
 	app.use(express.static("public/css"));
 	res.render('browser', {
 		layout: false,
@@ -281,11 +291,11 @@ app.get('/create/miniverse', async function(req, res) {
 app.post('/create/miniverse', async function(req, res) {
 	try {
 	vd.miniverseCreationForm(req);
-	var nameExists = await db.findMiniverseName(req.body.miniverseName);
+	let nameExists = await db.findMiniverseName(req.body.miniverseName);
 	if (nameExists > 0) {
 		throw "Name already exists";
 	}
-	var encodedURI = encodeURIComponent(req.body.miniverseName);
+	let encodedURI = encodeURIComponent(req.body.miniverseName);
 	db.createMiniverse(req, encodedURI);
 	res.redirect('/browser');
 } catch (error) {
@@ -295,7 +305,7 @@ app.post('/create/miniverse', async function(req, res) {
 
 app.get('/m/:miniverseName', async function(req, res) {
 	if (vd.verifySession(req)) {
-	var miniverseExists = await db.findMiniverseName(req.params.miniverseName);
+	let miniverseExists = await db.findMiniverseName(req.params.miniverseName);
 	if (miniverseExists > 0) {
 	req.session.lastViewedMiniverse = req.params.miniverseName;
 	app.use(express.static('public/js'));
@@ -311,7 +321,7 @@ app.get('/m/:miniverseName', async function(req, res) {
 			nonceID: `${res.locals.nonce}`,
 		});
 	} else {
-	var followerExists = await db.checkMiniverseFollowerExists(req.session.user, req.session.lastViewedMiniverse);
+	let followerExists = await db.checkMiniverseFollowerExists(req.session.user, req.session.lastViewedMiniverse);
 	if (followerExists == 1) {
 	res.render('miniverse-followed', {
 		layout: false,
@@ -423,8 +433,8 @@ app.post('/create/miniverse-post', async function(req, res) {
 app.post('/create/profile-post', async function(req, res) {
 	if (vd.verifySession(req)) {
 		if (req.body.profilePostContent != '') {
-      var d = new Date();
-      var date = d.toString();
+      let d = new Date();
+      let date = d.toString();
 			if (await db.checkProfilePostsExist() == false) {
 				db.insertProfilePost(req.session.user, date, req.body.profilePostContent, 1);
 			} else {

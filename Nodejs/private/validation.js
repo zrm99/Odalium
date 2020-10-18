@@ -11,13 +11,13 @@ module.exports = {
     var usernameRequirements = new RegExp("[a-zA-Z]{3,}");
     var passwordRequirements = new RegExp("^(?=.*[0-9]{3,})(?=.*[a-zA-Z])(?=.*[!@#$%^&*])([a-zA-Z0-9!@#$%^&*]+)$");
     if (usernameRequirements.test(username) == true) {
-      if (passwordRequirements.test(password) == true && password.length >= 6 && password.length < 30) {
-        // SUCCESSFULLY PASSED REQUIREMENTS, PROCEED TO HASHING.
-      } else if (passwordRequirements.test(password) == false || password.length >= 6 || password.length < 30) {
+      if (passwordRequirements.test(password) == false || password.length < 6 || password.length > 30) {
         throw "<h1>Password requirements not met</h1>";
       }
-    } else if (usernameRequirements.test(username) == false  || username.length >= 1 || username.length < 20){
+    } else if (usernameRequirements.test(username) == false  || username.length < 3 || username.length > 20) {
       throw "<h1>Username requirements not met</h1>";
+    } else {
+      throw 404;
     }
   },
 

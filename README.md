@@ -17,21 +17,19 @@ Installation Instructions for HTTP server:
 </h3>
 
 1) Install the required tools.
-2) Download the main Nodejs directory.  
-3) Run pgadmin, set up a user and password and then create a database.
+2) Download or clone the directory.
+3) Run pgadmin, set up a username and password and then create a database.
 4) Follow these simple instructions by importing the file titled 'initial.sql':
 https://www.postgresql-archive.org/pgAdmin-4-How-to-I-import-a-sql-file-td5999352.html
 5) Start up the Node.js command prompt and navigate to the inside of the /Nodejs/ directory.
 6) Run NPM install which will install the required dependencies for the program.
-7) Enter "node odal.js" into the Node.js command prompt after the dependencies are installed
-and then you should see a console prompt displaying "Database name:".
-8) Submit the database name and then answer the next prompts of "Database owner:" and "Database password:".
-These prompts will be asked every time the server is restarted.
+7) Change the .env.example file to .env and fill out the enviroment variables with the
+database credentials.
 
 If all is successful two messages should appear, the first displays
 "SERVING RUNNING AT: localhost:8080", and the next message says
-"DATABASE CONNECTED". If the messages mentioned do not show up, and you see a
-large list of errors, you went wrong somewhere and the credentials or
+"DATABASE CONNECTED". If the messages mentioned do not show up, and you see some
+errors, you went wrong somewhere and the credentials or
 information entered is wrong, or an unknown bug may have been discovered.
 
 <h3>
@@ -72,7 +70,7 @@ Images of the current iteration of Odalmedia:
 
 ![Topic expanded](https://user-images.githubusercontent.com/36284384/96005833-b3d08a00-0df1-11eb-86d6-3384f3b233d4.png)
 
-<h4> /m/:miniverseName/topic/:id  (topic creator view) </h4>
+<h4> /m/:miniverseName/topic/:topic  (topic creator view) </h4>
 
 ![Miniverse topic creator](https://user-images.githubusercontent.com/36284384/96006202-16c22100-0df2-11eb-9663-c7c273390f54.png)
 

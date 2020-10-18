@@ -1,10 +1,6 @@
 const bcrypt = require('bcrypt');
-var prompt = require('prompt-sync')();
-var databaseName = prompt('Database name: ');
-var databaseUser = prompt('Database owner: ');
-var databasePass = prompt('Database password: ');
-
-const connection = "postgres://" + databaseUser + ":" + databasePass + "@localhost:5432/" + databaseName;
+const dotenv = require('dotenv-safe').config()
+const connection = "postgres://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@localhost:5432/" + process.env.DB_NAME;
 const { Client } = require('pg');
 const client = new Client(connection);
 client.connect();
@@ -13,10 +9,6 @@ client.query('SELECT $1::text as message', ['DATABASE CONNECTED'], (err, res) =>
 });
 
 module.exports = {
-  dbUser: databaseUser,
-  dbPass: databasePass,
-  dbName: databaseName,
-
   deleteSessions: async function deleteSessions(session) {
     try {
       var queryDeleteSession = `DELETE FROM session WHERE sess ->> 'user' = $1`;
@@ -53,11 +45,11 @@ module.exports = {
     return result.rows[0];
   },
 
-  validateUser: async function verifyUser(req, res) {
+  validateUser: async function validateUser(req, res) {
     var hashQuery = 'SELECT "password_hash" FROM t_users WHERE "username" = $1';
     var fetchUsername = [req.body.Username];
     var hash = await client.query(hashQuery, fetchUsername);
-  bcrypt.compare(req.body.Password, hash.rows[0].password_hash, (err, check) => {
+    bcrypt.compare(req.body.Password, hash.rows[0].password_hash, (err, check) => {
     if (check == true) {
       req.session.user = req.body.Username;
       return res.redirect("/profile");

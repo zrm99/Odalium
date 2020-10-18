@@ -7,10 +7,6 @@ body {
   padding-right: 25px;
 }
 
-img{
-  display:block;
-}
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(64, 1fr);
@@ -126,7 +122,7 @@ a:visited {
 }
 
 @media screen and (max-width: 900px) {
-  
+
 .gi2 {
   grid-row: 2/2;
   grid-column: 5/60;
