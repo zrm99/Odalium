@@ -1,4 +1,9 @@
-#ignore all node packages
-
+# node packages
 /node_modules
+
+# environment variables
 .env
+
+# linters
+.eslintrc.json
+.stylelintrc.json

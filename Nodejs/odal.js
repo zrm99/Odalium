@@ -56,8 +56,7 @@ app.use(session({
     secret: process.env.DB_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-		cookie: {maxAge: null, secure: false, httpOnly: false},
-    // In production change 'secure' to true.
+		cookie: {maxAge: null, secure: false, httpOnly: true},
 		autoRemove: 'native',
 }));
 

@@ -20,7 +20,11 @@
     "utf-8-validate": "^5.0.2",
     "uuidv4": "^6.2.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.11.0",
+    "stylelint": "^13.7.2",
+    "stylelint-config-standard": "^20.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

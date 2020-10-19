@@ -6,9 +6,9 @@ const fs = require('fs');
 module.exports = {
 
   createLogFile: function createLogFile() {
-    var d = new Date();
-    var date = d.getMonth() + '_' + d.getDate() + '_' + d.getFullYear();
-    var fileName = date + '-log' + '.txt';
+    let d = new Date();
+    let date = d.getMonth() + '_' + d.getDate() + '_' + d.getFullYear();
+    let fileName = date + '-log' + '.txt';
     fs.access('logs/', fs.F_OK, function(err) {
        if (err) {
          fs.open('logs/' + fileName, 'w', function(err) {
@@ -18,11 +18,12 @@ module.exports = {
          });
        }
     });
-    return fileName;
+
+return fileName;
   },
   appendLogFile: function appendLogFile(fileName, fileData) {
-    var d = new Date();
-    var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + ':' + d.getMilliseconds();
+    let d = new Date();
+    let time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + ':' + d.getMilliseconds();
     fileData = fileData + ' (' + time + ')' + '\n';
     fs.appendFile('logs/' + fileName, fileData, function(err) {
       if (err) {
