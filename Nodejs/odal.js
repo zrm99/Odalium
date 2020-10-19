@@ -48,13 +48,12 @@ app.engine('hbs', require('exphbs'));
 app.set('view engine', 'hbs');
 
 let pgSession = require('connect-pg-simple')(session);
-let expireDate = new Date(Date.now() + 60 * 60 * 1000);
 app.use(session({
   store: new pgSession({conString: "postgres://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@localhost:5432/" + process.env.DB_NAME}),
   secret: process.env.DB_SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: {maxAge: expireDate, secure: false, httpOnly: true},
+  cookie: {maxAge: 259200000, secure: false, httpOnly: true},
   autoRemove: 'native',
 }));
 
@@ -96,7 +95,7 @@ app.post("/register", async (req, res) => {
         throw "<h1>Passwords do not match.</h1>";
       }
       vd.userRequirements(req.body.Username, req.body.Password);
-      db.insertUser(req.body.Username, req.body.Password, new Date(), req.ip);
+      db.insertUser(req, new Date());
       res.redirect('/login');
     } catch (error) {
       res.sendStatus(500);
@@ -383,10 +382,10 @@ app.post('/topic-delete', async function(req, res) {
 
 app.post('/create/topic-reply', async function(req, res) {
   if (await db.checkRepliesExist() <= 0) {
-    await db.createUserReply(req.body.replyContent, req.session.user, req.session.lastViewedMiniverse, 0, req.session.lastViewedTopic);
+    await db.createUserReply(req, 0);
   } else {
     let replyID = await db.lastReplyID();
-    await db.createUserReply(req.body.replyContent, req.session.user, req.session.lastViewedMiniverse, replyID, req.session.lastViewedTopic);
+    await db.createUserReply(req, replyID);
   }
   res.redirect('/m/' + req.session.lastViewedMiniverse + '/topic/' + req.session.lastViewedTopic);
 });
@@ -415,11 +414,11 @@ app.post('/create/miniverse-post', async function(req, res) {
     res.send("<h1>Please include a title and the content of the post <br> that you are trying to make and try again.</h1>");
   } else {
     if (await db.checkMiniverseTopicsExist(req.session.lastViewedMiniverse) == 0) {
-      db.insertMiniverseTopic(req.body.topicTitle, req.body.topicContent, req.session.user, req.session.lastViewedMiniverse, new Date(), 1);
+      db.insertMiniverseTopic(req, new Date(), 1);
     } else {
       let topicID = await db.lastMiniverseID(req.session.lastViewedMiniverse);
       topicID = parseInt(topicID) + 1;
-      db.insertMiniverseTopic(req.body.topicTitle, req.body.topicContent, req.session.user, req.session.lastViewedMiniverse, new Date(), topicID);
+      db.insertMiniverseTopic(req, new Date(), topicID);
     }
     res.redirect('/m/' + req.session.lastViewedMiniverse);
   }
@@ -431,11 +430,11 @@ app.post('/create/profile-post', async function(req, res) {
       let d = new Date();
       let date = d.toString();
       if (await db.checkProfilePostsExist() == false) {
-        db.insertProfilePost(req.session.user, date, req.body.profilePostContent, 1);
+        db.insertProfilePost(req, date, 1);
       } else {
         let postID = await db.lastPostID(req.session.user);
         postID = parseInt(postID) + 1;
-        db.insertProfilePost(req.session.user, date, req.body.profilePostContent, postID);
+        db.insertProfilePost(req, date, postID);
       }
     }
     res.redirect('back');
