@@ -38,7 +38,7 @@ CREATE TABLE "t_users" (
   "follower_names" text [],
   "follower_count" bigint,
   "bio" text DEFAULT('no bio'),
-  "role" text
+  "role" text DEFAULT('user')
 );
 
 
