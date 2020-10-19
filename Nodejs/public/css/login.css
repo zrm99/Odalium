@@ -7,12 +7,11 @@
 
 #gi1 {
   display: block;
-  grid-column: 10/11;
+  grid-column: 8/14;
   grid-row: 1/2;
 }
 
 .login-form {
-  margin: auto;
   display: block;
   background-color: #cff;
   border-radius: 20px;
@@ -24,36 +23,34 @@
 input[type=text] {
   border-style: solid;
   border-color: #dfe1e5;
-  border-radius: 7px;
   border-width: 2px;
-  width: 370px;
+  width: -moz-available;          /* For Mozzila */
+  width: -webkit-fill-available;  /* For Chrome */
+  width: stretch;                 /* Unprefixed */
   padding: 7px;
-  margin-bottom: 30px;
 }
 
 input[type=password] {
   border-style: solid;
   border-color: #dfe1e5;
-  border-radius: 7px;
   border-width: 2px;
-  width: 370px;
+  width: -moz-available;          /* For Mozzila */
+  width: -webkit-fill-available;  /* For Chrome */
+  width: stretch;                 /* Unprefixed */
   padding: 7px;
 }
 
 input[type=submit] {
-  border-radius: 12px;
   padding: 3px;
-  margin-left: 0;
-  width: 388px;
-  border-color: black;
+  width: 100%;
   cursor: pointer;
+  border-style: none;
 }
 
 .display-text {
   text-align: center;
   color: black;
   font-size: 20px;
-  border-radius: 7px;
   background-color: #00b7ffde;
   font-family: "Arial";
 }
@@ -66,16 +63,8 @@ body {
   background-color: #28f0da;
 }
 
-@media screen and (max-width: 420px) {
-  input[type=text] {
-    width: 270px;
-  }
-
-  input[type=password] {
-    width: 270px;
-  }
-
-  input[type=submit] {
-    width: 289px;
-  }
+@media screen and (max-width: 630px) {
+#gi1 {
+  grid-column: 1/21;
+}
 }
