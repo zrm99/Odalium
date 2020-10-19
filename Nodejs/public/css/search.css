@@ -29,7 +29,6 @@ body {
   background-color: #00b7ffde;
   border-radius: 8px;
   padding: 3px;
-  border-width: 7px;
   border-color: #595959;
   text-align: center;
 }
@@ -67,7 +66,7 @@ input[type="submit"] {
   grid-column: 4/6;
   border-color: #999;
   border-radius: 20px;
-  margin-top: 7px;
+  margin-top: 20px;
   border-style: inset;
   cursor: pointer;
 }
