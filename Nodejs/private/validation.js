@@ -1,10 +1,10 @@
 module.exports = {
   verifySession: function verifySession(request) {
-  	if (request.session.user != undefined) {
-  		return true;
-  	}
+    if (request.session.user != undefined) {
+      return true;
+    }
 
-return false;
+    return false;
 
   },
   userRequirements: function userRequirements(username, password) {

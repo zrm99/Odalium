@@ -10,16 +10,16 @@ module.exports = {
     let date = d.getMonth() + '_' + d.getDate() + '_' + d.getFullYear();
     let fileName = date + '-log' + '.txt';
     fs.access('logs/', fs.F_OK, function(err) {
-       if (err) {
-         fs.open('logs/' + fileName, 'w', function(err) {
-           if (err) {
-             return console.log(err);
-           }
-         });
-       }
+      if (err) {
+        fs.open('logs/' + fileName, 'w', function(err) {
+          if (err) {
+            return console.log(err);
+          }
+        });
+      }
     });
 
-return fileName;
+    return fileName;
   },
   appendLogFile: function appendLogFile(fileName, fileData) {
     let d = new Date();
