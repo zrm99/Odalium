@@ -23,7 +23,6 @@
 input[type=text] {
   border-style: solid;
   border-color: #dfe1e5;
-  width: 95.5%;
   width: -moz-available;          /* For Mozzila */
   width: -webkit-fill-available;  /* For Chrome */
   width: stretch;                 /* Unprefixed */
@@ -41,14 +40,11 @@ input[type=password] {
 }
 
 input[type=submit] {
-  border-radius: 12px;
   padding: 3px;
-  margin-left: 0;
-  width: 100%;
   width: -moz-available;          /* For Mozzila */
   width: -webkit-fill-available;  /* For Chrome */
   width: stretch;                 /* Unprefixed */
-  border-color: #8a8a8ad8;
+  border-style: none;
   cursor: pointer;
 }
 
