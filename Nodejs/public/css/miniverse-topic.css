@@ -1,12 +1,12 @@
 body {
-background-color: #28f0da;
+  background-color: #28f0da;
 }
 
 pre {
   font-family: "Times New Roman";
   word-wrap: break-word;
   white-space: pre-wrap;
-  margin: 0px;
+  margin: 0;
   display: flex;
   padding-bottom: 5px;
   padding-top: 5px;
@@ -15,7 +15,7 @@ pre {
 #grid {
   display: grid;
   grid-template-columns: repeat(30, 1fr);
-  grid-gap: 0px;
+  grid-gap: 0;
 }
 
 #navbar-grid-size {
@@ -30,7 +30,7 @@ pre {
   background-color: #00b7ffde;
   border-style: solid;
   border-radius: 10px;
-  grid-template-columns: repeat(20, 1fr)
+  grid-template-columns: repeat(20, 1fr);
 }
 
 #topic-title {
@@ -48,14 +48,14 @@ pre {
 }
 
 #topic-summary {
- margin-bottom: 15px;
- padding: 4px;
- padding-left: 15px;
- background-color: white;
- border-color: black;
- border-top-style: solid;
- border-bottom-style: solid;
- grid-column: 1/21;
+  margin-bottom: 15px;
+  padding: 4px;
+  padding-left: 15px;
+  background-color: white;
+  border-color: black;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  grid-column: 1/21;
 }
 
 #reply-button-container {
@@ -75,7 +75,7 @@ pre {
 #create-reply-form,
 #delete-reply-form {
   color: black;
-  background-color: #cceeff;
+  background-color: #cef;
   border-color: black;
   border-style: solid;
   border-radius: 5px;
@@ -96,16 +96,17 @@ pre {
 
 #reply-container {
   display: block;
-  /* word-wrap: anywhere; */
-  /* white-space: pre-wrap; */
-  background-color:  #80d4ff;
-  border-radius: 20px;
-    padding: 8px;
-    word-break: break-all;
-    word-break: break-word;
-    hyphens: auto;
-}
 
+  /* word-wrap: anywhere; */
+
+  /* white-space: pre-wrap; */
+  background-color: #80d4ff;
+  border-radius: 20px;
+  padding: 8px;
+  word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
+}
 
 #delete-topic {
   grid-row: 1;
@@ -121,6 +122,7 @@ pre {
 #delete-topic-icon {
   font-size: 30px;
 }
+
 #delete-topic-icon:hover {
   color: red;
   cursor: pointer;
@@ -142,7 +144,7 @@ pre {
 }
 
 .background-styling-1 {
-  background-color: #cceeff;
+  background-color: #cef;
   border-radius: 20px;
   padding: 3px;
 }
@@ -160,18 +162,22 @@ pre {
     grid-column: 5/23;
     grid-row: 2;
   }
+
   #topic-summary {
     grid-column: 5/25;
     grid-row: 3;
   }
+
   #reply-button-container {
     grid-column: 9/21;
     grid-row: 4;
   }
+
   #delete-reply-container {
     grid-column: 9/21;
     grid-row: 5;
   }
+
   #reply-list {
     grid-column: 9/18;
     grid-row: 6;
@@ -180,34 +186,33 @@ pre {
   #delete-topic {
     grid-column: 24/25;
   }
- }
+}
 
- @media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
+  #reply-list {
+    grid-column: 7/18;
+    grid-row: 6;
+  }
+}
 
-   #reply-list {
-     grid-column: 7/18;
-     grid-row: 6;
-   }
- }
+@media screen and (max-width: 450px) {
+  #inner-grid,
+  #topic-summary {
+    grid-column: 1/31;
+  }
 
- @media screen and (max-width: 450px){
-   #inner-grid,
-   #topic-summary {
-     grid-column: 1/31;
-   }
+  #topic-title {
+    grid-row: 1;
+    grid-column: 1/31;
+  }
 
-   #topic-title {
-     grid-row: 1;
-     grid-column: 1/31;
-   }
+  #reply-button-container,
+  #delete-reply-container {
+    grid-column: 6/19;
+  }
 
-   #reply-button-container,
-   #delete-reply-container {
-     grid-column: 6/19;
-   }
-
-   #reply-list {
-     grid-column: 4/24;
-     grid-row: 6;
-   }
- }
+  #reply-list {
+    grid-column: 4/24;
+    grid-row: 6;
+  }
+}

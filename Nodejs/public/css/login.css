@@ -12,9 +12,9 @@
 }
 
 .login-form {
- margin: auto;
+  margin: auto;
   display: block;
-  background-color:  #ccffff;
+  background-color: #cff;
   border-radius: 20px;
   border-color: #595959;
   border-style: solid;
@@ -43,7 +43,7 @@ input[type=password] {
 input[type=submit] {
   border-radius: 12px;
   padding: 3px;
-  margin-left: 0px;
+  margin-left: 0;
   width: 388px;
   border-color: black;
   cursor: pointer;
@@ -63,21 +63,19 @@ input[type=submit] {
 }
 
 body {
-	background-color: #28f0da;
+  background-color: #28f0da;
 }
 
 @media screen and (max-width: 420px) {
+  input[type=text] {
+    width: 270px;
+  }
 
-input[type=text] {
-  width: 270px;
-}
+  input[type=password] {
+    width: 270px;
+  }
 
-input[type=password] {
- width: 270px;
-}
-
-input[type=submit] {
-  width: 289px;
-}
-
+  input[type=submit] {
+    width: 289px;
+  }
 }

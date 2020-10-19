@@ -53,8 +53,8 @@ a:hover {
 }
 
 #searchbar-text {
-grid-row: 1/1;
-grid-column: 30/32;
+  grid-row: 1/1;
+  grid-column: 30/32;
 }
 
 #submitbox {
@@ -73,7 +73,7 @@ grid-column: 30/32;
   border-width: 2px;
   border-color: black;
   border-style: solid;
-  background-color: #cceeff;
+  background-color: #cef;
   font-size: 15px;
   margin-bottom: 55px;
   border-radius: 8px;
@@ -98,22 +98,23 @@ grid-column: 30/32;
   font-size: 85%;
   border-radius: 3px;
   background-color: white;
-  border-color: LightGray;
+  border-color: lightgray;
   cursor: pointer;
 }
 
 .button-styling:hover {
-  background-color:  #bfbfbf;
+  background-color: #bfbfbf;
 }
 
-/* Below 420 pixels, orientate the username or buttons in a different manner to prevent overlapping and buttons getting cut off*/
+/* Below 420 pixels, orientate the username or buttons in a different manner to prevent overlapping and buttons getting cut off */
 @media screen and (max-width: 391px) {
-#username {
-  grid-row: 2;
-  grid-column: 19;
-}
-#links-main {
-  grid-row: 1;
-  grid-column: 1/2;
-}
+  #username {
+    grid-row: 2;
+    grid-column: 19;
+  }
+
+  #links-main {
+    grid-row: 1;
+    grid-column: 1/2;
+  }
 }

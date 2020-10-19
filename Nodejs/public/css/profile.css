@@ -11,9 +11,11 @@ a {
   margin-right: 4px;
   padding-right: 3px;
 }
+
 a:hover {
   color: red;
 }
+
 .profile-grid {
   display: grid;
   grid-template-columns: repeat(30, 1fr);
@@ -32,24 +34,23 @@ a:hover {
 .hover-background:hover {
   background-color: #e7e7e7;
 }
+
 #settings-position {
   grid-row: 1/1;
   grid-column: 30/30;
   z-index: 2;
 }
+
 #settings-content {
   display: flex;
   font-size: 15px;
   margin-top: 3px;
 }
+
 #searchbar {
   grid-row: 1/1;
   grid-column: 28/32;
 }
-
-
-
-
 
 #searchbar-text {
   grid-row: 1/1;
@@ -73,6 +74,7 @@ a:hover {
 #user-image {
   width: 100px;
   height: 100px;
+
   /* If I choose to allow this, use a safe host like imgur */
 }
 
@@ -112,12 +114,10 @@ a:hover {
   margin-right: 125px;
 }
 
-
-
 #profile-post-form {
   display: none;
   color: black;
-  background-color: #cceeff;
+  background-color: #cef;
   border-color: black;
   border-style: solid;
   border-radius: 5px;
@@ -132,7 +132,7 @@ a:hover {
   border-style: solid;
   margin-top: 25px;
   border-bottom-left-radius: 7px;
-	border-bottom-right-radius: 7px;
+  border-bottom-right-radius: 7px;
   border-bottom-width: 1px;
   border-left-style: none;
   border-right-style: none;
@@ -145,7 +145,6 @@ a:hover {
   border-radius: 10px;
   border-style: solid;
   margin-top: 35px;
-
 }
 
 .user-posts {
@@ -162,12 +161,12 @@ a:hover {
 }
 
 .links-container {
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
-    background-color: #cceeff;
-    border-top-width: 2px;
-    border-radius: 8px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  background-color: #cef;
+  border-top-width: 2px;
+  border-radius: 8px;
 }
 
 .flex {
@@ -175,16 +174,18 @@ a:hover {
   flex-flow: column;
 }
 
-/* Below 420 pixels, orientate the username or buttons in a different manner to prevent overlapping and buttons getting cut off*/
+/* Below 420 pixels, orientate the username or buttons in a different manner to prevent overlapping and buttons getting cut off */
 @media screen and (max-width: 391px) {
   #username {
     grid-row: 2;
     grid-column: 19;
   }
+
   #links-main {
     grid-row: 1;
     grid-column: 1/2;
   }
+
   #image-box {
     grid-column: 19;
     grid-row: 3/6;
@@ -192,29 +193,31 @@ a:hover {
 }
 
 @media screen and (max-width: 430px) {
+  .profile-table {
+    grid-column: 1/31;
+  }
 
-.profile-table {
-  grid-column: 1/31;
-}
-#profile-post-container {
-  margin-left: 85px;
-  margin-right: 85px;
-}
-#profile-post-form {
-  text-align: center;
-  left: 50%;
-  transform: translate(-50%, 1%);
-}
-#profile-post-content {
-  width: 97%;
-}
+  #profile-post-container {
+    margin-left: 85px;
+    margin-right: 85px;
+  }
 
+  #profile-post-form {
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 1%);
+  }
+
+  #profile-post-content {
+    width: 97%;
+  }
 }
 
 @media screen and (max-width: 900px) {
   #username {
     grid-column: 1/50;
   }
+
   #bio {
     grid-column: 1/50;
   }
@@ -222,7 +225,7 @@ a:hover {
 
 @media screen and (max-width: 514px) {
   a {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }

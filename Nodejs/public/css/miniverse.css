@@ -42,6 +42,7 @@ body {
   width: 225px;
   height: 124px;
 }
+
 #delete-miniverse {
   grid-row: 2;
   grid-column: 10/11;
@@ -56,11 +57,11 @@ body {
 #delete-miniverse-icon {
   font-size: 40px;
 }
+
 #delete-miniverse-icon:hover {
   color: red;
   cursor: pointer;
 }
-
 
 #navbar-grid-size {
   grid-column: 1/83;
@@ -75,12 +76,12 @@ body {
   font-size: 85%;
   border-radius: 3px;
   background-color: white;
-  border-color: LightGray;
+  border-color: lightgray;
   cursor: pointer;
 }
 
 .button-styling:hover {
-  background-color:  #bfbfbf;
+  background-color: #bfbfbf;
 }
 
 .unfollow-button-position {
@@ -100,59 +101,60 @@ body {
 a {
   text-decoration: none;
 }
- a:hover {
-   color: red;
- }
 
- #grid-container {
-   display: grid;
-   grid-template-columns: repeat(82, 1fr);
- }
+a:hover {
+  color: red;
+}
 
- #create-post-container {
-   grid-column: 1/11;
-   grid-row: 4/4;
-   color: blue;
-   display: block;
-   position: relative;
-   text-align: center;
-   margin-bottom: 15px;
-   margin-left: 100px;
-   margin-right: 100px;
-   border-radius: 5px;
-   border-style: solid;
-   background-color: #d9d9d9;
-   cursor: pointer;
- }
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(82, 1fr);
+}
 
- #create-post-container:hover {
-   color: red;
- }
+#create-post-container {
+  grid-column: 1/11;
+  grid-row: 4/4;
+  color: blue;
+  display: block;
+  position: relative;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-left: 100px;
+  margin-right: 100px;
+  border-radius: 5px;
+  border-style: solid;
+  background-color: #d9d9d9;
+  cursor: pointer;
+}
 
- #create-post-form {
-   color: black;
-   background-color: #cceeff;
-   border-color: black;
-   border-style: solid;
-   border-radius: 5px;
-   border-width: 5px;
-   display: none;
-   position: absolute;
-   cursor: default;
-   top: 0%;
-   left: 50%;
-   transform: translate(-50%, 8%);
- }
+#create-post-container:hover {
+  color: red;
+}
+
+#create-post-form {
+  color: black;
+  background-color: #cef;
+  border-color: black;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 5px;
+  display: none;
+  position: absolute;
+  cursor: default;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 8%);
+}
 
 #topic-box {
   width: 98%;
   border-style: solid;
   border-radius: 3px;
-  border-color: #999999;
+  border-color: #999;
 }
 
 #topic-box:hover {
-  border-color:  #595959;
+  border-color: #595959;
 }
 
 #description-box {
@@ -160,12 +162,12 @@ a {
   height: 150px;
   border-style: solid;
   border-radius: 3px;
-  border-color: #999999;
+  border-color: #999;
   resize: none;
 }
 
 #description-box:hover {
-  border-color:  #595959;
+  border-color: #595959;
 }
 
 #topics-list {
@@ -175,7 +177,7 @@ a {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-color: #737373;
-  background-color: #cceeff;
+  background-color: #cef;
   grid-row: 5;
   grid-column: 1/11;
 }
@@ -190,7 +192,7 @@ pre {
   font-family: "Times New Roman";
   word-wrap: break-word;
   white-space: pre-wrap;
-  margin: 0px;
+  margin: 0;
   margin-left: 20px;
   margin-right: 20px;
   display: flex;
@@ -273,22 +275,25 @@ pre {
   #miniverse-name {
     grid-column: 24/54;
   }
+
   #delete-miniverse {
     grid-column: 50/52;
   }
+
   #miniverse-summary {
     grid-column: 24/55;
   }
+
   #create-post-container {
     grid-column: 25/54;
   }
+
   #topics-list {
     grid-column: 25/54;
   }
 }
 
 @media screen and (max-width: 500px) {
-
   #miniverse-name {
     grid-column: 12/64;
   }
@@ -314,25 +319,29 @@ pre {
   .miniverse-container {
     grid-column: 1/84;
   }
+
   #miniverse-name {
     grid-column: 1/54;
   }
+
   #delete-miniverse {
     grid-column: 50/52;
   }
+
   #miniverse-summary {
     grid-column: 1/55;
   }
+
   #create-post-container {
     grid-column: 1/54;
   }
+
   #topics-list {
     grid-column: 1/54;
   }
 }
 
 @media screen and (max-width: 350px) {
-
   #miniverse-name {
     grid-column: 1/83;
   }

@@ -11,11 +11,11 @@
 }
 
 .register-form {
- margin: auto;
+  margin: auto;
   display: block;
-  background-color:  #ccffff;
+  background-color: #cff;
   border-radius: 20px;
-  border-color:  #595959;
+  border-color: #595959;
   border-style: solid;
   border-width: 7px;
 }
@@ -43,7 +43,7 @@ input[type=password] {
 input[type=submit] {
   border-radius: 12px;
   padding: 3px;
-  margin-left: 0px;
+  margin-left: 0;
   width: 100%;
   width: -moz-available;          /* For Mozzila */
   width: -webkit-fill-available;  /* For Chrome */
@@ -61,36 +61,38 @@ input[type=submit] {
 }
 
 .user-requirement-container {
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 5px;
-  margin: 0px;
+  margin: 0;
   text-align: center;
 }
+
 .user-requirement-list {
   color: black;
-  padding: 0px;
-  margin: 0px 0px 0px 30px;
+  padding: 0;
+  margin: 0 0 0 30px;
 }
 
 #password-box {
-  padding: 0px;
+  padding: 0;
   font-size: 14px;
 }
 
 .pass-requirement-container {
-  padding-left: 0px;
+  padding-left: 0;
   padding-right: 5px;
-  margin: 0px;
+  margin: 0;
   text-align: center;
 }
+
 .pass-requirement-list {
-  color:  black;
-  padding: 0px;
-  margin: 0px 0px 0px 23px;
+  color: black;
+  padding: 0;
+  margin: 0 0 0 23px;
 }
 
 body {
-	background-color: #28f0da;
+  background-color: #28f0da;
 }
 
 .hover-background:hover {
@@ -98,8 +100,7 @@ body {
 }
 
 @media screen and (max-width: 700px) {
-#register-container {
-  grid-column: 1/21;
-}
-
+  #register-container {
+    grid-column: 1/21;
+  }
 }

@@ -2,7 +2,6 @@ body {
   background-color: #28f0da;
 }
 
-
 #grid {
   display: grid;
   grid-template-columns: repeat(20, 1fr);

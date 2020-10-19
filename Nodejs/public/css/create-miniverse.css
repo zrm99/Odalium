@@ -22,7 +22,7 @@ a:hover {
 
 .miniverse-form {
   text-align: center;
-  background-color: #ccffff;
+  background-color: #cff;
   border-style: solid;
   border-color: #595959;
   border-radius: 20px;
@@ -49,14 +49,13 @@ a:hover {
   border-top-right-radius: 10px;
 }
 
-
- ul {
-   font-size: 14px;
-   padding-left: 12px;
- }
+ul {
+  font-size: 14px;
+  padding-left: 12px;
+}
 
 .text-area-resize {
-     resize: none;
+  resize: none;
 }
 
 input[type="textarea"] {
@@ -96,14 +95,14 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-border-color: #595959;
-background-color: #e7e7e7;
-color: red;
+  border-color: #595959;
+  background-color: #e7e7e7;
+  color: red;
 }
 
 .miniverse-type-selection {
   border-radius: 20px;
-  border-color:#dfe1e5;
+  border-color: #dfe1e5;
   width: 100px;
   margin-top: 4px;
 }

@@ -14,7 +14,7 @@ a:hover {
 #grid {
   display: grid;
   grid-template-columns: repeat(50, 1fr);
-  grid-gap: 0px;
+  grid-gap: 0;
 }
 
 #navbar-grid-size {
@@ -54,13 +54,16 @@ a:hover {
   grid-row: 2/2;
   grid-column: 19/50;
 }
+
 #miniverse-title {
   margin-right: 135px;
   font-weight: bold;
 }
+
 .type-spacing {
   margin-left: 50px;
 }
+
 .title-styling {
   text-decoration: underline;
   font-weight: bold;
@@ -68,21 +71,23 @@ a:hover {
 
 @media screen and (max-width: 630px) {
   #browser-content {
-  grid-column: 14/50;
+    grid-column: 14/50;
   }
 }
 
 @media screen and (max-width: 447px) {
   #browser-content {
-  grid-column: 2/50;
+    grid-column: 2/50;
   }
 }
+
 @media screen and (max-width: 353px) {
   #miniverse-title {
     margin-right: 135px;
   }
+
   #browser-content {
-  grid-column: 1/50;
+    grid-column: 1/50;
   }
 
   .button-styling {
