@@ -23,7 +23,7 @@ Installation Instructions for HTTP server:
 https://www.postgresql-archive.org/pgAdmin-4-How-to-I-import-a-sql-file-td5999352.html
 5) Start up the Node.js command prompt and navigate to the inside of the /Nodejs/ directory.
 6) Run NPM install which will install the required dependencies for the program.
-7) Change the .env.example file to .env and fill out the enviroment variables with the
+7) Create a .env file and fill out the environment variables with the
 database credentials.
 
 If all is successful two messages should appear, the first displays
