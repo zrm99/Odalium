@@ -1,8 +1,7 @@
 # Odalmedia
-Odalmedia is an open-source ExpressJS based text only forum software using PostgreSQL, which is
-meant to be similar to, but different than Reddit was in its early days.
-This software is currently feature incomplete, riddled with bugs and it has some
-security vulnerabilities.
+Odalmedia is an ExpressJs, text only forum software using PostgreSQL which is 
+meant to be similar to, but different than Reddit was in its early days. 
+This software is currently in very early development and should not be used in production. 
 
 <h3>
 Required tools:
