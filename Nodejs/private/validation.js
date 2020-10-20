@@ -1,6 +1,6 @@
 module.exports = {
-  verifySession: function verifySession(request) {
-    if (request.session.user != undefined) {
+  verifySession: function verifySession(req) {
+    if (typeof req.session.user !== 'undefined') {
       return true;
     }
 
