@@ -44,7 +44,7 @@ body {
   grid-column: 15/19;
   text-align: center;
   margin-right: 40px;
-  font-family: "Arial";
+  font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif;
 }
 
 #txt-clr-bg {

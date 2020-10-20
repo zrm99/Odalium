@@ -81,10 +81,9 @@ a:hover {
 }
 
 #bio {
-  background-color: blue;
+  background-color: white;
   grid-column: 11/20;
   grid-row: 3/3;
-  background-color: white;
   text-align: left;
   padding-top: 5px;
   padding-left: 25px;

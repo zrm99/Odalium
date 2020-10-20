@@ -94,10 +94,6 @@ body {
   grid-row: 1;
 }
 
-.create-post-noscript:hover {
-
-}
-
 a {
   text-decoration: none;
 }
@@ -189,7 +185,7 @@ a:hover {
 }
 
 pre {
-  font-family: "Times New Roman";
+  font-family: "Times New Roman", Arial, Helvetica, Verdana, Tahoma, sans-serif;
   word-wrap: break-word;
   white-space: pre-wrap;
   margin: 0;

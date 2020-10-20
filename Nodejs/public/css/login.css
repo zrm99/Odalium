@@ -52,7 +52,7 @@ input[type=submit] {
   color: black;
   font-size: 20px;
   background-color: #00b7ffde;
-  font-family: "Arial";
+  font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif;
 }
 
 .hover-background:hover {
@@ -64,7 +64,7 @@ body {
 }
 
 @media screen and (max-width: 630px) {
-#gi1 {
-  grid-column: 1/21;
-}
+  #gi1 {
+    grid-column: 1/21;
+  }
 }

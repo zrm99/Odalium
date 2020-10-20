@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Following</title>
-    <link rel="stylesheet" href="/user-following.css">
-    <link rel="stylesheet" href="/navbar.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>Following</title>
+  <link rel="stylesheet" href="/user-follow.css">
+  <link rel="stylesheet" href="/navbar.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
   <div id="grid">
     {{> default-navbar}}
-  <div id="following-box-header">
-    People you follow
+    <div class="follow-box-header">
+      People you follow
+    </div>
+    {{#each userFollowing}}
+    <div class="follow-box">
+      <a href="/user/{{this}}">{{this}}</a>
+    </div>
+    {{/each}}
   </div>
-  {{#each userFollowing}}
-  <div id="following-box">
-    <a href="/user/{{this}}">{{this}}</a>
-  </div>
-  {{/each}}
-  </div>
-  </body>
+</body>
 </html>

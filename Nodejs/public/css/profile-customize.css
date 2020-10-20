@@ -4,7 +4,7 @@ body {
 
 #update-bio-form {
   font-size: 30px;
-  font-family: "Calibri";
+  font-family: "Calibri", Arial, Helvetica, Verdana, Tahoma, sans-serif;
 }
 
 #grid-container {
