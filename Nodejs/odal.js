@@ -8,19 +8,8 @@ const db = require('./private/database.js');
 const vd = require('./private/validation.js');
 const helmet = require('helmet');
 const crypto = require('crypto');
-// const fs = require('fs');
-// const https = require('https');
 const rateLimit = require("express-rate-limit");
 
-// const httpsOptions = {
-// 	cert: fs.readFileSync('./security/www_example_com.crt'),
-// 	ca: fs.readFileSync('./security/www_example_com.ca-bundle'),
-// 	key: fs.readFileSync('./security/example.key'),
-// }
-
-// const httpsServer = https.createServer(httpsOptions, app).listen(process.env.PORT, process.env.HOST, () => {
-//   console.log('\nServer running at ' + 'https://' + process.env.HOST + ":" + process.env.PORT);
-// });
 
 http.createServer(app).listen(process.env.PORT);
 console.log("SERVING RUNNING AT: localhost:" + process.env.PORT);
@@ -49,7 +38,7 @@ app.set('view engine', 'hbs');
 
 let pgSession = require('connect-pg-simple')(session);
 app.use(session({
-  store: new pgSession({conString: "postgres://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@localhost:5432/" + process.env.DB_NAME}),
+  store: new pgSession({conString: "postgres://" + process.env.PGDATABASE + ":" + process.env.PGPASSWORD + "@localhost:5432/" + process.env.PGDATABASE}),
   secret: process.env.DB_SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -67,13 +56,13 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.get('/', async function(req, res) {
+app.get('/', async (req, res) => {
   res.sendFile(path.join(__dirname  + '/public/html/index.html'));
   app.use(express.static("public/css"));
   app.use(express.static("public/images"));
 });
 
-app.get('/register', function(req, res) {
+app.get('/register', async (req, res) => {
   if (vd.verifySession(req)) {
     res.redirect('/profile');
   } else {
@@ -103,7 +92,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get('/login', function(req, res) {
+app.get('/login', async (req, res) => {
   if (vd.verifySession(req)) {
     res.redirect('/profile');
   } else {
@@ -112,7 +101,7 @@ app.get('/login', function(req, res) {
   }
 });
 
-app.post('/login', async function(req, res){
+app.post('/login', async (req, res) => {
   if (vd.verifySession(req)) {
     res.redirect('/profile');
   } else {
@@ -125,7 +114,6 @@ app.post('/login', async function(req, res){
       } else {
         vd.userRequirements(req.body.Username, req.body.Password);
         db.validateUser(req, res);
-        req.session.user = req.body.Username;
         db.updateIpAddress(req);
       }
     } catch (error) {
@@ -134,7 +122,7 @@ app.post('/login', async function(req, res){
   }
 });
 
-app.get('/profile', async function(req, res) {
+app.get('/profile', async (req, res) => {
   if (vd.verifySession(req)) {
     app.use(express.static("public/css"));
     app.use(express.static("public/js"));
@@ -149,7 +137,7 @@ app.get('/profile', async function(req, res) {
   }
 });
 
-app.get('/profile/customize', function(req, res) {
+app.get('/profile/customize', async (req, res) => {
   if (vd.verifySession(req)) {
     app.use(express.static("public/css"));
     res.render('profile-customize', {layout: false});
@@ -158,12 +146,12 @@ app.get('/profile/customize', function(req, res) {
   }
 });
 
-app.post('/profile/update-bio', async function(req, res) {
+app.post('/profile/update-bio', async (req, res) => {
   await db.updateUserBio(req.body.update_bio, req.session.user);
   res.redirect('/profile');
 });
 
-app.get('/search', async function(req, res) {
+app.get('/search', async (req, res) => {
   if (vd.verifySession(req)) {
     res.render('search',
     {
@@ -176,12 +164,12 @@ app.get('/search', async function(req, res) {
   }
 });
 
-app.post('/search', async function(req, res) {
+app.post('/search', async (req, res) => {
   res.redirect('/user/' + req.body.usernameSearch);
 });
 
 
-app.get('/logout', async function(req, res) {
+app.get('/logout', async (req, res) => {
   if (vd.verifySession(req)) {
     db.deleteSessions(req.session.user);
     res.redirect('/');
@@ -190,7 +178,7 @@ app.get('/logout', async function(req, res) {
   }
 });
 
-app.get('/user/:username', async function(req, res) {
+app.get('/user/:username', async (req, res) => {
   if (vd.verifySession(req)) {
     if (req.params.username == req.session.user) {
       res.redirect('/profile');
@@ -222,7 +210,7 @@ app.get('/user/:username', async function(req, res) {
   }
 });
 
-app.get('/profile/following', async function(req, res) {
+app.get('/profile/following', async (req, res) => {
   if (vd.verifySession(req)) {
     let following = await db.retrieveUserFollowing(req.session.user)
     res.render('user-following',  {
@@ -234,7 +222,7 @@ app.get('/profile/following', async function(req, res) {
   }
 });
 
-app.get('/profile/followers', async function(req, res) {
+app.get('/profile/followers', async (req, res) => {
   if (vd.verifySession(req)) {
     let followers = await db.retrieveUserFollowers(req.session.user);
     res.render('user-followers', {
@@ -246,17 +234,17 @@ app.get('/profile/followers', async function(req, res) {
   }
 });
 
-app.post('/user/follow', async function(req, res) {
+app.post('/user/follow', async (req, res) => {
   db.addUserFollower(req.session.user, req.session.lastViewedUser);
   res.redirect('/user/' + req.session.lastViewedUser);
 });
 
-app.post('/user/unfollow', async function(req, res) {
+app.post('/user/unfollow', async (req, res) => {
   db.removeUserFollower(req.session.user, req.session.lastViewedUser);
   res.redirect('/user/' + req.session.lastViewedUser);
 });
 
-app.get('/browser', async function(req, res){
+app.get('/browser', async (req, res) => {
   if (vd.verifySession(req)) {
     let miniverseColumn = await db.listMiniverses();
     let miniverseFollowerCount = await db.listMiniverseFollowerCount();
@@ -271,7 +259,7 @@ app.get('/browser', async function(req, res){
   }
 });
 
-app.get('/create/miniverse', async function(req, res) {
+app.get('/create/miniverse', async (req, res) => {
   if (vd.verifySession(req)) {
     app.use(express.static('public/css'));
     res.render('create-miniverse', {
@@ -282,7 +270,7 @@ app.get('/create/miniverse', async function(req, res) {
   }
 });
 
-app.post('/create/miniverse', async function(req, res) {
+app.post('/create/miniverse', async (req, res) => {
   try {
     vd.miniverseCreationForm(req);
     let nameExists = await db.findMiniverseName(req.body.miniverseName);
@@ -297,7 +285,7 @@ app.post('/create/miniverse', async function(req, res) {
   }
 });
 
-app.get('/m/:miniverseName', async function(req, res) {
+app.get('/m/:miniverseName', async (req, res) => {
   if (vd.verifySession(req)) {
     let miniverseExists = await db.findMiniverseName(req.params.miniverseName);
     if (miniverseExists > 0) {
@@ -342,12 +330,12 @@ app.get('/m/:miniverseName', async function(req, res) {
   }
 });
 
-app.post('/m/delete', async function(req, res) {
+app.post('/m/delete', async (req, res) => {
   await db.deleteMiniverse(req.session.user, req.session.lastViewedMiniverse);
   res.redirect('/browser');
 });
 
-app.get('/m/:miniverseName/topic/:topic', async function(req, res) {
+app.get('/m/:miniverseName/topic/:topic', async (req, res) => {
 
   if (vd.verifySession(req)) {
     app.use(express.static('public/js'));
@@ -375,12 +363,12 @@ app.get('/m/:miniverseName/topic/:topic', async function(req, res) {
   }
 });
 
-app.post('/topic-delete', async function(req, res) {
+app.post('/topic-delete', async (req, res) => {
   await db.deleteMiniverseTopic(req.session.user, req.session.lastViewedMiniverse, req.session.lastViewedTopic);
   res.redirect('/browser');
 });
 
-app.post('/create/topic-reply', async function(req, res) {
+app.post('/create/topic-reply', async (req, res) => {
   if (await db.checkRepliesExist() <= 0) {
     await db.createUserReply(req, 0);
   } else {
@@ -390,7 +378,7 @@ app.post('/create/topic-reply', async function(req, res) {
   res.redirect('/m/' + req.session.lastViewedMiniverse + '/topic/' + req.session.lastViewedTopic);
 });
 
-app.post('/reply-delete', async function(req, res) {
+app.post('/reply-delete', async (req, res) => {
   if (req.body.replyCreator == req.session.user) {
     await db.deleteMiniverseTopicReply(req.session.user, req.body.replyID);
     res.redirect('back');
@@ -399,17 +387,17 @@ app.post('/reply-delete', async function(req, res) {
   }
 });
 
-app.post('/m/follow', function(req, res) {
+app.post('/m/follow', async (req, res) => {
   db.updateMiniverseFollowers(req);
   res.redirect('/browser');
 });
 
-app.post('/m/unfollow', function(req, res) {
+app.post('/m/unfollow', async (req, res) => {
   db.removeMiniverseFollower(req.session.user, req.session.lastViewedMiniverse);
   res.redirect('/browser');
 });
 
-app.post('/create/miniverse-post', async function(req, res) {
+app.post('/create/miniverse-post', async (req, res) => {
   if (req.body.topicTitle  == '' || req.body.topicContent == '') {
     res.send("<h1>Please include a title and the content of the post <br> that you are trying to make and try again.</h1>");
   } else {
@@ -424,7 +412,7 @@ app.post('/create/miniverse-post', async function(req, res) {
   }
 });
 
-app.post('/create/profile-post', async function(req, res) {
+app.post('/create/profile-post', async (req, res) => {
   if (vd.verifySession(req)) {
     if (req.body.profilePostContent != '') {
       let d = new Date();
@@ -443,7 +431,7 @@ app.post('/create/profile-post', async function(req, res) {
   }
 });
 
-app.get('/admin', async function(req, res) {
+app.get('/admin', async (req, res) => {
   app.use(express.static('public/css'));
   if (vd.verifySession(req)) {
     if (await db.retrieveUserRole(req.session.user) != "admin") {
@@ -460,16 +448,16 @@ app.get('/admin', async function(req, res) {
   }
 });
 
-app.get('/chat', function(req, res){
+app.get('/chat', async (req, res) => {
   res.send("Feature is currently disabled.");
 });
 
-app.get('/terms-and-conditions', function(req, res) {
+app.get('/terms-and-conditions', async (req, res) => {
   app.use(express.static("public/css"));
   res.sendFile(path.join(__dirname + '/public/html/terms-and-conditions.html'));
 });
 
-app.get('/privacy-policy', function(req, res) {
+app.get('/privacy-policy', async (req, res) => {
   app.use(express.static("public/css"));
   res.sendFile(path.join(__dirname + '/public/html/privacy-policy.html'));
 });
