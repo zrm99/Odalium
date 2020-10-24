@@ -1,7 +1,7 @@
 # Odalmedia
-Odalmedia is an ExpressJs, text only forum software using PostgreSQL which is 
-meant to be similar to, but different than Reddit was in its early days. 
-This software is currently in very early development and should not be used in production. 
+Odalmedia is an ExpressJs, text only forum software using PostgreSQL which is
+meant to be similar to, but different than Reddit was in its early days.
+This software is currently in very early development and should not be used in production.
 
 <h3>
 Required tools:
@@ -20,7 +20,7 @@ Installation Instructions for HTTP server:
 3) Run pgadmin, set up a username and password and then create a database.
 4) Follow these simple instructions by importing the file titled 'initial.sql':
 https://www.postgresql-archive.org/pgAdmin-4-How-to-I-import-a-sql-file-td5999352.html
-5) Start up the Node.js command prompt and navigate to the inside of the /Nodejs/ directory.
+5) Start up the Node.js command prompt and navigate to the inside of the directory.
 6) Run NPM install which will install the required dependencies for the program.
 7) Create a .env file and fill out the environment variables with the
 database credentials.

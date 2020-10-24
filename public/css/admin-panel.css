@@ -1,0 +1,35 @@
+.box-temp-size-limit {
+  max-width: 700px;
+}
+
+.table-header {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.table-div {
+  border-style: solid;
+  border-width: 20px;
+  border-radius: 20px;
+}
+
+#username-styling {
+  color: blue;
+}
+
+.table-data {
+  border-style: solid;
+  border-color: grey;
+  border-radius: 2px;
+  border-width: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+a:hover {
+  color: red;
+}
+
+a:visited {
+  color: purple;
+}

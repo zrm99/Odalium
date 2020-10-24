@@ -1,0 +1,45 @@
+body {
+  background-color: #28f0da;
+}
+
+#update-bio-form {
+  font-size: 30px;
+  font-family: "Calibri", Arial, Helvetica, Verdana, Tahoma, sans-serif;
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+}
+
+#navbar-grid-size {
+  grid-column: 1/31;
+}
+
+#bio-container {
+  background-color: #00b7ffde;
+  grid-column: 10/21;
+  text-align: center;
+  border-style: solid;
+  border-radius: 5px;
+  grid-row: 2;
+  margin-top: 25px;
+}
+
+textarea[name="update_bio"] {
+  resize: none;
+}
+
+.links-container {
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  background-color: #cef;
+  border-top-width: 2px;
+  border-radius: 8px;
+}
+
+.flex {
+  display: flex;
+  flex-flow: column;
+}
