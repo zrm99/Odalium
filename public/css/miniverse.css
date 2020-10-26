@@ -96,6 +96,7 @@ body {
 
 a {
   text-decoration: none;
+  word-wrap: anywhere;
 }
 
 a:hover {
@@ -186,7 +187,7 @@ a:hover {
 
 pre {
   font-family: "Times New Roman", Arial, Helvetica, Verdana, Tahoma, sans-serif;
-  word-wrap: break-word;
+  word-wrap: anywhere;
   white-space: pre-wrap;
   margin: 0;
   margin-left: 20px;

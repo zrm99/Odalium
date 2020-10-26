@@ -38,6 +38,7 @@ pre {
   padding-left: 15px;
   grid-column: 1/20;
   padding-top: 7px;
+  padding-bottom: 7px;
   border-radius: 20px;
   font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif;
 }
