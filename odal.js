@@ -9,6 +9,7 @@ const vd = require('./private/validation.js');
 const helmet = require('helmet');
 const crypto = require('crypto');
 const rateLimit = require("express-rate-limit");
+const exphbs = require('exphbs')
 
 
 http.createServer(app).listen(process.env.PORT);
@@ -33,8 +34,20 @@ app.use(helmet.contentSecurityPolicy({
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }))
 
-app.engine('hbs', require('exphbs'));
+app.engine('hbs', exphbs);
 app.set('view engine', 'hbs');
+
+// Handlebars helpers
+const Handlebars = exphbs.handlebars;
+
+Handlebars.registerHelper('if', function(conditional, options) {
+  if (conditional) {
+    return options.fn(Handlebars);
+  }
+
+return options.inverse(Handlebars);
+
+});
 
 let pgSession = require('connect-pg-simple')(session);
 app.use(session({
@@ -83,7 +96,7 @@ app.post("/register", async (req, res) => {
       if (req.body.Password != req.body.renteredPassword) {
         throw "<h1>Passwords do not match.</h1>";
       }
-      vd.userRequirements(req.body.Username, req.body.Password);
+      vd.userRequirements(req);
       db.insertUser(req, new Date());
       res.redirect('/login');
     } catch (error) {
@@ -101,23 +114,24 @@ app.get('/login', async (req, res) => {
   }
 });
 
+// The user session is validated to see if the user is logged on.
+// IF the user is logged on, they will beredirected to their profile.
+// If they are not logged on, the server tries to run several database queries to
+// verify and log in the user. If an error occurs during any step of logging in the
+// user, the server will send the HTTP error code '403' (Forbidden) and then log
+// the error message to the user.
+
 app.post('/login', async (req, res) => {
   if (vd.verifySession(req)) {
     res.redirect('/profile');
   } else {
     try {
-      let userExists = db.checkExistingUser(req.body.Username);
-      if (req.body.Username == "" || req.body.Password == "") {
-        throw '<h1>Empty username or password</h1>';
-      } else if (userExists.rowCount == false) {
-        throw `${req.body.Username} not found, please register first`;
-      } else {
-        vd.userRequirements(req.body.Username, req.body.Password);
-        db.validateUser(req, res);
-        db.updateIpAddress(req);
-      }
+      db.checkLoginUserExists(req)
+      vd.userRequirements(req);
+      db.validateUser(req, res);
+      db.updateIpAddress(req);
     } catch (error) {
-      res.send("<h1>Something went wrong while logging you in. Please try again</h1>");
+      res.status(403).send(error);
     }
   }
 });
@@ -187,22 +201,14 @@ app.get('/user/:username', async (req, res) => {
       if (userExists.rowCount > 0) {
         req.session.lastViewedUser= req.params.username;
         app.use(express.static("public/css"));
-        let userFollowingExists = await db.checkUserFollowingExists(req.params.username, req.session.user);
-        if (userFollowingExists == true) {
-          res.render('other-profiles-followed', {
+        let followingUser = await db.checkUserFollowingExists(req.params.username, req.session.user);
+          res.render('other-profiles', {
             layout: false,
             name: req.params.username,
+            following: followingUser,
             userBio: await db.retrieveUserBio(req.params.username),
             userPosts: await db.retrieveUserPosts(req.params.username),
           });
-        } else {
-          res.render('other-profiles-unfollowed', {
-            layout: false,
-            name: req.params.username,
-            userBio: await db.retrieveUserBio(req.params.username),
-            userPosts: await db.retrieveUserPosts(req.params.username),
-          });
-        }
       } else {
         res.sendStatus(403);
       }

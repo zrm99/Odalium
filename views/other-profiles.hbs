@@ -19,15 +19,20 @@
       </div>
       <div id="bio">
         <div id="follow-button-box">
-          <form class="" action="follow" method="POST">
-            <input class="button-styling" type="submit" name="" value="Follow user">
+          {{#if following}}
+          <form class="" action="unfollow" method="POST">
+            <input class="button-styling" type="submit" name="" value="Unfollow user">
+            {{else}}
+            <form class="" action="follow" method="POST">
+              <input class="button-styling" type="submit" name="" value="Follow user">
+              {{/if}}
           </form>
         </div>
         {{userBio}}
       </div>
       <div class="user-posts-container">
         {{#each userPosts}}
-        <div class="user-posts"> <!-- Make nonceID -->
+        <div class="user-posts">
         {{this.profile_post_content}}
         <div>
           <div class="user-post-date">
@@ -39,7 +44,7 @@
   </div>
     </div>
   </div>
-  </div>
+</div>
 </div>
   </body>
 </html>
