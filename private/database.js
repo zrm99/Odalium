@@ -244,9 +244,10 @@ module.exports = {
     await pool.query(query, queryValues);
   },
 
-  checkMiniverseFollowerExists: async (userName, miniverseName) => {
+  checkMiniverseFollowerExists: async (req) => {
+    let username = [req.session.user];
     let query = `SELECT follower_names FROM t_miniverses WHERE follower_names @> $1 AND "name" = $2`;
-    let queryValues = [userName, miniverseName];
+    let queryValues = [username, req.session.lastViewedMiniverse];
     let result = await pool.query(query, queryValues);
 
     return result.rowCount;
@@ -262,22 +263,13 @@ module.exports = {
     await pool.query(query, queryValues);
   },
 
-  retrieveMiniverseSummaries: async (currentMiniverse) => {
-    let query = `SELECT "summary" from t_miniverses WHERE "name" = $1`;
-    let queryValues = [currentMiniverse];
+  retrieveMiniverseDataParams: async (req) => {
+    let miniverse = req.params.miniverseName;
+    let query = `SELECT * from t_miniverses WHERE "name" = $1`;
+    let queryValues = [miniverse];
     let result = await pool.query(query, queryValues);
-
-    return result.rows[0].summary;
+    return result.rows[0];
   },
-
-  retrieveMiniverseCreatorName: async (miniverseName) => {
-    let query = `SELECT "creator" FROM t_miniverses WHERE "name" = $1`;
-    let queryValues = [miniverseName];
-    let result = await pool.query(query, queryValues);
-
-    return result.rows[0].creator;
-  },
-
 
   retrieveMiniverseTopicTitle: async (currentMiniverse, miniverseID) => {
     let query = `SELECT "title" FROM t_topics WHERE miniverse = $1 AND topic_id = $2`;
