@@ -303,22 +303,18 @@ app.get('/m/:miniverseName', async (req, res) => {
           nonceID: `${res.locals.nonce}`,
         });
       } else {
-        let followerExists = await db.checkMiniverseFollowerExists(req.session.user, req.session.lastViewedMiniverse);
+        let followerExists = await db.checkMiniverseFollowerExists(req);
         if (followerExists == 1) {
           res.render('miniverse-followed', {
             layout: false,
-            miniverseName: req.params.miniverseName,
-            miniverseCreatorName: await db.retrieveMiniverseCreatorName(req.params.miniverseName),
-            miniverseSummary: await db.retrieveMiniverseSummaries(req.params.miniverseName),
+            miniverseData: await db.retrieveMiniverseDataParams(req),
             miniverseTopics: await db.topicColumnsOrderedByCreationDate(req.params.miniverseName),
             nonceID: `${res.locals.nonce}`,
           });
         } else {
           res.render('miniverse-unfollowed', {
             layout: false,
-            miniverseName: req.params.miniverseName,
-            miniverseCreatorName: await db.retrieveMiniverseCreatorName(req.params.miniverseName),
-            miniverseSummary: await db.retrieveMiniverseSummaries(req.params.miniverseName),
+            miniverseData: await db.retrieveMiniverseDataParams(req),
             miniverseTopics: await db.topicColumnsOrderedByCreationDate(req.params.miniverseName),
             nonceID: `${res.locals.nonce}`,
           });
