@@ -7,7 +7,9 @@ module.exports = {
     return false;
 
   },
-  userRequirements: function userRequirements(username, password) {
+  userRequirements: function userRequirements(req, res) {
+    let username = req.body.Username;
+    let password = req.body.Password;
     // uses positive look ahead to not consume match
     let usernameRequirements = /[a-zA-Z]{3,}/u;
     let passwordRequirements = /^(?=.*[0-9]{3,})(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/u;
@@ -18,8 +20,8 @@ module.exports = {
     } else if (usernameRequirements.test(username) == false  || username.length < 3 || username.length > 20) {
       throw "<h1>Username requirements not met</h1>";
     } else {
-      throw 404;
-    }
+      throw 403;
+    } 
   },
 
   miniverseCreationForm: function miniverseCreationForm(req) {
@@ -29,5 +31,11 @@ module.exports = {
       throw "<h1>Miniverse name too long</h1>";
     }
   },
+
+  passwordsMatch: function passwordsMatch(req, res) {
+    if (req.body.Password != req.body.renteredPassword) {
+      throw "<h1>Passwords do not match</h1>";
+    }
+  }
 
 }

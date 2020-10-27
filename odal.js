@@ -89,18 +89,13 @@ app.post("/register", async (req, res) => {
     res.redirect('/profile');
   } else {
     try {
-      let userExists = await db.checkExistingUser(req.body.Username);
-      if (userExists.rowCount >= 1) {
-        throw "<h1>Username already exists.</h1>";
-      }
-      if (req.body.Password != req.body.renteredPassword) {
-        throw "<h1>Passwords do not match.</h1>";
-      }
-      vd.userRequirements(req);
+      await db.checkRegisteringUser(req);
+      vd.passwordsMatch(req);
+      vd.userRequirements(req, res);
       db.insertUser(req, new Date());
       res.redirect('/login');
-    } catch (error) {
-      res.sendStatus(500);
+    } catch (err) {
+      res.status(403).send(err);
     }
   }
 });
@@ -114,13 +109,12 @@ app.get('/login', async (req, res) => {
   }
 });
 
-// The user session is validated to see if the user is logged on.
-// IF the user is logged on, they will beredirected to their profile.
+// The user session is validated/verified to see if the user is logged on.
+// IF the user is logged on, they will be redirected to their profile.
 // If they are not logged on, the server tries to run several database queries to
 // verify and log in the user. If an error occurs during any step of logging in the
 // user, the server will send the HTTP error code '403' (Forbidden) and then log
 // the error message to the user.
-
 app.post('/login', async (req, res) => {
   if (vd.verifySession(req)) {
     res.redirect('/profile');

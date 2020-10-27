@@ -54,6 +54,16 @@ module.exports = {
     return pool.query(query, queryValues);
   },
 
+  checkRegisteringUser: async (req) => {
+    let query = 'SELECT "username" FROM t_users WHERE "username" = $1';
+    let queryValues = [req.body.Username];
+
+    let results = await pool.query(query, queryValues)
+    if (results.rowCount > 0) {
+      throw '<h1>Username already exists</h1>';
+    }
+  },
+
   findUsernameByIp: async (ipAddress) => {
     let query = `SELECT "username" FROM t_users WHERE "ip_address" = $1`;
     let queryValues = [ipAddress];
@@ -67,16 +77,18 @@ module.exports = {
       const client = await pool.connect();
       try {
         const hash = await client.query('SELECT "password_hash" FROM t_users WHERE "username" = $1', [req.body.Username])
+        if (typeof hash.rows[0] !== 'undefined') {
         bcrypt.compare(req.body.Password, hash.rows[0].password_hash, (err, check) => {
           if (check == true) {
             req.session.user = req.body.Username;
 
             return res.redirect("/profile");
           }
-          console.log(err);
-
-          return res.status(400).send("Password invalid");
-        })
+          return res.status(400).send("<h1>Password invalid</h1>");
+        });
+      } else {
+        return res.status(403).send("<h1>Password left blank</h1>");
+      }
       } finally {
         client.release();
       }
@@ -394,5 +406,18 @@ module.exports = {
 
     return result.rows;
   },
+
+  checkLoginUserExists: async (req) => {
+    let query = 'SELECT "username" FROM t_users WHERE "username" = $1';
+    let queryValues = [req.body.Username];
+    let results = await pool.query(query, queryValues);
+    if (req.body.Username == "" || req.body.Password == "") {
+
+      return new Error('<h1>Empty username or password</h1>');
+    } else if (results.rowCount == false) {
+
+      return new Error(`${req.body.Username} not found, please register first`);
+    }
+  }
 
 }
