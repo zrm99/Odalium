@@ -6,21 +6,21 @@
     <link rel="stylesheet" href="/miniverse.css">
     <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>{{miniverseName}}</title>
+    <title>{{miniverseData.name}}</title>
 
   </head>
   <body>
     <div id="grid-container">
       {{> default-navbar}}
       <div class="miniverse-container">
-    <div id="miniverse-name">{{miniverseName}}</div>
+    <div id="miniverse-name">{{miniverseData.name}}</div>
     <div id="miniverse-summary">
       <form action="/m/follow" method="POST" class="unfollow-button-position">
-        <input class="button-styling" type="submit" value="Follow {{miniverseName}}">
+        <input class="button-styling" type="submit" value="Follow {{miniverseData.name}}">
       </form>
-      {{miniverseSummary}}
+      {{miniverseData.summary}}
       <div id="creator-name">
-        Owner: <a href="/user/{{miniverseCreatorName}}">{{miniverseCreatorName}}</a>
+        Owner: <a href="/user/{{miniverseData.creator}}">{{miniverseData.creator}}</a>
       </div>
     </div>
 
