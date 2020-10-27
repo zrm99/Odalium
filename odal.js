@@ -95,7 +95,7 @@ app.post("/register", async (req, res) => {
       db.insertUser(req, new Date());
       res.redirect('/login');
     } catch (err) {
-      res.status(403).send(err);
+      res.sendStatus(403);
     }
   }
 });
@@ -125,7 +125,7 @@ app.post('/login', async (req, res) => {
       db.validateUser(req, res);
       db.updateIpAddress(req);
     } catch (error) {
-      res.status(403).send(error);
+      res.sendStatus(403);
     }
   }
 });
