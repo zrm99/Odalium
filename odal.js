@@ -113,8 +113,7 @@ app.get('/login', async (req, res) => {
 // IF the user is logged on, they will be redirected to their profile.
 // If they are not logged on, the server tries to run several database queries to
 // verify and log in the user. If an error occurs during any step of logging in the
-// user, the server will send the HTTP error code '403' (Forbidden) and then log
-// the error message to the user.
+// user, the server will send the HTTP error code '403' (Forbidden).
 app.post('/login', async (req, res) => {
   if (vd.verifySession(req)) {
     res.redirect('/profile');
@@ -141,7 +140,7 @@ app.get('/profile', async (req, res) => {
       userPosts: await db.retrieveUserPosts(req.session.user),
     });
   } else {
-    res.status(403).send("<h1>Please register, login, or enable cookies to access this content.</h1>");
+    res.status(403).send(vd.sessionError());
   }
 });
 
@@ -150,7 +149,7 @@ app.get('/profile/customize', async (req, res) => {
     app.use(express.static("public/css"));
     res.render('profile-customize', {layout: false});
   } else {
-    res.status(403).send("<h1>Please register, login, or enable cookies to access this content.</h1>");
+    res.status(403).send(vd.sessionError());
   }
 });
 
@@ -168,7 +167,7 @@ app.get('/search', async (req, res) => {
     });
     app.use(express.static("public/css"));
   } else {
-    res.status(403).send("<h1>Please register, login, or enable cookies to access this content.</h1>");
+    res.status(403).send(vd.sessionError());
   }
 });
 
@@ -255,7 +254,7 @@ app.get('/browser', async (req, res) => {
       miniverseFollowerCount: miniverseFollowerCount,
     });
   } else {
-    res.status(403).send("<h1>Please register, login, or enable cookies to access this content.</h1>");
+    res.status(403).send(vd.sessionError());
   }
 });
 
@@ -423,7 +422,7 @@ app.post('/create/profile-post', async (req, res) => {
     }
     res.redirect('back');
   } else {
-    res.status(403).send("<h1>Please register, login, or enable cookies to access this content.</h1>");
+    res.status(403).send(vd.sessionError());
   }
 });
 
