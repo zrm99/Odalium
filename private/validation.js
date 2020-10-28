@@ -21,7 +21,7 @@ module.exports = {
       throw "<h1>Username requirements not met</h1>";
     } else {
       throw 403;
-    } 
+    }
   },
 
   miniverseCreationForm: function miniverseCreationForm(req) {
@@ -36,6 +36,10 @@ module.exports = {
     if (req.body.Password != req.body.renteredPassword) {
       throw "<h1>Passwords do not match</h1>";
     }
+  },
+
+  sessionError: function sessionError(req, res) {
+    throw "<h1>Please register, login, or enable cookies to access this content.</h1>";
   }
 
 }
