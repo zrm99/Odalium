@@ -132,12 +132,10 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
   if (vd.verifySession(req)) {
-
     res.render('profile', {
       layout: false,
-      user: req.session.user,
-      userBio: await db.retrieveUserBio(req.session.user),
-      userPosts: await db.retrieveUserPosts(req.session.user),
+      userData: await db.retrieveSessionUserData(req),
+      userPosts: await db.retrieveSessionUserPosts(req),
     });
   } else {
     res.status(403).send(vd.sessionError());
@@ -153,14 +151,13 @@ app.get('/profile/customize', async (req, res) => {
 });
 
 app.post('/profile/update-bio', async (req, res) => {
-  await db.updateUserBio(req.body.update_bio, req.session.user);
+  await db.updateUserBio(req);
   res.redirect('/profile');
 });
 
 app.get('/search', async (req, res) => {
   if (vd.verifySession(req)) {
-    res.render('search',
-    {
+    res.render('search', {
       layout: false,
       usernames: await db.retrieveAllUsers(),
     });
@@ -188,17 +185,15 @@ app.get('/user/:username', async (req, res) => {
     if (req.params.username == req.session.user) {
       res.redirect('/profile');
     } else {
-      let userExists = await db.checkExistingUser(req.params.username);
+      let userExists = await db.checkParamUserExists(req);
       if (userExists.rowCount > 0) {
-        req.session.lastViewedUser= req.params.username;
-        let followingUser = await db.checkUserFollowingExists(req.params.username, req.session.user);
-          res.render('other-profiles', {
-            layout: false,
-            name: req.params.username,
-            following: followingUser,
-            userBio: await db.retrieveUserBio(req.params.username),
-            userPosts: await db.retrieveUserPosts(req.params.username),
-          });
+        req.session.lastViewedUser = req.params.username;
+        res.render('other-profiles', {
+          layout: false,
+          userData: await db.retrieveParamUserData(req),
+          following: await db.checkParamUserFollowingExists(req),
+          userPosts: await db.retrieveParamUserPosts(req),
+        });
       } else {
         res.sendStatus(403);
       }
@@ -208,10 +203,9 @@ app.get('/user/:username', async (req, res) => {
 
 app.get('/profile/following', async (req, res) => {
   if (vd.verifySession(req)) {
-    let following = await db.retrieveUserFollowing(req.session.user)
     res.render('user-following',  {
       layout: false,
-      userFollowing: following,
+      userFollowing: await db.retrieveSessionUserFollowing(req)
     });
   } else {
     res.sendStatus(403);
@@ -220,10 +214,9 @@ app.get('/profile/following', async (req, res) => {
 
 app.get('/profile/followers', async (req, res) => {
   if (vd.verifySession(req)) {
-    let followers = await db.retrieveUserFollowers(req.session.user);
     res.render('user-followers', {
       layout: false,
-      userFollowers: followers,
+      userFollowers: await db.retrieveSessionUserFollowers(req)
     });
   } else {
     res.sendStatus(403);
@@ -231,23 +224,21 @@ app.get('/profile/followers', async (req, res) => {
 });
 
 app.post('/user/follow', async (req, res) => {
-  db.addUserFollower(req.session.user, req.session.lastViewedUser);
+  db.addSessionUserFollower(req);
   res.redirect('/user/' + req.session.lastViewedUser);
 });
 
 app.post('/user/unfollow', async (req, res) => {
-  db.removeUserFollower(req.session.user, req.session.lastViewedUser);
+  db.removeSessionUserFollower(req);
   res.redirect('/user/' + req.session.lastViewedUser);
 });
 
 app.get('/browser', async (req, res) => {
   if (vd.verifySession(req)) {
-    let miniverseColumn = await db.listMiniverses();
-    let miniverseFollowerCount = await db.listMiniverseFollowerCount();
     res.render('browser', {
       layout: false,
-      miniverseColumn: miniverseColumn,
-      miniverseFollowerCount: miniverseFollowerCount,
+      miniverseColumn: await db.listMiniverses(),
+      miniverseFollowerCount: await db.listMiniverseFollowerCount()
     });
   } else {
     res.status(403).send(vd.sessionError());
@@ -260,14 +251,14 @@ app.get('/create/miniverse', async (req, res) => {
       layout: false,
     });
   } else {
-    res.status(403).send("Please register, login, or enable cookies to access this content.");
+    res.status(403).send(vd.sessionError());
   }
 });
 
 app.post('/create/miniverse', async (req, res) => {
   try {
     vd.miniverseCreationForm(req);
-    let nameExists = await db.findMiniverseName(req.body.miniverseName);
+    let nameExists = await db.findMiniverseName(req);
     if (nameExists > 0) {
       throw "Name already exists";
     }
@@ -281,7 +272,7 @@ app.post('/create/miniverse', async (req, res) => {
 
 app.get('/m/:miniverseName', async (req, res) => {
   if (vd.verifySession(req)) {
-    let miniverseExists = await db.findMiniverseName(req.params.miniverseName);
+    let miniverseExists = await db.findMiniverseParamName(req);
     if (miniverseExists > 0) {
       req.session.lastViewedMiniverse = req.params.miniverseName;
       let miniverseCreatorName = await db.retrieveMiniverseCreatorName(req.params.miniverseName);
@@ -289,7 +280,7 @@ app.get('/m/:miniverseName', async (req, res) => {
         res.render('miniverse-creator', {
           layout: false,
           miniverseData: await db.retrieveMiniverseDataParams(req),
-          miniverseTopics: await db.topicColumnsOrderedByCreationDate(req.params.miniverseName),
+          miniverseTopics: await db.topicColumnsOrderedByCreationDate(req),
           nonceID: `${res.locals.nonce}`,
         });
       } else {
@@ -298,14 +289,14 @@ app.get('/m/:miniverseName', async (req, res) => {
           res.render('miniverse-followed', {
             layout: false,
             miniverseData: await db.retrieveMiniverseDataParams(req),
-            miniverseTopics: await db.topicColumnsOrderedByCreationDate(req.params.miniverseName),
+            miniverseTopics: await db.topicColumnsOrderedByCreationDate(req),
             nonceID: `${res.locals.nonce}`,
           });
         } else {
           res.render('miniverse-unfollowed', {
             layout: false,
             miniverseData: await db.retrieveMiniverseDataParams(req),
-            miniverseTopics: await db.topicColumnsOrderedByCreationDate(req.params.miniverseName),
+            miniverseTopics: await db.topicColumnsOrderedByCreationDate(req),
             nonceID: `${res.locals.nonce}`,
           });
         }
@@ -322,24 +313,19 @@ app.post('/m/delete', async (req, res) => {
 });
 
 app.get('/m/:miniverseName/topic/:topic', async (req, res) => {
-
   if (vd.verifySession(req)) {
     req.session.lastViewedTopic = req.params.topic;
-    if (await db.retrieveMiniverseTopicCreator(req.params.miniverseName, req.params.topic) == req.session.user) {
+    if (await db.retrieveMiniverseTopicCreator(req) == req.session.user) {
       res.render('miniverse-topic-creator', {
         layout: false,
-        topicTitle: await db.retrieveMiniverseTopicTitle(req.session.lastViewedMiniverse, req.params.topic),
-        topicSummary: await db.retrieveMiniverseTopicSummary(req.session.lastViewedMiniverse, req.params.topic),
-        topicCreator: await db.retrieveMiniverseTopicCreator(req.session.lastViewedMiniverse, req.params.topic),
-        topicReplies : await db.displayUserTopicReplies(req.params.topic, req.params.miniverseName),
+        topicData: await db.retrieveMiniverseTopicData(req),
+        topicReplies : await db.displayUserTopicReplies(req),
       });
     } else {
       res.render('miniverse-topic', {
         layout: false,
-        topicTitle: await db.retrieveMiniverseTopicTitle(req.session.lastViewedMiniverse, req.params.topic),
-        topicSummary: await db.retrieveMiniverseTopicSummary(req.session.lastViewedMiniverse, req.params.topic),
-        topicCreator: await db.retrieveMiniverseTopicCreator(req.session.lastViewedMiniverse, req.params.topic),
-        topicReplies : await db.displayUserTopicReplies(req.params.topic, req.params.miniverseName),
+        topicData: await db.retrieveMiniverseTopicData(req),
+        topicReplies : await db.displayUserTopicReplies(req),
       });
     }
   } else {
@@ -348,7 +334,7 @@ app.get('/m/:miniverseName/topic/:topic', async (req, res) => {
 });
 
 app.post('/topic-delete', async (req, res) => {
-  await db.deleteMiniverseTopic(req.session.user, req.session.lastViewedMiniverse, req.session.lastViewedTopic);
+  await db.deleteMiniverseTopic(req);
   res.redirect('/browser');
 });
 
@@ -364,7 +350,7 @@ app.post('/create/topic-reply', async (req, res) => {
 
 app.post('/reply-delete', async (req, res) => {
   if (req.body.replyCreator == req.session.user) {
-    await db.deleteMiniverseTopicReply(req.session.user, req.body.replyID);
+    await db.deleteMiniverseTopicReply(req);
     res.redirect('back');
   } else {
     res.send("<h1>This is not your post!<h1>")
@@ -373,19 +359,19 @@ app.post('/reply-delete', async (req, res) => {
 
 app.post('/m/follow', async (req, res) => {
   db.updateMiniverseFollowers(req);
-  res.redirect('/browser');
+  res.redirect('back');
 });
 
 app.post('/m/unfollow', async (req, res) => {
-  db.removeMiniverseFollower(req.session.user, req.session.lastViewedMiniverse);
-  res.redirect('/browser');
+  db.removeMiniverseFollower(req);
+  res.redirect('back');
 });
 
 app.post('/create/miniverse-post', async (req, res) => {
   if (req.body.topicTitle  == '' || req.body.topicContent == '') {
     res.send("<h1>Please include a title and the content of the post <br> that you are trying to make and try again.</h1>");
   } else {
-    if (await db.checkMiniverseTopicsExist(req.session.lastViewedMiniverse) == 0) {
+    if (await db.checkSessionMiniverseTopicsExist(req) == 0) {
       db.insertMiniverseTopic(req, new Date(), 1);
     } else {
       let topicID = await db.lastMiniverseID(req.session.lastViewedMiniverse);
@@ -417,13 +403,13 @@ app.post('/create/profile-post', async (req, res) => {
 
 app.get('/admin', async (req, res) => {
   if (vd.verifySession(req)) {
-    if (await db.retrieveUserRole(req.session.user) != "admin") {
+    if (await db.retrieveSessionUserRole(req) != "admin") {
       res.sendStatus(403);
     } else {
       res.render('admin-panel', {
         layout: false,
-        allUsers: await db.retrieveUsersData(),
         adminUsername: req.session.user,
+        allUsers: await db.retrieveUsersData(),
       });
     }
   } else {

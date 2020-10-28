@@ -47,9 +47,9 @@ module.exports = {
     await pool.query(query, queryValues);
   },
 
-  checkExistingUser: async (username) => {
+  checkParamUserExists: async (req) => {
     let query = 'SELECT "username" FROM t_users WHERE "username" = $1';
-    let queryValues = [username];
+    let queryValues = [req.params.username];
 
     return pool.query(query, queryValues);
   },
@@ -78,77 +78,85 @@ module.exports = {
       try {
         const hash = await client.query('SELECT "password_hash" FROM t_users WHERE "username" = $1', [req.body.Username])
         if (typeof hash.rows[0] !== 'undefined') {
-        bcrypt.compare(req.body.Password, hash.rows[0].password_hash, (err, check) => {
-          if (check == true) {
-            req.session.user = req.body.Username;
+          bcrypt.compare(req.body.Password, hash.rows[0].password_hash, (err, check) => {
+            if (check == true) {
+              req.session.user = req.body.Username;
 
-            return res.redirect("/profile");
-          }
-          return res.status(400).send("<h1>Password invalid</h1>");
-        });
-      } else {
-        return res.status(403).send("<h1>Password left blank</h1>");
-      }
+              return res.redirect("/profile");
+            }
+            return res.status(403).send("<h1>Password invalid</h1>");
+          });
+        } else {
+          return res.status(403).send("<h1>Password left blank</h1>");
+        }
       } finally {
         client.release();
       }
     })().catch(err => console.log(err.stack));
   },
 
-  addUserFollower: async (userName, lastViewedUser) => {
-    let targetUser = [lastViewedUser];
+  addSessionUserFollower: async (req) => {
+    let targetUser = [req.session.lastViewedUser];
     let query = `UPDATE t_users SET following_names = following_names || $1 WHERE "username" = $2`;
-    let queryValues = [targetUser, userName];
+    let queryValues = [targetUser, req.session.user];
     await pool.query(query, queryValues);
 
-    let safeUsername = [userName];
+    let safeUsername = [req.session.user];
     query = `UPDATE t_users SET follower_names = follower_names || $1 WHERE "username" = $2`;
-    queryValues = [safeUsername, lastViewedUser];
+    queryValues = [safeUsername, req.session.lastViewedUser];
     await pool.query(query, queryValues);
 
     query = `UPDATE t_users SET follower_count = follower_count + 1 WHERE "username" = $1`;
-    queryValues = [lastViewedUser];
+    queryValues = [req.session.lastViewedUser];
     await pool.query(query, queryValues);
   },
 
-  removeUserFollower: async (userName, lastViewedUser) => {
+  removeSessionUserFollower: async (req) => {
     let query = `UPDATE t_users SET following_names = array_remove(following_names, $1) WHERE "username" = $2`;
-    let queryValues = [lastViewedUser, userName];
+    let queryValues = [req.session.lastViewedUser, req.session.user];
     await pool.query(query, queryValues);
 
     let query2 = `UPDATE t_users SET follower_names = array_remove(follower_names, $1) WHERE "username" = $2`;
-    let queryValues2 = [userName, lastViewedUser];
+    let queryValues2 = [req.session.user, req.session.lastViewedUser];
     await pool.query(query2, queryValues2);
   },
 
-  checkUserFollowingExists: async (targetUser, sessionUser) => {
-    let safeTargetUser = [targetUser];
+  checkParamUserFollowingExists: async (req) => {
+    let safeParamUser = [req.params.username];
     let query = `SELECT following_names FROM t_users WHERE following_names @> $1 AND "username" = $2`;
-    let queryValues = [safeTargetUser, sessionUser];
+    let queryValues = [safeParamUser, req.session.user];
     let result = await pool.query(query, queryValues);
 
     return result.rowCount;
   },
 
-  retrieveUserFollowers: async (userName) => {
+  retrieveSessionUserFollowers: async (req) => {
     let query = `SELECT "follower_names" FROM t_users WHERE "username" = $1`;
-    let queryValues = [userName];
+    let queryValues = [req.session.user];
     let results = await pool.query(query, queryValues);
 
     return results.rows[0].follower_names;
   },
 
-  retrieveUserFollowing: async (userName) => {
+  retrieveSessionUserFollowing: async (req) => {
     let query = `SELECT "following_names" FROM t_users WHERE "username" = $1`;
-    let queryValues = [userName];
+    let queryValues = [req.session.user];
     let results = await pool.query(query, queryValues);
 
     return results.rows[0].following_names;
   },
 
-  findMiniverseName: async (miniverseName) => {
+  findMiniverseName: async (req) => {
     let query = `SELECT "name" FROM t_miniverses WHERE "name" = $1`
-    let queryValues = [miniverseName];
+    let queryValues = [req.body.miniverseName];
+    let result = await pool.query(query, queryValues);
+
+    return result.rowCount;
+  },
+
+  findMiniverseParamName: async (req) => {
+    let query = `SELECT "name" FROM t_miniverses WHERE "name" = $1`
+    let queryValues = [req.params.miniverseName];
     let result = await pool.query(query, queryValues);
 
     return result.rowCount;
@@ -172,19 +180,19 @@ module.exports = {
     await pool.query(query3, queryValues);
   },
 
-  deleteMiniverseTopic: async (creatorName, miniverseName, topicID) => {
+  deleteMiniverseTopic: async (req) => {
     let query = `DELETE FROM t_topics WHERE "creator" = $1 AND "miniverse" = $2 AND "topic_id" = $3`;
-    let queryValues = [creatorName, miniverseName, topicID];
+    let queryValues = [req.session.user, req.session.lastViewedMiniverse, req.session.lastViewedTopic];
     await pool.query(query, queryValues);
 
     let query2 = `DELETE FROM t_replies WHERE "miniverse" = $1 AND "topic_id" = $2`;
-    let queryValues2 = [miniverseName, topicID];
+    let queryValues2 = [req.session.lastViewedMiniverse, req.session.lastViewedTopic];
     await pool.query(query2, queryValues2);
   },
 
-  checkMiniverseTopicsExist: async (miniverseName) => {
+  checkSessionMiniverseTopicsExist: async (req) => {
     let query = `SELECT * FROM "t_topics" WHERE "miniverse" = $1`;
-    let queryValues = [miniverseName];
+    let queryValues = [req.session.lastViewedMiniverse];
     let result = await pool.query(query, queryValues);
 
     return result.rowCount;
@@ -199,9 +207,9 @@ module.exports = {
     return result.rows[0].topic_id;
   },
 
-  topicColumnsOrderedByCreationDate: async (miniverseName) => {
+  topicColumnsOrderedByCreationDate: async (req) => {
     let query = `SELECT * FROM t_topics WHERE "miniverse" = $1 ORDER BY "creation_date" ASC;`
-    let queryValues = [miniverseName];
+    let queryValues = [req.params.miniverseName];
     let result = await pool.query(query, queryValues);
 
     return result.rows;
@@ -253,13 +261,13 @@ module.exports = {
     return result.rowCount;
   },
 
-  removeMiniverseFollower: async (userName, miniverseName) => {
+  removeMiniverseFollower: async (req) => {
     let query = `UPDATE t_miniverses SET follower_names = array_remove(follower_names, $1) WHERE "name" = $2`;
-    let queryValues = [userName, miniverseName];
+    let queryValues = [req.session.user, req.session.lastViewedMiniverse];
     await pool.query(query, queryValues);
 
     query = `UPDATE t_miniverses SET follower_count = follower_count - 1 WHERE "name" = $1`;
-    queryValues = [miniverseName];
+    queryValues = [req.session.lastViewedMiniverse];
     await pool.query(query, queryValues);
   },
 
@@ -271,25 +279,24 @@ module.exports = {
     return result.rows[0];
   },
 
-  retrieveMiniverseTopicTitle: async (currentMiniverse, miniverseID) => {
-    let query = `SELECT "title" FROM t_topics WHERE miniverse = $1 AND topic_id = $2`;
-    let queryValues = [currentMiniverse, miniverseID];
-    let result = await pool.query(query, queryValues);
-
-    return result.rows[0].title;
+  retrieveMiniverseCreatorName: async (miniverseName) => {
+    var query = `SELECT "creator" FROM t_miniverses WHERE "name" = $1`;
+    var queryValues = [miniverseName];
+    var result = await pool.query(query, queryValues);
+    return result.rows[0].creator;
   },
 
-  retrieveMiniverseTopicSummary: async (currentMiniverse, miniverseID) => {
-    let query = `SELECT "descriptor" FROM t_topics WHERE miniverse = $1 AND topic_id = $2`;
-    let queryValues = [currentMiniverse, miniverseID];
+  retrieveMiniverseTopicData: async (req) => {
+    let query = `SELECT * FROM t_topics WHERE miniverse = $1 AND topic_id = $2`;
+    let queryValues = [req.session.lastViewedMiniverse, req.params.topic];
     let result = await pool.query(query, queryValues);
 
-    return result.rows[0].descriptor;
+    return result.rows[0];
   },
 
-  retrieveMiniverseTopicCreator: async (currentMiniverse, miniverseID) => {
+  retrieveMiniverseTopicCreator: async (req) => {
     let query = `SELECT "creator" FROM t_topics WHERE miniverse = $1 AND topic_id = $2`;
-    let queryValues = [currentMiniverse, miniverseID];
+    let queryValues = [req.params.miniverseName, req.params.topic];
     let result = await pool.query(query, queryValues);
 
     return result.rows[0].creator;
@@ -313,9 +320,9 @@ module.exports = {
     await pool.query(query, queryValues);
   },
 
-  deleteMiniverseTopicReply: async (replyCreator, replyID) => {
+  deleteMiniverseTopicReply: async (req) => {
     let query = `DELETE FROM t_replies WHERE "creator" = $1 AND "reply_id" = $2`;
-    let queryValues = [replyCreator, replyID];
+    let queryValues = [req.session.user, req.body.replyID];
     await pool.query(query, queryValues);
   },
 
@@ -326,26 +333,34 @@ module.exports = {
     return result.rowCount;
   },
 
-  displayUserTopicReplies: async (topicID, miniverseName) => {
+  displayUserTopicReplies: async (req) => {
     let query = `SELECT * FROM t_replies WHERE "topic_id" = $1 AND "miniverse" = $2 ORDER BY "creation_date" ASC`;
-    let queryValues = [topicID, miniverseName];
+    let queryValues = [req.params.topic, req.params.miniverseName];
     let results = await pool.query(query, queryValues);
 
     return results.rows;
   },
 
-  updateUserBio: async (bioText, userName) => {
+  updateUserBio: async (req) => {
     let query = `UPDATE t_users SET bio = $1 WHERE "username" = $2`;
-    let queryValues = [bioText, userName];
+    let queryValues = [req.body.update_bio, req.session.user];
     await pool.query(query, queryValues);
   },
 
-  retrieveUserBio: async (userName) => {
-    let query = `SELECT bio FROM t_users WHERE "username" = $1`;
-    let queryValues = [userName];
+  retrieveSessionUserData: async (req) => {
+    let query = `SELECT * FROM t_users WHERE "username" = $1`;
+    let queryValues = [req.session.user];
     let result = await pool.query(query, queryValues);
 
-    return result.rows[0].bio;
+    return result.rows[0];
+  },
+
+  retrieveParamUserData: async (req) => {
+    let query = `SELECT * FROM t_users WHERE "username" = $1`;
+    let queryValues = [req.params.username];
+    let result = await pool.query(query, queryValues);
+
+    return result.rows[0];
   },
 
   retrieveAllUsers: async () => {
@@ -355,9 +370,9 @@ module.exports = {
     return results.rows;
   },
 
-  retrieveUserRole: async (userName) => {
+  retrieveSessionUserRole: async (req) => {
     let query = `SELECT "role" FROM t_users WHERE "username" = $1`;
-    let queryValues = [userName];
+    let queryValues = [req.session.user];
     let result = await pool.query(query, queryValues);
 
     return result.rows[0].role;
@@ -370,6 +385,13 @@ module.exports = {
     return results.rows;
   },
 
+  retrieveParamUserPosts: async function retrieveUserPosts(req) {
+    var query = `SELECT * FROM "t_profile_posts" WHERE "username" = $1 ORDER BY date_created DESC`;
+    var queryValues = [req.params.username];
+    var result = await pool.query(query, queryValues);
+
+    return result.rows;
+  },
 
   checkProfilePostsExist: async () => {
     let query = `SELECT * FROM "t_profile_posts" WHERE "post_id" = 1`;
@@ -391,9 +413,9 @@ module.exports = {
     return result.rows[0].post_id;
   },
 
-  retrieveUserPosts: async (sessionUser) => {
+  retrieveSessionUserPosts: async (req) => {
     let query = `SELECT * FROM "t_profile_posts" WHERE "username" = $1 ORDER BY date_created DESC`;
-    let queryValues = [sessionUser];
+    let queryValues = [req.session.user];
     let result = await pool.query(query, queryValues);
 
     return result.rows;

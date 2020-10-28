@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>{{topicTitle}}</title>
+    <title>{{topicData.title}}</title>
     <link rel="stylesheet" href="/miniverse-topic.css">
     <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -13,11 +13,11 @@
       {{> default-navbar}}
       <div id="inner-grid">
     <div id="topic-title">
-      {{topicTitle}}
+      {{topicData.title}}
     </div>
     <div id="topic-summary">
-      <pre>{{topicSummary}}</pre>
-      By: <a href="/user/{{topicCreator}}">{{topicCreator}}</a>
+      <pre>{{topicData.summary}}</pre>
+      By: <a href="/user/{{topicData.creator}}">{{topicData.creator}}</a>
     </div>
     <div id="reply-button-container">
       <i class="las la-reply"></i>
