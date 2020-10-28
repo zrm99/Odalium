@@ -288,9 +288,7 @@ app.get('/m/:miniverseName', async (req, res) => {
       if (miniverseCreatorName == req.session.user) {
         res.render('miniverse-creator', {
           layout: false,
-          miniverseName: req.params.miniverseName,
-          miniverseCreatorName: miniverseCreatorName,
-          miniverseSummary: await db.retrieveMiniverseSummaries(req.params.miniverseName),
+          miniverseData: await db.retrieveMiniverseDataParams(req),
           miniverseTopics: await db.topicColumnsOrderedByCreationDate(req.params.miniverseName),
           nonceID: `${res.locals.nonce}`,
         });
