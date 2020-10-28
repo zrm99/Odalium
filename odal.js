@@ -68,11 +68,14 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+app.use(express.static("public/css"));
+app.use(express.static("public/js"));
+app.use(express.static("public/images"));
+
+
 
 app.get('/', async (req, res) => {
   res.sendFile(path.join(__dirname  + '/public/html/index.html'));
-  app.use(express.static("public/css"));
-  app.use(express.static("public/images"));
 });
 
 app.get('/register', async (req, res) => {
@@ -80,7 +83,6 @@ app.get('/register', async (req, res) => {
     res.redirect('/profile');
   } else {
     res.sendFile(path.join(__dirname + '/public/html/register.html'));
-    app.use(express.static("public/css"));
   }
 });
 
@@ -105,7 +107,6 @@ app.get('/login', async (req, res) => {
     res.redirect('/profile');
   } else {
     res.sendFile(path.join(__dirname + '/public/html/login.html'));
-    app.use(express.static("public/css"));
   }
 });
 
@@ -131,8 +132,7 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
   if (vd.verifySession(req)) {
-    app.use(express.static("public/css"));
-    app.use(express.static("public/js"));
+
     res.render('profile', {
       layout: false,
       user: req.session.user,
@@ -146,7 +146,6 @@ app.get('/profile', async (req, res) => {
 
 app.get('/profile/customize', async (req, res) => {
   if (vd.verifySession(req)) {
-    app.use(express.static("public/css"));
     res.render('profile-customize', {layout: false});
   } else {
     res.status(403).send(vd.sessionError());
@@ -165,7 +164,6 @@ app.get('/search', async (req, res) => {
       layout: false,
       usernames: await db.retrieveAllUsers(),
     });
-    app.use(express.static("public/css"));
   } else {
     res.status(403).send(vd.sessionError());
   }
@@ -193,7 +191,6 @@ app.get('/user/:username', async (req, res) => {
       let userExists = await db.checkExistingUser(req.params.username);
       if (userExists.rowCount > 0) {
         req.session.lastViewedUser= req.params.username;
-        app.use(express.static("public/css"));
         let followingUser = await db.checkUserFollowingExists(req.params.username, req.session.user);
           res.render('other-profiles', {
             layout: false,
@@ -247,7 +244,6 @@ app.get('/browser', async (req, res) => {
   if (vd.verifySession(req)) {
     let miniverseColumn = await db.listMiniverses();
     let miniverseFollowerCount = await db.listMiniverseFollowerCount();
-    app.use(express.static("public/css"));
     res.render('browser', {
       layout: false,
       miniverseColumn: miniverseColumn,
@@ -260,7 +256,6 @@ app.get('/browser', async (req, res) => {
 
 app.get('/create/miniverse', async (req, res) => {
   if (vd.verifySession(req)) {
-    app.use(express.static('public/css'));
     res.render('create-miniverse', {
       layout: false,
     });
@@ -289,8 +284,6 @@ app.get('/m/:miniverseName', async (req, res) => {
     let miniverseExists = await db.findMiniverseName(req.params.miniverseName);
     if (miniverseExists > 0) {
       req.session.lastViewedMiniverse = req.params.miniverseName;
-      app.use(express.static('public/js'));
-      app.use(express.static('public/css'));
       let miniverseCreatorName = await db.retrieveMiniverseCreatorName(req.params.miniverseName);
       if (miniverseCreatorName == req.session.user) {
         res.render('miniverse-creator', {
@@ -333,8 +326,6 @@ app.post('/m/delete', async (req, res) => {
 app.get('/m/:miniverseName/topic/:topic', async (req, res) => {
 
   if (vd.verifySession(req)) {
-    app.use(express.static('public/js'));
-    app.use(express.static('public/css'));
     req.session.lastViewedTopic = req.params.topic;
     if (await db.retrieveMiniverseTopicCreator(req.params.miniverseName, req.params.topic) == req.session.user) {
       res.render('miniverse-topic-creator', {
@@ -427,7 +418,6 @@ app.post('/create/profile-post', async (req, res) => {
 });
 
 app.get('/admin', async (req, res) => {
-  app.use(express.static('public/css'));
   if (vd.verifySession(req)) {
     if (await db.retrieveUserRole(req.session.user) != "admin") {
       res.sendStatus(403);
@@ -448,11 +438,9 @@ app.get('/chat', async (req, res) => {
 });
 
 app.get('/terms-and-conditions', async (req, res) => {
-  app.use(express.static("public/css"));
   res.sendFile(path.join(__dirname + '/public/html/terms-and-conditions.html'));
 });
 
 app.get('/privacy-policy', async (req, res) => {
-  app.use(express.static("public/css"));
   res.sendFile(path.join(__dirname + '/public/html/privacy-policy.html'));
 });
