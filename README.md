@@ -7,6 +7,12 @@ This software is currently in very early development and should not be used in p
 
 ![Code Grade](https://www.code-inspector.com/project/15427/score/svg)
 
+[![Project Status: WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/72fef5f8be7a48387caa/maintainability)](https://codeclimate.com/github/zrm99/Odalmedia/maintainability)
+
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
+
 <h3>
 Required tools:
 </h3>
