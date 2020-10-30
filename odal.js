@@ -316,20 +316,13 @@ app.post('/m/delete', async (req, res) => {
 
 app.get('/m/:miniverseName/topic/:topic', async (req, res) => {
   if (vd.verifySession(req)) {
-    req.session.lastViewedTopic = req.params.topic;
-    if (await db.retrieveMiniverseTopicCreator(req) == req.session.user) {
-      res.render('miniverse-topic-creator', {
-        layout: false,
-        topicData: await db.retrieveMiniverseTopicData(req),
-        topicReplies : await db.displayUserTopicReplies(req),
-      });
-    } else {
+      req.session.lastViewedTopic = req.params.topic;
       res.render('miniverse-topic', {
         layout: false,
+        topicCreator: await db.retrieveMiniverseTopicCreator(req),
         topicData: await db.retrieveMiniverseTopicData(req),
         topicReplies : await db.displayUserTopicReplies(req),
       });
-    }
   } else {
     res.sendStatus(403);
   }

@@ -15,6 +15,13 @@
       <div id="topic-title">
         {{topicData.title}}
       </div>
+      {{#if topicCreator}}
+      <form id ="delete-topic" action="/topic-delete" method="POST">
+        <button type="submit" class="button-icon" name="button">
+          <i id="delete-topic-icon" title="Delete topic"  class="lar la-trash-alt"></i>
+        </button>
+      </form>
+      {{/if}}
       <div id="topic-summary">
         <pre>{{topicData.summary}}</pre>
         By: <a href="/user/{{topicData.creator}}">{{topicData.creator}}</a>

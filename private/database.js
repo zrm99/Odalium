@@ -73,7 +73,7 @@ module.exports = {
   },
 
   validateUser: async (req, res) => {
-    (async () => {
+    try {
       const client = await pool.connect();
       try {
         const hash = await client.query('SELECT "password_hash" FROM t_users WHERE "username" = $1', [req.body.Username])
@@ -92,7 +92,9 @@ module.exports = {
       } finally {
         client.release();
       }
-    })().catch(err => console.log(err.stack));
+    } catch (e) {
+      console.log(e);
+    }
   },
 
   addSessionUserFollower: async (req) => {
@@ -168,9 +170,9 @@ module.exports = {
     await pool.query(query, queryValues);
   },
 
-  deleteMiniverse: async (creatorName, miniverseName) => {
+  deleteMiniverse: async (req) => {
     let query = `DELETE FROM t_miniverses WHERE "creator" = $1 AND "name" = $2`;
-    let queryValues = [creatorName, miniverseName];
+    let queryValues = [req.session.user, req.session.lastViewedMiniverse];
     await pool.query(query, queryValues);
 
     let query2 = `DELETE FROM t_topics WHERE "creator" = $1 AND "miniverse" = $2`;
@@ -199,9 +201,9 @@ module.exports = {
   },
 
 
-  lastMiniverseID: async (miniverseName) => {
+  lastMiniverseID: async (req) => {
     let query = `SELECT "topic_id" FROM t_topics WHERE "miniverse" = $1 ORDER BY "creation_date" DESC LIMIT 1`;
-    let queryValues = [miniverseName];
+    let queryValues = [req.session.lastViewedMiniverse];
     let result = await pool.query(query, queryValues);
 
     return result.rows[0].topic_id;
@@ -279,9 +281,9 @@ module.exports = {
     return result.rows[0];
   },
 
-  retrieveMiniverseCreatorName: async (miniverseName) => {
+  retrieveMiniverseCreatorName: async (req) => {
     var query = `SELECT "creator" FROM t_miniverses WHERE "name" = $1`;
-    var queryValues = [miniverseName];
+    var queryValues = [req.params.miniverseName];
     var result = await pool.query(query, queryValues);
     return result.rows[0].creator;
   },
@@ -298,8 +300,11 @@ module.exports = {
     let query = `SELECT "creator" FROM t_topics WHERE miniverse = $1 AND topic_id = $2`;
     let queryValues = [req.params.miniverseName, req.params.topic];
     let result = await pool.query(query, queryValues);
-
-    return result.rows[0].creator;
+    if (result.rows[0].creator == req.session.user) {
+      return true;
+    } else {
+      return false;
+    }
   },
 
   lastReplyID: async () => {
