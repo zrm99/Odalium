@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.1.3",
     "express-session": "^1.17.1",
-    "fs": "0.0.1-security",
+    "fs": "0.0.2",
     "helmet": "^4.1.1",
     "pg": "^8.4.1",
     "utf-8-validate": "^5.0.2",
