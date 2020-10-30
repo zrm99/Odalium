@@ -9,7 +9,8 @@ const vd = require('./private/validation.js');
 const helmet = require('helmet');
 const crypto = require('crypto');
 const rateLimit = require("express-rate-limit");
-const exphbs = require('exphbs')
+const csrf = require('csurf');
+const exphbs = require('exphbs');
 
 
 http.createServer(app).listen(process.env.PORT);
@@ -45,16 +46,17 @@ Handlebars.registerHelper('if', function(conditional, options) {
     return options.fn(Handlebars);
   }
 
-return options.inverse(Handlebars);
+  return options.inverse(Handlebars);
 
 });
 
 let pgSession = require('connect-pg-simple')(session);
 app.use(session({
-  store: new pgSession({conString: "postgres://" + process.env.PGDATABASE + ":" + process.env.PGPASSWORD + "@localhost:5432/" + process.env.PGDATABASE}),
+  store: new pgSession({conString: `${process.env.PGUSER}://${process.env.PGDATABASE}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`}),
   secret: process.env.DB_SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  domain: 'localhost:8080',
   cookie: {maxAge: 259200000, secure: false, httpOnly: true},
   autoRemove: 'native',
 }));
@@ -275,7 +277,7 @@ app.get('/m/:miniverseName', async (req, res) => {
     let miniverseExists = await db.findMiniverseParamName(req);
     if (miniverseExists > 0) {
       req.session.lastViewedMiniverse = req.params.miniverseName;
-      let miniverseCreatorName = await db.retrieveMiniverseCreatorName(req.params.miniverseName);
+      let miniverseCreatorName = await db.retrieveMiniverseCreatorName(req);
       if (miniverseCreatorName == req.session.user) {
         res.render('miniverse-creator', {
           layout: false,
@@ -308,7 +310,7 @@ app.get('/m/:miniverseName', async (req, res) => {
 });
 
 app.post('/m/delete', async (req, res) => {
-  await db.deleteMiniverse(req.session.user, req.session.lastViewedMiniverse);
+  await db.deleteMiniverse(req);
   res.redirect('/browser');
 });
 
@@ -374,7 +376,7 @@ app.post('/create/miniverse-post', async (req, res) => {
     if (await db.checkSessionMiniverseTopicsExist(req) == 0) {
       db.insertMiniverseTopic(req, new Date(), 1);
     } else {
-      let topicID = await db.lastMiniverseID(req.session.lastViewedMiniverse);
+      let topicID = await db.lastMiniverseID(req);
       topicID = parseInt(topicID) + 1;
       db.insertMiniverseTopic(req, new Date(), topicID);
     }
@@ -390,7 +392,7 @@ app.post('/create/profile-post', async (req, res) => {
       if (await db.checkProfilePostsExist() == false) {
         db.insertProfilePost(req, date, 1);
       } else {
-        let postID = await db.lastPostID(req.session.user);
+        let postID = await db.lastPostID();
         postID = parseInt(postID) + 1;
         db.insertProfilePost(req, date, postID);
       }
