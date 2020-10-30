@@ -63,7 +63,6 @@ a:hover {
   border-style: solid;
 }
 
-/* https://stackoverflow.com/questions/45536537/centering-in-css-grid */
 #image-box {
   display: flex;
   justify-content: center;

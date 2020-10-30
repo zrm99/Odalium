@@ -335,8 +335,7 @@ app.use(session({
       if (await db.checkSessionMiniverseTopicsExist(req) == 0) {
         db.insertMiniverseTopic(req, new Date(), 1);
       } else {
-        let topicID = await db.lastMiniverseID(req);
-        topicID = parseInt(topicID) + 1;
+        let topicID = parseInt(await db.lastMiniverseID(req)) + 1;
         db.insertMiniverseTopic(req, new Date(), topicID);
       }
       res.redirect('/m/' + req.session.lastViewedMiniverse);
@@ -351,8 +350,7 @@ app.use(session({
         if (await db.checkProfilePostsExist() == false) {
           db.insertProfilePost(req, date, 1);
         } else {
-          let postID = await db.lastPostID();
-          postID = parseInt(postID) + 1;
+          let postID = parseInt(await db.lastPostID()) + 1;
           db.insertProfilePost(req, date, postID);
         }
       }
@@ -370,7 +368,7 @@ app.use(session({
         res.render('admin-panel', {
           layout: false,
           adminUsername: req.session.user,
-          allUsers: await db.retrieveUsersData(),
+          allUsers: await db.retrieveUsersData()
         });
       }
     } else {
