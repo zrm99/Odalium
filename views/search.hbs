@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/search.css">
-    <link rel="stylesheet" href="/navbar.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <meta charset="utf-8">
-    <title>Search</title>
-  </head>
-  <body>
-    <div id="grid">
-      <div class="links-container" id="navbar-grid-size">
-        <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
-        <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
-        <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
-      </div>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/search.css">
+  <link rel="stylesheet" href="/navbar.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <meta charset="utf-8">
+  <title>Search</title>
+</head>
+<body>
+  <div id="grid">
+    <div class="links-container" id="navbar-grid-size">
+      <a href="/profile" class="button-styling"><i class="las la-user icon-size-spacing"></i>Profile</a>
+      <a href="/browser" class="button-styling"><i class="las la-newspaper icon-size-spacing"></i>Browser</a>
+      <a href="/logout" class="float-right button-styling"><i class="las la-sign-out-alt icon-size-spacing"></i>Logout</a>
+    </div>
     <div id="search-form">
       <strong id="txt-clr-bg">Username</strong>
-    <form id="search-bar" action="search" method="post">
-      <div id="search-form-grid">
-      <input id="search-box" list="user-list" type="text" name="usernameSearch">
-      <input type="submit" name="submitbutton" value="Submit">
-      <datalist id="user-list">
-        {{#each usernames}}
-          <option value="{{this.username}}">{{this.username}}</option>
-        {{/each}}
-      </datalist>
+      <form id="search-bar" action="search" method="post">
+        <div id="search-form-grid">
+          <input id="search-box" list="user-list" type="text" name="usernameSearch">
+          <input type="submit" name="submitbutton" value="Submit">
+          <datalist id="user-list">
+            {{#each usernames}}
+            <option value="{{this.username}}">{{this.username}}</option>
+            {{/each}}
+          </datalist>
+        </div>
+      </form>
     </div>
-    </form>
-    </div>
-    </div>
-  </body>
+  </div>
+</body>
 </html>

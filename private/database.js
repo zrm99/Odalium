@@ -148,20 +148,25 @@ module.exports = {
     return results.rows[0].following_names;
   },
 
-  findMiniverseName: async (req) => {
+  findMiniverseNameExists: async (req) => {
     let query = `SELECT "name" FROM t_miniverses WHERE "name" = $1`
     let queryValues = [req.body.miniverseName];
     let result = await pool.query(query, queryValues);
 
-    return result.rowCount;
+    if (result.rowCount > 0) {
+      return true;
+    }
+    return false;
   },
 
-  findMiniverseParamName: async (req) => {
+  findMiniverseParamNameExists: async (req) => {
     let query = `SELECT "name" FROM t_miniverses WHERE "name" = $1`
     let queryValues = [req.params.miniverseName];
     let result = await pool.query(query, queryValues);
-
-    return result.rowCount;
+    if (result.rowCount > 0) {
+      return true;
+    }
+    return false;
   },
 
   createMiniverse: async (req, encodedURI) => {
@@ -259,8 +264,10 @@ module.exports = {
     let query = `SELECT follower_names FROM t_miniverses WHERE follower_names @> $1 AND "name" = $2`;
     let queryValues = [username, req.session.lastViewedMiniverse];
     let result = await pool.query(query, queryValues);
-
-    return result.rowCount;
+    if (result.rowCount == 1) {
+      return true;
+    }
+    return false;
   },
 
   removeMiniverseFollower: async (req) => {
@@ -281,11 +288,14 @@ module.exports = {
     return result.rows[0];
   },
 
-  retrieveMiniverseCreatorName: async (req) => {
+  retrieveMiniverseCreator: async (req) => {
     var query = `SELECT "creator" FROM t_miniverses WHERE "name" = $1`;
     var queryValues = [req.params.miniverseName];
     var result = await pool.query(query, queryValues);
-    return result.rows[0].creator;
+    if (result.rows[0].creator == req.session.user) {
+      return true;
+    }
+    return false;
   },
 
   retrieveMiniverseTopicData: async (req) => {
@@ -302,9 +312,8 @@ module.exports = {
     let result = await pool.query(query, queryValues);
     if (result.rows[0].creator == req.session.user) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   },
 
   lastReplyID: async () => {

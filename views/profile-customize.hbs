@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/profile-customize.css">
-    <link rel="stylesheet" href="/navbar.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <meta charset="utf-8">
-    <title>Customize profile</title>
-  </head>
-  <body>
-      <div id="grid-container">
-        <div class="flex" id="navbar-grid-size">
-          {{>default-navbar}}
-      </div>
-      <div id="bio-container">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/profile-customize.css">
+  <link rel="stylesheet" href="/navbar.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <meta charset="utf-8">
+  <title>Customize profile</title>
+</head>
+<body>
+  <div id="grid-container">
+    <div class="flex" id="navbar-grid-size">
+      {{>default-navbar}}
+    </div>
+    <div id="bio-container">
       <div id="update-bio-form">
         Update status
-      <form action="update-bio" method="POST">
-        <textarea name="update_bio" rows="3" cols="50" maxlength="240"></textarea>
-        <input type="submit" value="Submit">
-      </form>
+        <form action="update-bio" method="POST">
+          <textarea name="update_bio" rows="3" cols="50" maxlength="240"></textarea>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
     </div>
   </div>
-  </div>
-  </body>
+</body>
 </html>

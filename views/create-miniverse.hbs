@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta charset="utf-8">
-    <title>Create</title>
-    <link rel="stylesheet" href="/navbar.css">
-    <link rel="stylesheet" href="/create-miniverse.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-  </head>
-  <body>
-    <div id="grid">
-      {{> default-navbar }}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <title>Create</title>
+  <link rel="stylesheet" href="/navbar.css">
+  <link rel="stylesheet" href="/create-miniverse.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+  <div id="grid">
+    {{> default-navbar }}
     <form class="miniverse-form" action="/create/miniverse" method="POST">
       <div id="miniverse-box">
         <div class="title-text rounded-top-element">Miniverse Name</div>
         <input type="textarea" name="miniverseName">
         <ul>
-        <li>Must be 20 characters or less</li>
-      </ul>
+          <li>Must be 20 characters or less</li>
+        </ul>
       </div>
       <div id="summary-box">
         <div class="title-text">Summary</div>
@@ -37,5 +37,5 @@
       <input type="submit" value="Submit">
     </form>
   </div>
-  </body>
+</body>
 </html>

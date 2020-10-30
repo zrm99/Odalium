@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="/admin-panel.css">
-
-  </head>
-  <body>
-    <table class="table-div">
-      <th class="table-header">Users</th>
-      <th class="table-header">Date Created</th>
-      <th class="table-header">IP Address</th>
-      <th class="table-header">Bio</th>
-      <th class="table-header">User Role</th>
-      <th class="table-header">Follower Count</th>
-        {{#each allUsers}}
-        <tr>
-          <td class="table-data"><a href="/user/{{this.username}}">{{this.username}}</a></td>
-          <td class="table-data">{{this.date_created}}</td>
-          <td class="table-data">{{this.ip_address}}</td>
-          <td class="table-data">{{this.bio}}</td>
-          <td class="table-data">{{this.role}}</td>
-          <td class="table-data">{{this.follower_count}}</td>
-        </tr>
-        {{/each}}
-    </table>
-    </body>
+<head>
+  <meta charset="utf-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/admin-panel.css">
+</head>
+<body>
+  <table class="table-div">
+    <th class="table-header">Users</th>
+    <th class="table-header">Date Created</th>
+    <th class="table-header">IP Address</th>
+    <th class="table-header">Bio</th>
+    <th class="table-header">User Role</th>
+    <th class="table-header">Follower Count</th>
+    {{#each allUsers}}
+    <tr>
+      <td class="table-data"><a href="/user/{{this.username}}">{{this.username}}</a></td>
+      <td class="table-data">{{this.date_created}}</td>
+      <td class="table-data">{{this.ip_address}}</td>
+      <td class="table-data">{{this.bio}}</td>
+      <td class="table-data">{{this.role}}</td>
+      <td class="table-data">{{this.follower_count}}</td>
+    </tr>
+    {{/each}}
+  </table>
+</body>
 </html>
