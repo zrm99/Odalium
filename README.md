@@ -17,7 +17,7 @@ This software is currently in very early development and should not be used in p
 Required tools:
 </h3>
 
-Pgadmin https://www.pgadmin.org/download/
+Postgres https://www.postgresql.org/download/
 <br>
 NodeJS https://nodejs.org/en/
 
@@ -25,15 +25,16 @@ NodeJS https://nodejs.org/en/
 Installation Instructions for HTTP server:
 </h3>
 
-1) Install the required tools.
-2) Download or clone the directory.
-3) Run pgadmin, set up a username and password and then create a database.
-4) Follow these simple instructions by importing the file titled 'initial.sql':
-https://www.postgresql-archive.org/pgAdmin-4-How-to-I-import-a-sql-file-td5999352.html
-5) Start up the Node.js command prompt and navigate to the inside of the directory.
-6) Run NPM install which will install the required dependencies for the program.
-7) Create a .env file and fill out the environment variables with the
-database credentials.
+<ol>
+<li> Install the required tools. </li>
+<li> Download or clone the directory. </li>
+<li> Follow these simple instructions by importing the file titled 'initial.sql':
+https://www.postgresql-archive.org/pgAdmin-4-How-to-I-import-a-sql-file-td5999352.html </li>
+<li> Start up the Node.js command prompt and navigate to the inside of the directory. </li>
+<li> Run NPM install which will install the required dependencies for the program. </li>
+<li> Create a .env file and fill out the environment variables with the
+database credentials. </li>
+</ol>
 
 If all is successful two messages should appear, the first displays
 "SERVING RUNNING AT: localhost:8080", and the next message says
