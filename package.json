@@ -18,7 +18,7 @@
     "fs": "0.0.2",
     "helmet": "^4.1.1",
     "pg": "^8.4.2",
-    "utf-8-validate": "^5.0.2",
+    "utf-8-validate": "^5.0.3",
     "uuidv4": "^6.2.4"
   },
   "devDependencies": {
