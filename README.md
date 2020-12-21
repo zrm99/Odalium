@@ -13,6 +13,12 @@ This software is currently in very early development and should not be used in p
 
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
+<b>Important note:</b>
+Internal development has been suspended until further notice due
+to homelessness and having no access to a development
+computer. Package updates will be provided for 
+a short time.
+
 <h3>
 Required tools:
 </h3>
@@ -37,7 +43,7 @@ database credentials. </li>
 </ol>
 
 If all is successful two messages should appear, the first displays
-"SERVING RUNNING AT: localhost:8080", and the next message says
+"SERVER RUNNING AT: localhost:8080", and the next message says
 "DATABASE CONNECTED". If the messages mentioned do not show up, and you see some
 errors, you went wrong somewhere and the credentials or
 information entered is wrong, or an unknown bug may have been discovered.
