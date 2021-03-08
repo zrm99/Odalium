@@ -50,7 +50,7 @@ errors, you went wrong somewhere and the credentials or
 information entered is wrong, or an unknown bug may have been discovered.
 
 <h3>
-Images of the current iteration of Odalmedia:
+Images of the current iteration of Odalium:
 </h3>
 
 <h4> /profile with no posts </h4>
