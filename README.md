@@ -1,4 +1,4 @@
-# Odalmedia
+# Odalium
 
 An ExpressJs software meant to have similarities to the early functionality of Reddit. 
 
