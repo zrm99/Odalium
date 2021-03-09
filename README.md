@@ -91,9 +91,6 @@ Images of the current iteration of Odalium:
 
 ![Miniverse topic creator](https://user-images.githubusercontent.com/36284384/96006202-16c22100-0df2-11eb-9663-c7c273390f54.png)
 
-![Miniverse topic with reply](https://user-images.githubusercontent.com/36284384/96006356-3fe2b180-0df2-11eb-9907-1f1daf68aea5.JPG)
-
-
 <h4> /miniverse-followed (miniverse where you are not the creator) </h4>
 
 ![Followed miniverse](https://user-images.githubusercontent.com/36284384/96007370-46255d80-0df3-11eb-925b-fb75819965e9.JPG)
