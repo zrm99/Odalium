@@ -1,6 +1,6 @@
 # Odalium
 
-An ExpressJs software meant to have similarities to the early functionality of Reddit. 
+An ExpressJs dynamic webserver software meant to have similarities to the functionality of Reddit. 
 
 This software is currently in early development and should not be used in production scenarios.
 
