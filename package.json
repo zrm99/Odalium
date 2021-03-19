@@ -4,7 +4,7 @@
   "description": "odalmedia dependencies",
   "main": "odal.js",
   "dependencies": {
-    "bcrypt": ">=5.0.0",
+    "bcrypt": ">=5.0.1",
     "body-parser": "^1.19.0",
     "bufferutil": "^4.0.3",
     "connect-pg-simple": "^6.2.1",
