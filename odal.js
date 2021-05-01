@@ -13,8 +13,8 @@ const rateLimit = require("express-rate-limit");
 const exphbs = require('exphbs');
 
 
-http.createServer(app).listen(process.env.PORT);
-console.log("SERVING RUNNING AT: localhost:" + process.env.PORT);
+http.createServer(app).listen(process.env.PORT, process.env.HOST);
+console.log("SERVING RUNNING AT:" + process.env.HOST + ":" + process.env.PORT);
 
 app.use(helmet());
 app.use(function (req, res, next) {
@@ -41,10 +41,10 @@ app.set('view engine', 'hbs');
 let pgSession = require('connect-pg-simple')(session);
 app.use(session({
   store: new pgSession({conString: `${process.env.PGUSER}://${process.env.PGDATABASE}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`}),
-    secret: process.env.DB_SESSION_SECRET,
+    secret: process.env.DBSESSIONSECRET,
     resave: false,
     saveUninitialized: false,
-    domain: 'localhost:8080',
+    // domain: 'localhost:8080',
     cookie: {maxAge: 259200000, secure: false, httpOnly: true},
     autoRemove: 'native',
   }));

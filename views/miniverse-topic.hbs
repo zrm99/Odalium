@@ -23,10 +23,10 @@
       </form>
       {{/if}}
       <div id="topic-summary">
-        <pre>{{topicData.summary}}</pre>
+        <pre>{{topicData.descriptor}}</pre>
         By: <a href="/user/{{topicData.creator}}">{{topicData.creator}}</a>
       </div>
-      <div id="reply-button-container">
+      <div id="reply-button-container" onclick="displayBlock('create-reply-form', 'replyContent')">
         <i class="las la-reply"></i>
         Reply
         <div id="create-reply-form">
@@ -37,7 +37,7 @@
           </form>
         </div>
       </div>
-      <div id="delete-reply-container">
+      <div id="delete-reply-container" onclick="displayBlock('delete-reply-form', 'replyCreator', 'replyID')">
         <i title="Delete reply"  class="lar la-trash-alt delete-reply-icon"></i>
         Delete
         <div id="delete-reply-form">

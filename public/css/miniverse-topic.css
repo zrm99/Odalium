@@ -14,33 +14,32 @@ pre {
 
 #grid {
   display: grid;
-  grid-template-columns: repeat(30, 1fr);
+  grid-template-columns: repeat(82, 1fr);
   grid-gap: 0;
 }
 
 #navbar-grid-size {
-  grid-column: 1/31;
+  grid-column: 1/83;
 }
 
 #inner-grid {
   display: grid;
   grid-row: 2;
-  grid-column: 10/21;
+  grid-column: 27/55;
   margin-top: 25px;
   background-color: #00b7ffde;
   border-style: solid;
-  border-radius: 10px;
+  border-radius: 5px;
   grid-template-columns: repeat(20, 1fr);
 }
 
 #topic-title {
-  font-size: 20px;
+  font-size: 30px;
   padding-left: 15px;
   grid-column: 1/20;
   padding-top: 7px;
   padding-bottom: 7px;
   border-radius: 20px;
-  font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif;
 }
 
 .button-icon {
@@ -112,7 +111,7 @@ pre {
 #delete-topic {
   grid-row: 1;
   grid-column: 20;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 #delete-topic:hover {
@@ -121,7 +120,7 @@ pre {
 }
 
 #delete-topic-icon {
-  font-size: 30px;
+  font-size: 40px;
 }
 
 #delete-topic-icon:hover {

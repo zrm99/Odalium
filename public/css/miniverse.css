@@ -72,15 +72,15 @@ body {
   border: none;
 }
 
-.button-styling {
+.follow-button {
   font-size: 85%;
   border-radius: 3px;
-  background-color: white;
+  background-color: ivory;
   border-color: lightgray;
   cursor: pointer;
 }
 
-.button-styling:hover {
+.follow-button:hover {
   background-color: #bfbfbf;
 }
 
@@ -125,7 +125,7 @@ a:hover {
 }
 
 #create-post-container:hover {
-  color: red;
+  background-color: #bfbfbf;
 }
 
 #create-post-form {
@@ -134,7 +134,6 @@ a:hover {
   border-color: black;
   border-style: solid;
   border-radius: 5px;
-  border-width: 5px;
   display: none;
   position: absolute;
   cursor: default;

@@ -23,11 +23,11 @@
       <div id="miniverse-summary">
         {{#if followerExists}}
         <form action="/m/unfollow" method="POST" class="follow-button-position">
-          <input class="button-styling" type="submit" value="Unfollow {{miniverseData.name}}">
+          <input class="follow-button" type="submit" value="Unfollow {{miniverseData.name}}">
         </form>
         {{else}}
         <form action="/m/follow" method="POST" class="unfollow-button-position">
-          <input class="button-styling" type="submit" value="Follow {{miniverseData.name}}">
+          <input class="follow-button" type="submit" value="Follow {{miniverseData.name}}">
         </form>
         {{/if}}
         {{miniverseData.summary}}
@@ -49,11 +49,11 @@
         </div>
       </div>
       <div id="topics-list">
-        <span id="topic-box-header">TOPICS</span>
+        <span id="topic-box-header">Topics</span>
         <div id="topic-sorting-box">
-          <span id="sort-by-top">TOP</span>
+          <span id="sort-by-top">Top</span>
           |
-          <span id="sort-by-recent">RECENT</span>
+          <span id="sort-by-recent">Recent</span>
         </div>
         <div id="topic-box-style">
           {{#each miniverseTopics}}

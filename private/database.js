@@ -74,7 +74,7 @@ module.exports = {
 
   validateUser: async (req, res) => {
     try {
-      const client = await pool.connect();
+      let client = await pool.connect();
       try {
         const hash = await client.query('SELECT "password_hash" FROM t_users WHERE "username" = $1', [req.body.Username])
         if (typeof hash.rows[0] !== 'undefined') {
