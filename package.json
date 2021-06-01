@@ -19,7 +19,7 @@
     "helmet": "^4.6.0",
     "pg": "^8.6.0",
     "utf-8-validate": "^5.0.5",
-    "uuidv4": "^6.2.7"
+    "uuidv4": "^6.2.8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
