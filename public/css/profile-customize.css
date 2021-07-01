@@ -28,6 +28,8 @@ body {
 
 textarea[name="update_bio"] {
   resize: none;
+  width: 96%;
+
 }
 
 .links-container {
@@ -42,4 +44,12 @@ textarea[name="update_bio"] {
 .flex {
   display: flex;
   flex-flow: column;
+}
+
+@media only screen and (max-width: 600px) {
+
+  #bio-container {
+     grid-column: 1/31;
+  }
+
 }

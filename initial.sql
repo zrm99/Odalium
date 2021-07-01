@@ -2,7 +2,7 @@ CREATE TABLE "t_miniverses" (
   "name" text,
   "summary" text,
   "date" timestamptz,
-  "follower_count" bigint,
+  "follower_count" bigint DEFAULT 0,
   "follower_names" text [],
   "creator" text,
   "moderators" text [],
@@ -44,7 +44,7 @@ CREATE TABLE "t_users" (
 
 CREATE TABLE "t_profile_posts" (
   "username" text,
-  "date_created" text,
+  "date_created" timestamptz,
   "profile_post_content" text,
   "post_id" bigint
 );

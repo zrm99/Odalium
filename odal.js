@@ -345,8 +345,7 @@ app.use(session({
   app.post('/create/profile-post', async (req, res) => {
     if (vd.verifySession(req)) {
       if (req.body.profilePostContent != '') {
-        let d = new Date();
-        let date = d.toString();
+        let date = new Date();
         if (await db.checkProfilePostsExist() == false) {
           db.insertProfilePost(req, date, 1);
         } else {
