@@ -28,8 +28,12 @@ body {
 
 textarea[name="update_bio"] {
   resize: none;
-  width: 96%;
-
+  width: 99%;
+  border-style: solid;
+  border-right-style: none;
+  border-left-style: none;
+  border-color: black;
+  border-width: 3px;
 }
 
 .links-container {

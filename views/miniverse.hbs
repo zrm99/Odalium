@@ -23,11 +23,11 @@
       <div id="miniverse-summary">
         {{#if followerExists}}
         <form action="/m/unfollow" method="POST" class="follow-button-position">
-          <input class="follow-button" type="submit" value="Unfollow {{miniverseData.name}}">
+          <input class="follow-button" type="submit" value="Unfollow community">
         </form>
         {{else}}
         <form action="/m/follow" method="POST" class="unfollow-button-position">
-          <input class="follow-button" type="submit" value="Follow {{miniverseData.name}}">
+          <input class="follow-button" type="submit" value="Follow community">
         </form>
         {{/if}}
         {{miniverseData.summary}}

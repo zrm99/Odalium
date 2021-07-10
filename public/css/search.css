@@ -80,20 +80,13 @@ input[type="submit"]:hover {
   #search-form {
     grid-column: 7/27;
   }
+}
 
   @media screen and (max-width: 400px) {
-    #search-text {
-      grid-column: 14/16;
-    }
-  }
-
-  @media screen and (max-width: 370px) {
     #search-form {
-      grid-column: 1/35;
-    }
-
-    #search-text {
-      grid-column: 13/16;
+      grid-column: 1/33;
     }
   }
+
+
 }

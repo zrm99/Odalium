@@ -159,27 +159,26 @@ pre {
 
 @media screen and (max-width: 800px) {
   #topic-title {
-    grid-column: 5/23;
-    grid-row: 2;
+    grid-row: 1;
   }
 
   #topic-summary {
-    grid-column: 5/25;
-    grid-row: 3;
+    grid-column: 1/25;
+    grid-row: 2;
   }
 
   #reply-button-container {
-    grid-column: 9/21;
+    grid-column: 4/19;
     grid-row: 4;
   }
 
   #delete-reply-container {
-    grid-column: 9/21;
+    grid-column: 4/19;
     grid-row: 5;
   }
 
   #reply-list {
-    grid-column: 9/18;
+    grid-column: 3/20;
     grid-row: 6;
   }
 
@@ -189,30 +188,28 @@ pre {
 }
 
 @media screen and (max-width: 500px) {
+  #inner-grid {
+    grid-column: 15/70;
+  }
+
   #reply-list {
-    grid-column: 7/18;
+    grid-column: 4/19;
     grid-row: 6;
   }
 }
 
 @media screen and (max-width: 450px) {
-  #inner-grid,
-  #topic-summary {
-    grid-column: 1/31;
-  }
-
-  #topic-title {
-    grid-row: 1;
-    grid-column: 1/31;
+  #inner-grid {
+    grid-column: 1/83;
   }
 
   #reply-button-container,
   #delete-reply-container {
-    grid-column: 6/19;
+    grid-column: 3/19;
   }
 
   #reply-list {
-    grid-column: 4/24;
+    grid-column: 1/25;
     grid-row: 6;
   }
 }
