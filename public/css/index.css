@@ -26,7 +26,10 @@ body {
 
 .gi3 {
   grid-row: 1/1;
-  grid-column: 31/31;
+  grid-column: 1/66;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
 .gi4 {
@@ -68,6 +71,7 @@ a:visited {
   display: block;
   height: 50px;
   margin: 0;
+  z-index: 1;
 }
 
 .about {
@@ -121,26 +125,23 @@ a:visited {
   grid-column: 26/37;
 }
 
-@media screen and (max-width: 900px) {
-  .gi2 {
-    grid-row: 2/2;
-    grid-column: 5/60;
-  }
+@media screen and (max-width: 700px) {
 
-  .gi4 {
-    grid-row: 3/5;
-    grid-column: 5/60;
+  .gi3 {
+    grid-column: 6/64;
   }
 }
 
-@media screen and (max-width: 500px) {
-  .gi2 {
-    grid-row: 2/2;
-    grid-column: 1/70;
+@media screen and (max-width: 600px) {
+
+  .gi3 {
+    grid-column: 7/64;
   }
 
-  .gi4 {
-    grid-row: 3/5;
-    grid-column: 1/70;
+}
+
+@media screen and (max-width: 500px) {
+  .gi3 {
+    grid-column: 9/64;
   }
 }

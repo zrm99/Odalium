@@ -79,7 +79,6 @@ pre {
   border-color: black;
   border-style: solid;
   border-radius: 5px;
-  border-width: 5px;
   display: none;
   position: absolute;
   top: 0%;
@@ -90,7 +89,7 @@ pre {
 
 #reply-list {
   display: block;
-  grid-column: 3/19;
+  grid-column: 1/22;
   grid-row: 5;
 }
 
@@ -100,7 +99,6 @@ pre {
   /* word-wrap: anywhere; */
 
   /* white-space: pre-wrap; */
-  background-color: #80d4ff;
   border-radius: 20px;
   padding: 8px;
   word-break: break-all;
@@ -144,9 +142,9 @@ pre {
 }
 
 .background-styling-1 {
-  background-color: #cef;
-  border-radius: 20px;
+  background-color: white;
   padding: 3px;
+  border-top-style: solid;
 }
 
 .creator-name-spacing {

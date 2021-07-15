@@ -2,9 +2,15 @@
   border-width: 2px;
   border-color: black;
   border-style: solid;
-  background-color: #cef;
+  background-color:#00b7ffde;
   border-top-width: 2px;
-  border-radius: 8px;
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  margin-left: -14px;
+  margin-right: -14px;
+  margin-top: -14px;
 }
 
 .flex {
@@ -34,7 +40,7 @@ a:hover {
 }
 
 .float-right {
-  float: right;
+ margin-left: auto;
 }
 
 .button-styling:hover {
