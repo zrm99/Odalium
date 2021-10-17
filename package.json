@@ -6,7 +6,7 @@
   "dependencies": {
     "bcrypt": ">=5.0.1",
     "body-parser": "^1.19.0",
-    "bufferutil": "^4.0.3",
+    "bufferutil": "^4.0.4",
     "connect-pg-simple": "^6.2.1",
     "crypto": "^1.0.1",
     "csurf": "^1.11.0",
