@@ -8,17 +8,14 @@ This software is currently in early development and should not be used in produc
 
 ![Code Grade](https://www.code-inspector.com/project/15427/score/svg)
 
-[![Project Status: Suspended – Initial development has started, but there has not yet been a stable, usable release; work has been stopped for the time being but the author(s) intend on resuming work.](https://www.repostatus.org/badges/latest/suspended.svg)](https://www.repostatus.org/#suspended)
+[![Project Status: Abandoned – Initial development has started, but there has not yet been a stable, usable release; the project has been abandoned and the author(s) do not intend on continuing development.](https://www.repostatus.org/badges/latest/abandoned.svg)](https://www.repostatus.org/#abandoned)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/72fef5f8be7a48387caa/maintainability)](https://codeclimate.com/github/zrm99/Odalmedia/maintainability)
 
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 <b>Important note:</b>
-Internal development has been suspended until further notice due
-to homelessness and having no access to a development
-computer. Package updates will be provided for 
-a short time.
+Project has been abandoned in favor of private development of a NextJS Antdesign application.
 
 <h3>
 Required tools:
