@@ -12,7 +12,7 @@
     "csurf": "^1.11.0",
     "dotenv-safe": "^8.2.0",
     "exphbs": "^1.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-rate-limit": "^5.4.0",
     "express-session": "^1.17.2",
     "fs": "0.0.2",
